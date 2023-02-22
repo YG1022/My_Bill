@@ -1,6 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# My Bill: A lightweight tool to keep accounts
 
 ## Available Scripts
 
