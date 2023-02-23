@@ -20,13 +20,13 @@ describe('InputBar', () => {
         });
     });
 
-    it('should not render text if input character not number', async () => {
+    it('should render 0 if input character not number', async () => {
         render(<InputBar />);
         await userEvent.type(screen.getByTestId('input-content'), 'character');
         await userEvent.click(screen.getByRole('button', { name: 'Assign' }));
         const amount = screen.getByTestId('amount').innerHTML;
         await waitFor(() => {
-            expect(amount).toBe('');
+            expect(amount).toBe('0');
         });
     });
 
