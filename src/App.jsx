@@ -4,7 +4,6 @@ import InputBar from './components/InputBar';
 function App() {
     return (
         <div>
-            Tap here!
             <InputBar />
         </div>
     );

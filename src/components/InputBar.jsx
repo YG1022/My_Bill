@@ -13,7 +13,6 @@ const InputBar = () => {
 
     return (
         <div>
-            <div>InputBar</div>
             <label htmlFor="Count">Tap your count here: </label>
             <input type="number" className="number-input" data-testid="input-content" />
             <button onClick={assignAmount}>Assign</button>
