@@ -1,12 +1,12 @@
 import React from 'react';
-import "./InputBar.css"
+import './InputBar.css';
 
-const InputBar = () => {
+const InputBar = (): JSX.Element => {
     const assignAmount = () => {
-        const numInput = document.querySelector('.number-input');
+        const numInput = document.querySelector('.number-input') as HTMLInputElement;
         const billAmount = numInput.value;
         numInput.value = '';
-        const amountDisplay = document.querySelector('.amount-display');
+        const amountDisplay = document.querySelector('.amount-display') as HTMLElement;
         amountDisplay.innerHTML = billAmount;
     };
 

@@ -1,8 +1,9 @@
 import './styles/App.css';
 import { Layout, Space } from 'antd';
 import InputBar from './components/InputBar';
+import React from 'react';
 
-function App() {
+const App = (): JSX.Element => {
     const { Header, Footer, Content } = Layout;
 
     return (
@@ -16,6 +17,6 @@ function App() {
             </Layout>
         </Space>
     );
-}
+};
 
 export default App;
