@@ -1,4 +1,3 @@
-import React from 'react';
 import './styles/App.css';
 import { Layout, Space } from 'antd';
 import InputBar from './components/InputBar';
