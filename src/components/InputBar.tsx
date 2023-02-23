@@ -1,5 +1,6 @@
 import React from 'react';
-import '../styles/InputBar.css';
+import { Row, Col } from 'antd';
+import '../styles/InputBar.scss';
 
 const InputBar = (): JSX.Element => {
     const assignAmount = () => {
@@ -11,23 +12,27 @@ const InputBar = (): JSX.Element => {
     };
 
     return (
-        <div>
-            <label htmlFor="Count">Tap your count here: </label>
-            <input
-                type="number"
-                className="number-input"
-                data-testid="input-content"
-                placeholder="Only number is permitted!"
-            />
-            <button onClick={assignAmount}>Assign</button>
-            <br />
-            <div data-testid="amount-content">
-                The amount of the money is $
-                <span className="amount-display" data-testid="amount">
-                    0
-                </span>
-            </div>
-        </div>
+        <Row>
+            <Col>
+                <div>
+                    <label htmlFor="Count">Tap your count here: </label>
+                    <input
+                        type="number"
+                        className="number-input"
+                        data-testid="input-content"
+                        placeholder="Only number is permitted!"
+                    />
+                    <button onClick={assignAmount}>Assign</button>
+                    <br />
+                    <div data-testid="amount-content">
+                        The amount of the money is $
+                        <span className="amount-display" data-testid="amount">
+                            0
+                        </span>
+                    </div>
+                </div>
+            </Col>
+        </Row>
     );
 };
 
