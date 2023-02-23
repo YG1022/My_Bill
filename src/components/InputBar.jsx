@@ -14,12 +14,15 @@ const InputBar = () => {
     return (
         <div>
             <div>InputBar</div>
-            <label htmlFor='Count'>Tap your count here: </label>
-            <input type='text' className='number-input' />
+            <label htmlFor="Count">Tap your count here: </label>
+            <input type="text" className="number-input" data-testid="input-content" />
             <button onClick={assignAmount}>Assign</button>
             <br />
-            <div data-testid='amount-content'>
-                The amount of the money is $<span className='amount-display'>0</span>
+            <div data-testid="amount-content">
+                The amount of the money is $
+                <span className="amount-display" data-testid="amount">
+                    0
+                </span>
             </div>
         </div>
     );
