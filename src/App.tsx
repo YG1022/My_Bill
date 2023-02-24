@@ -1,4 +1,4 @@
-import './styles/App.scss';
+import './App.scss';
 import { Layout, Space } from 'antd';
 import InputBar from './components/InputBar';
 import React from 'react';

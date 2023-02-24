@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'antd';
-import '../styles/InputBar.scss';
+import './InputBar.scss';
 
 const InputBar = (): JSX.Element => {
     const assignAmount = () => {
