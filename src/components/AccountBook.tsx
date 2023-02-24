@@ -2,17 +2,22 @@ import React, { useState } from 'react';
 import { Row, Col } from 'antd';
 import './AccountBook.scss';
 
-const InputBar = (): JSX.Element => {
+type billItem = {
+    amount: string;
+    date: string;
+};
+
+const AccountBook = (): JSX.Element => {
     const [amount, setAmount] = useState<string>('');
-    const [amountList, setAmountList] = useState<string[]>([]);
+    const [amountList, setAmountList] = useState<billItem[]>([]);
 
     const assignAmount = (event): void => {
         setAmount(event.target.value);
     };
 
-    const displayAmount = (): void => {
-        setAmountList([amount]);
-    };
+    const displayAmount = (): void =>
+        setAmountList((preList) => [...preList, { amount, date: '20230224' }]);
+    ;
 
     return (
         <>
@@ -31,11 +36,15 @@ const InputBar = (): JSX.Element => {
                     </div>
                 </Col>
                 <Col span={12}>
-                    <div data-testid='amount-content'>
+                    <div className='amount-content' data-testid='amount-content'>
                         <span>The amount of the money is $</span>
                         <span className='amount-display' data-testid='amount'>
-                            {amountList[0] ? amountList[0] : 0}
+                            {amountList[amountList.length - 1]?.amount ? amountList[amountList.length - 1]?.amount : 0}
                         </span>
+                        <ul>
+                            {amountList.reverse().map((perAmount) => (
+                                <li>${perAmount.amount || 0}</li>))}
+                        </ul>
                     </div>
                 </Col>
             </Row>
