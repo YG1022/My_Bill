@@ -15,29 +15,31 @@ const InputBar = (): JSX.Element => {
     };
 
     return (
-        <Row>
-            <Col span={12}>
-                <div>
-                    <label htmlFor="Count">Tap your count here: </label>
-                    <input
-                        type="number"
-                        className="number-input"
-                        data-testid="input-content"
-                        placeholder="Only number is permitted!"
-                        onChange={assignAmount}
-                    />
-                    <button onClick={displayAmount}>Assign</button>
-                    <br />
-                    <div data-testid="amount-content">
-                        The amount of the money is $
-                        <span className="amount-display" data-testid="amount">
+        <>
+            <Row>
+                <Col span={12}>
+                    <div className='input-content'>
+                        <label htmlFor='Amount'>Tap your amount here: </label>
+                        <input
+                            type='number'
+                            className='number-input'
+                            data-testid='input-bar'
+                            placeholder='Only number is permitted!'
+                            onChange={assignAmount}
+                        />
+                        <button onClick={displayAmount}>Assign</button>
+                    </div>
+                </Col>
+                <Col span={12}>
+                    <div data-testid='amount-content'>
+                        <span>The amount of the money is $</span>
+                        <span className='amount-display' data-testid='amount'>
                             {amountList[0] ? amountList[0] : 0}
                         </span>
                     </div>
-                </div>
-            </Col>
-            <Col span={12}>Bill</Col>
-        </Row>
+                </Col>
+            </Row>
+        </>
     );
 };
 

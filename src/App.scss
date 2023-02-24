@@ -1,50 +1,54 @@
 @import "./styles/variables.scss";
 
 %base-layout {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 %ant-layout-location {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 %ant-layout-color-group {
-    color: $default-font-color;
-    background-color: $body-background-color;
+  color: $default-font-color;
+  background-color: $body-background-color;
 }
 
 .App {
-    @extend %base-layout;
-    height: 100%;
-    text-align: center;
+  @extend %base-layout;
+  height: 100%;
+  text-align: center;
 }
 
 .ant-layout {
+  @extend %base-layout;
+  @extend %ant-layout-color-group;
+  height: 100%;
+
+  .ant-layout-header {
     @extend %base-layout;
+    @extend %ant-layout-location;
+    @extend %ant-layout-color-group;
+    height: $header-height;
+    font-size: 2.25rem;
+  }
+
+  .ant-layout-content {
+    @extend %ant-layout-color-group;
+    margin: 50px;
+    padding: 30px 50px;
     height: 100%;
+    border-radius: 50px;
+    box-shadow: -20px 20px 40px #d1d9be, 20px -20px 60px #ffffff;
+  }
 
-    .ant-layout-header {
-        @extend %base-layout;
-        @extend %ant-layout-location;
-        @extend %ant-layout-color-group;
-        height: $header-height;
-        font-size: 2.25rem;
-    }
-
-    .ant-layout-content {
-        @extend %base-layout;
-        @extend %ant-layout-color-group;
-        height: 100%;
-    }
-
-    .ant-layout-footer {
-        @extend %base-layout;
-        @extend %ant-layout-location;
-        @extend %ant-layout-color-group;
-        height: $footer-height;
-        font-size: 1.25rem;
-    }
+  .ant-layout-footer {
+    @extend %base-layout;
+    @extend %ant-layout-location;
+    @extend %ant-layout-color-group;
+    height: $footer-height;
+    font-size: 1.25rem;
+  }
 }
