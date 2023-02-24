@@ -12,7 +12,7 @@ describe('AccountBook', () => {
 
     it('should render text input on screen', async () => {
         render(<AccountBook />);
-        await userEvent.type(screen.getByTestId('input-content'), '11');
+        await userEvent.type(screen.getByTestId('input-bar'), '11');
         await userEvent.click(screen.getByRole('button', { name: 'Assign' }));
         const amount = screen.getByTestId('amount').innerHTML;
         await waitFor(() => {
@@ -22,7 +22,7 @@ describe('AccountBook', () => {
 
     it('should render 0 if input character not number', async () => {
         render(<AccountBook />);
-        await userEvent.type(screen.getByTestId('input-content'), 'character');
+        await userEvent.type(screen.getByTestId('input-bar'), 'character');
         await userEvent.click(screen.getByRole('button', { name: 'Assign' }));
         const amount = screen.getByTestId('amount').innerHTML;
         await waitFor(() => {
@@ -32,7 +32,7 @@ describe('AccountBook', () => {
 
     it('should render negative number', async () => {
         render(<AccountBook />);
-        await userEvent.type(screen.getByTestId('input-content'), '-13');
+        await userEvent.type(screen.getByTestId('input-bar'), '-13');
         await userEvent.click(screen.getByRole('button', { name: 'Assign' }));
         const amount = screen.getByTestId('amount').innerHTML;
         await waitFor(() => {
