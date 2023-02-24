@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Row, Col } from 'antd';
 import './AccountBook.scss';
+import moment from 'moment';
 
 type billItem = {
     amount: string;
@@ -16,8 +17,7 @@ const AccountBook = (): JSX.Element => {
     };
 
     const displayAmount = (): void =>
-        setAmountList((preList) => [...preList, { amount, date: '20230224' }]);
-    ;
+        setAmountList((preList) => [...preList, { amount, date: moment().format('YYYY-MM-DD HH:mm:ss') }]);
 
     return (
         <>
@@ -43,7 +43,7 @@ const AccountBook = (): JSX.Element => {
                         </span>
                         <ul>
                             {amountList.reverse().map((perAmount) => (
-                                <li>${perAmount.amount || 0}</li>))}
+                                <li key={perAmount.date}>${perAmount.amount || 0}</li>))}
                         </ul>
                     </div>
                 </Col>
