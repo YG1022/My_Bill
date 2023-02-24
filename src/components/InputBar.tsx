@@ -13,7 +13,7 @@ const InputBar = (): JSX.Element => {
 
     return (
         <Row>
-            <Col>
+            <Col span={12}>
                 <div>
                     <label htmlFor="Count">Tap your count here: </label>
                     <input
@@ -32,6 +32,7 @@ const InputBar = (): JSX.Element => {
                     </div>
                 </div>
             </Col>
+            <Col span={12}>Bill</Col>
         </Row>
     );
 };

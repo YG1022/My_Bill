@@ -1,34 +1,50 @@
+@import "variables";
+
+%base-layout {
+    margin: 0;
+    padding: 0;
+}
+
+%ant-layout-location {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+%ant-layout-color-group {
+    color: $default-font-color;
+    background-color: $body-background-color;
+}
+
 .App {
+    @extend %base-layout;
     height: 100%;
     text-align: center;
 }
 
 .ant-layout {
-    padding: 0;
+    @extend %base-layout;
     height: 100%;
-    text-align: center;
-    color: cadetblue;
-    background-color: #f6ffdf;
-}
 
-.ant-layout .ant-layout-header {
-    padding: 0;
-    height: 130px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.25rem;
-    color: cadetblue;
-    background-color: #f6ffdf;
-}
+    .ant-layout-header {
+        @extend %base-layout;
+        @extend %ant-layout-location;
+        @extend %ant-layout-color-group;
+        height: $header-height;
+        font-size: 2.25rem;
+    }
 
-.ant-layout .ant-layout-footer {
-    padding: 0;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-    color: cadetblue;
-    background-color: #f6ffdf;
+    .ant-layout-content {
+        @extend %base-layout;
+        @extend %ant-layout-color-group;
+        height: 100%;
+    }
+
+    .ant-layout-footer {
+        @extend %base-layout;
+        @extend %ant-layout-location;
+        @extend %ant-layout-color-group;
+        height: $footer-height;
+        font-size: 1.25rem;
+    }
 }
