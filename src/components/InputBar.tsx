@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Row, Col } from 'antd';
 import './InputBar.scss';
 
 const InputBar = (): JSX.Element => {
-    const assignAmount = () => {
-        const numInput = document.querySelector('.number-input') as HTMLInputElement;
-        const billAmount = numInput.value ? numInput.value : '0';
-        numInput.value = '';
-        const amountDisplay = document.querySelector('.amount-display') as HTMLElement;
-        amountDisplay.innerHTML = billAmount;
+    const [amount, setAmount] = useState<string>('');
+    const [amountList, setAmountList] = useState<string[]>([]);
+
+    const assignAmount = (event): void => {
+        setAmount(event.target.value);
+    };
+
+    const displayAmount = (): void => {
+        setAmountList([amount]);
     };
 
     return (
@@ -21,13 +24,14 @@ const InputBar = (): JSX.Element => {
                         className="number-input"
                         data-testid="input-content"
                         placeholder="Only number is permitted!"
+                        onChange={assignAmount}
                     />
-                    <button onClick={assignAmount}>Assign</button>
+                    <button onClick={displayAmount}>Assign</button>
                     <br />
                     <div data-testid="amount-content">
                         The amount of the money is $
                         <span className="amount-display" data-testid="amount">
-                            0
+                            {amountList[0] ? amountList[0] : 0}
                         </span>
                     </div>
                 </div>
