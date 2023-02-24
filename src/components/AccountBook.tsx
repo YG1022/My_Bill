@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Row, Col } from 'antd';
-import './InputBar.scss';
+import './AccountBook.scss';
 
 const InputBar = (): JSX.Element => {
     const [amount, setAmount] = useState<string>('');
@@ -41,4 +41,4 @@ const InputBar = (): JSX.Element => {
     );
 };
 
-export default InputBar;
+export default AccountBook;

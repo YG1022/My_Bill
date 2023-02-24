@@ -1,6 +1,6 @@
 import './App.scss';
 import { Layout, Space } from 'antd';
-import InputBar from './components/InputBar';
+import AccountBook from './components/AccountBook';
 import React from 'react';
 
 const App = (): JSX.Element => {
@@ -11,7 +11,7 @@ const App = (): JSX.Element => {
             <Layout>
                 <Header>My Bill</Header>
                 <Content>
-                    <InputBar />
+                    <AccountBook />
                 </Content>
                 <Footer>Saving is a virtue.</Footer>
             </Layout>
