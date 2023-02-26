@@ -8,6 +8,8 @@ type billItem = {
     date: string;
 };
 
+const dateStamp = moment().format('YYYY-MM-DD HH:mm:ss');
+
 const AccountBook = (): JSX.Element => {
     const [amount, setAmount] = useState<string>('');
     const [amountList, setAmountList] = useState<billItem[]>([]);
@@ -17,7 +19,7 @@ const AccountBook = (): JSX.Element => {
     };
 
     const displayAmount = (): void =>
-        setAmountList((preList) => [...preList, { amount, date: moment().format('YYYY-MM-DD HH:mm:ss') }]);
+        setAmountList(preList => [...preList, { amount, date: dateStamp }]);
 
     return (
         <>
@@ -39,11 +41,16 @@ const AccountBook = (): JSX.Element => {
                     <div className='amount-content' data-testid='amount-content'>
                         <span>The amount of the money is $</span>
                         <span className='amount-display' data-testid='amount'>
-                            {amountList[amountList.length - 1]?.amount ? amountList[amountList.length - 1]?.amount : 0}
+                            {amountList[amountList.length - 1]?.amount
+                                ? amountList[amountList.length - 1]?.amount
+                                : 0}
                         </span>
                         <ul>
-                            {amountList.reverse().map((perAmount) => (
-                                <li key={perAmount.date}>${perAmount.amount || 0}</li>))}
+                            {amountList.reverse().map(perAmount => (
+                                <li key={perAmount.date}>
+                                    <div className='bill-tag'>${perAmount.amount}</div>
+                                </li>
+                            )) || 0}
                         </ul>
                     </div>
                 </Col>
