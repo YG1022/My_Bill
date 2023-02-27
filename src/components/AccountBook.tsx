@@ -1,68 +1,66 @@
-import React, { useRef, useState } from 'react';
-import { Row, Col } from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
+import { Col, Row } from 'antd';
 import './AccountBook.scss';
 import moment from 'moment';
 import { addBillItem } from './services/addBillItem';
-
-type billItem = {
-    amount: string;
-    date: string;
-};
+import { getBillItems } from './services/getBillItems';
+import { fetchedBillItem } from '../constants/types';
 
 const dateStamp: string = moment().format('YYYY-MM-DD HH:mm:ss');
 
 const AccountBook = (): JSX.Element => {
     const [amount, setAmount] = useState<string>('');
-    const [amountList, setAmountList] = useState<billItem[]>([]);
+    const [amountList, setAmountList] = useState<fetchedBillItem[]>([]);
 
     const inputRef: React.MutableRefObject<HTMLInputElement> = useRef();
 
+    const fetchData = async (): Promise<void> => setAmountList(await getBillItems());
+
     const assignAmount = (): void => setAmount(inputRef.current.value);
 
-    const displayAmount = async (): Promise<void> => {
+    const addBill = async (): Promise<void> => {
         const newBillItem = { amount, date: dateStamp };
-        setAmountList(preList => [...preList, newBillItem]);
-
-        const EmptyList = amountList.filter((item) => item.amount === '0');
-        if (EmptyList.length > 0) {
-            console.log('The empty bill is not allowed!');
-        }
 
         await addBillItem(newBillItem);
+        await fetchData();
 
         inputRef.current.value = '';
     };
 
-    const allBillsAmount: number = amountList.reduce((total, curr) => total + Number(curr.amount), 0);
+    const sumBill: number = amountList.reduce((total, curr) => total + Number(curr.amount), 0);
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     return (
         <>
             <Row>
                 <Col span={12}>
-                    <div className='input-content'>
-                        <label htmlFor='Amount'>Tap your amount here: </label>
+                    <div className="input-content">
+                        <label htmlFor="Amount">Tap your amount here: </label>
                         <br />
                         <input
-                            type='number'
-                            className='number-input'
-                            data-testid='input-bar'
-                            placeholder='Only number is permitted!'
+                            type="number"
+                            className="number-input"
+                            data-testid="input-bar"
+                            placeholder="Only number is permitted!"
                             onChange={assignAmount}
                             ref={inputRef}
                         />
-                        <button onClick={displayAmount}>Assign</button>
+                        <button onClick={addBill}>Assign</button>
                     </div>
                 </Col>
                 <Col span={12}>
-                    <div className='amount-content' data-testid='amount-content'>
+                    <div className="amount-content" data-testid="amount-content">
                         <span>The amount of all the bills is $</span>
-                        <span className='amount-display' data-testid='amount'>
-                            {allBillsAmount}
+                        <span className="amount-display" data-testid="amount">
+                            {sumBill}
                         </span>
                         <ul>
                             {amountList.reverse().map(perAmount => (
-                                <li>
-                                    <div className='bill-tag'>${perAmount.amount || 0}</div>
+                                <li key={perAmount.id}>
+                                    <div className="bill-tag">${perAmount.amount || 0}</div>
                                 </li>
                             ))}
                         </ul>
