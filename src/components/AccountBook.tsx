@@ -14,10 +14,14 @@ const AccountBook = (): JSX.Element => {
     const [amount, setAmount] = useState<string>('');
     const [amountList, setAmountList] = useState<billItem[]>([]);
 
-    const assignAmount = (event): void => setAmount(event.target.value);
+    const inputRef: React.MutableRefObject<HTMLInputElement> = useRef();
 
-    const displayAmount = (): void => {
-        setAmountList(preList => [...preList, { amount, date: dateStamp }]);
+    const assignAmount = (): void => setAmount(inputRef.current.value);
+
+    const displayAmount = async (): Promise<void> => {
+        const newBillItem = { amount, date: dateStamp };
+        setAmountList(preList => [...preList, newBillItem]);
+
         const EmptyList = amountList.filter((item) => item.amount === '0');
         if (EmptyList.length > 0) {
             console.log('The empty bill is not allowed!');
@@ -39,6 +43,7 @@ const AccountBook = (): JSX.Element => {
                             data-testid='input-bar'
                             placeholder='Only number is permitted!'
                             onChange={assignAmount}
+                            ref={inputRef}
                         />
                         <button onClick={displayAmount}>Assign</button>
                     </div>
