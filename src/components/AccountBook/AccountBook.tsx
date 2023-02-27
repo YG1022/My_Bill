@@ -4,7 +4,7 @@ import './AccountBook.scss';
 import moment from 'moment';
 import { addBillItem } from './services/addBillItem';
 import { getBillItems } from './services/getBillItems';
-import { fetchedBillItem } from '../constants/types';
+import { fetchedBillItem } from '../../constants/types';
 
 const dateStamp: string = moment().format('YYYY-MM-DD HH:mm:ss');
 

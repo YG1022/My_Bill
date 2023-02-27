@@ -1,6 +1,6 @@
 import './App.scss';
 import { Layout, Space } from 'antd';
-import AccountBook from './components/AccountBook';
+import AccountBook from './components/AccountBook/AccountBook';
 import React from 'react';
 
 const App = (): JSX.Element => {
