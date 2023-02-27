@@ -8,18 +8,23 @@ type billItem = {
     date: string;
 };
 
-const dateStamp = moment().format('YYYY-MM-DD HH:mm:ss');
+const dateStamp: string = moment().format('YYYY-MM-DD HH:mm:ss');
 
 const AccountBook = (): JSX.Element => {
     const [amount, setAmount] = useState<string>('');
     const [amountList, setAmountList] = useState<billItem[]>([]);
 
-    const assignAmount = (event): void => {
-        setAmount(event.target.value);
+    const assignAmount = (event): void => setAmount(event.target.value);
+
+    const displayAmount = (): void => {
+        setAmountList(preList => [...preList, { amount, date: dateStamp }]);
+        const EmptyList = amountList.filter((item) => item.amount === '0');
+        if (EmptyList.length > 0) {
+            console.log('The empty bill is not allowed!');
+        }
     };
 
-    const displayAmount = (): void =>
-        setAmountList(preList => [...preList, { amount, date: dateStamp }]);
+    const allBillsAmount: number = amountList.reduce((total, curr) => total + Number(curr.amount), 0);
 
     return (
         <>
@@ -27,6 +32,7 @@ const AccountBook = (): JSX.Element => {
                 <Col span={12}>
                     <div className='input-content'>
                         <label htmlFor='Amount'>Tap your amount here: </label>
+                        <br />
                         <input
                             type='number'
                             className='number-input'
@@ -39,18 +45,16 @@ const AccountBook = (): JSX.Element => {
                 </Col>
                 <Col span={12}>
                     <div className='amount-content' data-testid='amount-content'>
-                        <span>The amount of the money is $</span>
+                        <span>The amount of all the bills is $</span>
                         <span className='amount-display' data-testid='amount'>
-                            {amountList[amountList.length - 1]?.amount
-                                ? amountList[amountList.length - 1]?.amount
-                                : 0}
+                            {allBillsAmount}
                         </span>
                         <ul>
                             {amountList.reverse().map(perAmount => (
-                                <li key={perAmount.date}>
-                                    <div className='bill-tag'>${perAmount.amount}</div>
+                                <li>
+                                    <div className='bill-tag'>${perAmount.amount || 0}</div>
                                 </li>
-                            )) || 0}
+                            ))}
                         </ul>
                     </div>
                 </Col>
