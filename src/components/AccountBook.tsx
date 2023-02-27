@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Row, Col } from 'antd';
 import './AccountBook.scss';
 import moment from 'moment';
+import { addBillItem } from './services/addBillItem';
 
 type billItem = {
     amount: string;
@@ -26,6 +27,10 @@ const AccountBook = (): JSX.Element => {
         if (EmptyList.length > 0) {
             console.log('The empty bill is not allowed!');
         }
+
+        await addBillItem(newBillItem);
+
+        inputRef.current.value = '';
     };
 
     const allBillsAmount: number = amountList.reduce((total, curr) => total + Number(curr.amount), 0);
