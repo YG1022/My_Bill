@@ -1,3 +1,1 @@
-export const addBillItem = async (newItem): Promise<void> => {
-
-};
+export const addBillItem = async (newItem): Promise<void> => {};
