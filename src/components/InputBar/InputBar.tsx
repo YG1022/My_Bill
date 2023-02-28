@@ -20,7 +20,7 @@ const InputBar: React.FC = () => {
   };
 
   return (
-    <>
+    <div style={{ height: 100 }}>
       <Form
         {...layout}
         form={form}
@@ -41,7 +41,7 @@ const InputBar: React.FC = () => {
           </Button>
         </Form.Item>
       </Form>
-    </>
+    </div>
   );
 };
 
