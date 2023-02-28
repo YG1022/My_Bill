@@ -7,7 +7,7 @@ const App = (): JSX.Element => {
     const { Header, Footer, Content } = Layout;
 
     return (
-        <Space direction="vertical" style={{ width: '100%' }}>
+        <Space direction='vertical' style={{ width: '100%' }}>
             <Layout>
                 <Header>My Bill</Header>
                 <Content>

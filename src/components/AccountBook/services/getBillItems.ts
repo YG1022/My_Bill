@@ -1,14 +1,16 @@
-import { getDocs, collectionGroup } from 'firebase/firestore';
-import { db } from '../../../firebase';
-import { fetchedBillItem } from '../../../constants/types';
+import { supabase } from '../../../supabaseClient';
 
-export const getBillItems = async (): Promise<fetchedBillItem[]> => {
-    try {
-        let fetchedList = [];
-        const billRef = await getDocs(collectionGroup(db, 'billItems'));
-        billRef.docs.forEach(item => fetchedList.push({ ...item.data(), id: item.id }));
-        return fetchedList;
-    } catch (error) {
-        console.error('Error adding document: ', error);
+const getBillItems = async (error, setError, setAmountList): Promise<void> => {
+    const { data: bills, error: sqlError } = await supabase.from('bills').select();
+    if (sqlError) {
+        setError('Could not fetch the bills.');
+        setAmountList(null);
+        console.log(error);
+    }
+    if (bills) {
+        setAmountList(bills);
+        setError(null);
     }
 };
+
+export { getBillItems };

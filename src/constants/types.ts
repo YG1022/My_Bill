@@ -4,7 +4,7 @@ type billItem = {
 };
 
 type fetchedBillItem = {
-    id: string;
+    id: number;
     amount: string;
     date: string;
 };
