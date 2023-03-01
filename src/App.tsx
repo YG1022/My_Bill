@@ -2,8 +2,8 @@ import './App.scss';
 import { DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
-import AccountBook from './pages/AccountBook/AccountBook';
 import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
 const { Sider, Header, Footer, Content } = Layout;
 
@@ -45,7 +45,7 @@ const App: React.FC = () => {
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
           <div className="display-content">
-            <AccountBook />
+            <Outlet />
           </div>
         </Content>
         <Footer className="site-footer">Saving is a virtue.</Footer>
