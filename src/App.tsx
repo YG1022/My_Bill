@@ -3,7 +3,7 @@ import { DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 
 const { Sider, Header, Footer, Content } = Layout;
 
@@ -24,8 +24,8 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('Statistics data', '1', <PieChartOutlined />),
-  getItem('Operator', '2', <DesktopOutlined />),
+  getItem(<NavLink to={'/'}>Input</NavLink>, 'input', <DesktopOutlined />),
+  getItem(<NavLink to={'/input'}>Bills</NavLink>, 'bills', <PieChartOutlined />),
 ];
 
 const App: React.FC = () => {

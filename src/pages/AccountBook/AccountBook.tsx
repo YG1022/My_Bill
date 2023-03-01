@@ -5,18 +5,18 @@ import InputBar from '../../components/InputBar/InputBar';
 import BillsList from '../../components/BillsList/BillsList';
 
 const AccountBook: React.FC = () => {
-    const { amountList, fetchData } = useAccountBook();
+  const { amountList, fetchData } = useAccountBook();
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
-    return (
-        <>
-            <InputBar />
-            <BillsList amountList={amountList} />
-        </>
-    );
+  return (
+    <>
+      <InputBar />
+      <BillsList amountList={amountList} />
+    </>
+  );
 };
 
 export default AccountBook;
