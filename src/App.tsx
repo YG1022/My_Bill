@@ -2,7 +2,7 @@ import './App.scss';
 import { DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
-import AccountBook from './components/AccountBook/AccountBook';
+import AccountBook from './pages/AccountBook/AccountBook';
 import React, { useState } from 'react';
 
 const { Sider, Header, Footer, Content } = Layout;

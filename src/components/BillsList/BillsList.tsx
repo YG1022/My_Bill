@@ -1,16 +1,10 @@
 import { Divider, List } from 'antd';
 import React from 'react';
 import { billsListProps } from '../../constants/types';
+import { useBillsList } from './hooks/useBillsList';
 
 const BillsList: React.FC<billsListProps> = ({ amountList }) => {
-    let sumBill: number;
-    if (amountList) {
-        sumBill = amountList.reduce((total, curr) => total + Number(curr.amount), 0);
-    } else {
-        sumBill = 0;
-    }
-
-    const bills = amountList.map(item => item.amount);
+    const { bills, sumBill } = useBillsList(amountList);
 
     return (
         <div style={{ maxHeight: 500 }}>

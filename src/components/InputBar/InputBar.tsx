@@ -1,6 +1,6 @@
 import { Button, Form, Input } from 'antd';
 import React from 'react';
-import { addBillItem } from '../AccountBook/services/addBillItem';
+import { addBillItem } from '../../pages/AccountBook/services/addBillItem';
 import moment from 'moment/moment';
 
 const layout = {
