@@ -1,30 +1,10 @@
 import { Button, Form, Input } from 'antd';
 import React from 'react';
-import { addBillItem } from '../../pages/AccountBook/services/addBillItem';
-import moment from 'moment/moment';
-
-const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-};
-
-const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
-};
-
-const dateStamp: string = moment().format('YYYY-MM-DD HH:mm:ss');
+import { useInputBar } from './hooks/useInputBar';
 
 const InputBar: React.FC = () => {
     const [form] = Form.useForm();
-    const onFinish = async (values: { amount: string }) => {
-        const { data, error: sqlError } = await addBillItem(values.amount, dateStamp);
-        if (sqlError) {
-            console.log(sqlError);
-        }
-        if (data) {
-            form.resetFields();
-        }
-    };
+    const { layout, tailLayout, onFinish } = useInputBar(form);
 
     return (
         <div style={{ height: 100 }}>
