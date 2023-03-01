@@ -9,4 +9,9 @@ type fetchedBillItem = {
     date: string;
 };
 
-export { billItem, fetchedBillItem };
+type billsListProps = {
+    amountList: fetchedBillItem[];
+    error: any;
+}
+
+export { billItem, fetchedBillItem, billsListProps };
