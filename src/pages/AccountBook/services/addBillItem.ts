@@ -1,7 +1,7 @@
 import { supabase } from '../../../supabaseClient';
 
-const addBillItem = (amount, date) => {
-    return supabase.from('bills').insert([{ amount, date }]).select();
+const addBillItem = amount => {
+  return supabase.from('bills').insert([{ amount }]).select();
 };
 
 export { addBillItem };
