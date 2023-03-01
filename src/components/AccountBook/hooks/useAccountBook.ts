@@ -20,7 +20,7 @@ const useAccountBook = () => {
         }
     };
 
-    return { error, amountList, fetchData };
+    return { amountList, fetchData };
 };
 
 export { useAccountBook };

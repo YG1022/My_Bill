@@ -11,7 +11,6 @@ type fetchedBillItem = {
 
 type billsListProps = {
     amountList: fetchedBillItem[];
-    error: any;
 }
 
 export { billItem, fetchedBillItem, billsListProps };
