@@ -13,7 +13,6 @@ const AccountBook: React.FC = () => {
 
   return (
     <>
-      <InputBar />
       <BillsList amountList={amountList} />
     </>
   );

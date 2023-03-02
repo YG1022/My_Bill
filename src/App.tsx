@@ -16,16 +16,16 @@ function getItem(
   children?: MenuItem[]
 ): MenuItem {
   return {
+    label,
     key,
     icon,
     children,
-    label,
   } as MenuItem;
 }
 
 const items: MenuItem[] = [
-  getItem(<NavLink to={'/'}>Input</NavLink>, 'input', <DesktopOutlined />),
-  getItem(<NavLink to={'/input'}>Bills</NavLink>, 'bills', <PieChartOutlined />),
+  getItem(<NavLink to={'/input'}>Input</NavLink>, 'input', <DesktopOutlined />),
+  getItem(<NavLink to={'/bills'}>Bills</NavLink>, 'bills', <PieChartOutlined />),
 ];
 
 const App: React.FC = () => {
@@ -35,7 +35,7 @@ const App: React.FC = () => {
     <Layout style={{ minHeight: '100vh', width: '100%' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={value => setCollapsed(value)}>
         <div className="search-holder" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <Menu theme="dark" defaultSelectedKeys={['input']} mode="inline" items={items} />
       </Sider>
       <Layout className="site-layout">
         <Header className="site-header">My Bill</Header>
