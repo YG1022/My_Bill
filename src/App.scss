@@ -28,8 +28,11 @@
 
         .display-content {
             padding: 24px;
-            min-height: 360px;
-            background: $pure-white
+            height: 100%;
+            background: $pure-white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 
