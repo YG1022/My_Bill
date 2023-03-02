@@ -1,6 +1,6 @@
-import { addBillItem } from '../../../pages/AccountBook/services/addBillItem';
+import { addBillItem } from '../../AccountBook/services/addBillItem';
 
-const useInputBar = form => {
+const useInputAmount = form => {
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -23,4 +23,4 @@ const useInputBar = form => {
   return { layout, tailLayout, onFinish };
 };
 
-export { useInputBar };
+export { useInputAmount };
