@@ -1,0 +1,23 @@
+.bills-list {
+  max-height: 600px;
+
+  .bills-divider {
+    height: 20px;
+    width: 800px
+  }
+
+  .amount-content {
+    height: 20px;
+    margin: 10px 0;
+
+    .amount {
+      font-size: 1.25rem;
+    }
+  }
+
+  .list-content {
+    height: 400px;
+    width: 800px;
+    overflow-y: scroll;
+  }
+}
