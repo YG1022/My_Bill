@@ -1,16 +1,20 @@
+import { MenuProps } from 'antd';
+
 type billItem = {
-    amount: string;
-    date: string;
+  amount: string;
+  date: string;
 };
 
 type fetchedBillItem = {
-    id: number;
-    amount: string;
-    date: string;
+  id: number;
+  amount: string;
+  date: string;
 };
 
 type billsListProps = {
-    amountList: fetchedBillItem[];
-}
+  amountList: fetchedBillItem[];
+};
 
-export { billItem, fetchedBillItem, billsListProps };
+type MenuItem = Required<MenuProps>['items'][number];
+
+export { billItem, fetchedBillItem, billsListProps, MenuItem };

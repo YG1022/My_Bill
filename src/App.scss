@@ -1,42 +1,47 @@
 @import "./styles/variables.scss";
 
 .App {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
-.search-holder {
+.main-layout {
+  min-height: 100vh;
+  width: 100%;
+
+  .search-holder {
     height: 32px;
     margin: 16px;
     background: $search-placeholder;
-}
+  }
 
-.site-layout {
+  .site-layout {
     .site-header {
-        padding: 0 16px;
-        font-size: 1.75rem;
-        background: $pure-white;
+      padding: 0 16px;
+      font-size: 1.75rem;
+      background: $pure-white;
     }
 
     .site-content {
-        margin: 0 16px;
+      margin: 0 16px;
 
-        .site-breadcrumb {
-            margin: 16px 0;
-        }
+      .site-breadcrumb {
+        margin: 16px 0;
+      }
 
-        .display-content {
-            padding: 24px;
-            height: 100%;
-            background: $pure-white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+      .display-content {
+        padding: 24px;
+        height: 100%;
+        background: $pure-white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
 
     .site-footer {
-        text-align: center
+      text-align: center
     }
+  }
 }
