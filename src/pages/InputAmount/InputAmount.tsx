@@ -1,5 +1,6 @@
-import { Button, Form, Input } from 'antd';
+import { Button, Form } from 'antd';
 import React from 'react';
+import InputBar from '../../components/InputBar/InputBar';
 import { useInputAmount } from './hooks/useInputAmount';
 import './InputAmount.scss';
 
@@ -15,7 +16,7 @@ const InputAmount: React.FC = () => {
         label="Amount"
         rules={[{ required: true, message: 'Please input number!' }]}
       >
-        <Input type="number" />
+        <InputBar />
       </Form.Item>
       <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
