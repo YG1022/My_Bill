@@ -12,7 +12,8 @@ const AccountBook: React.FC = () => {
 
   return (
     <>
-      <BillsList amountList={amountList} />
+      <BillsList amountList={amountList} category={'+'} />
+      <BillsList amountList={amountList} category={'-'} />
     </>
   );
 };
