@@ -1,6 +1,5 @@
-import { Button, Form } from 'antd';
+import { Button, Form, InputNumber, Select } from 'antd';
 import React from 'react';
-import InputBar from '../../components/InputBar/InputBar';
 import { useInputAmount } from './hooks/useInputAmount';
 import './InputAmount.scss';
 
@@ -16,12 +15,20 @@ const InputAmount: React.FC = () => {
         label="Amount"
         rules={[{ required: true, message: 'Please input number!' }]}
       >
-        <InputBar />
+        <InputNumber placeholder="Please input number" style={{ width: 300 }} />
       </Form.Item>
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
+      <Form.Item name="category" label="Category" rules={[{ required: true }]}>
+        <Select style={{ width: 300 }}>
+          <Select.Option value="+">Income</Select.Option>
+          <Select.Option value="-">Expenses</Select.Option>
+        </Select>
+      </Form.Item>
+      <Form.Item {...tailLayout} shouldUpdate>
+        {() => (
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        )}
       </Form.Item>
     </Form>
   );

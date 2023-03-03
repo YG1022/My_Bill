@@ -10,8 +10,8 @@ const useInputAmount = form => {
     wrapperCol: { offset: 8, span: 16 },
   };
 
-  const onFinish = async (values: { amount: string }) => {
-    const { data, error: sqlError } = await addBillItem(values.amount);
+  const onFinish = async values => {
+    const { data, error: sqlError } = await addBillItem(values);
     if (sqlError) {
       console.log(sqlError);
     }

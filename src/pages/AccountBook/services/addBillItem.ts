@@ -1,7 +1,10 @@
 import { supabase } from '../../../supabaseClient';
 
-const addBillItem = amount => {
-  return supabase.from('bills').insert([{ amount }]).select();
+const addBillItem = values => {
+  return supabase
+    .from('bills')
+    .insert([{ amount: values.amount, category: values.category }])
+    .select();
 };
 
 export { addBillItem };
