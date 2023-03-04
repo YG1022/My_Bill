@@ -8,7 +8,6 @@ const useAccountBook = () => {
 
   const fetchData = async () => {
     const { data, error: sqlError } = await getBillItems();
-    console.log(data);
 
     if (sqlError) {
       setError(sqlError);
