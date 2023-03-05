@@ -5,7 +5,14 @@ import { useInputBar } from './hooks/useInputBar';
 const InputBar: React.FC = () => {
   const { selectBefore, selectAfter } = useInputBar();
 
-  return <InputNumber addonBefore={selectBefore} addonAfter={selectAfter} defaultValue={0} />;
+  return (
+    <InputNumber
+      addonBefore={selectBefore}
+      addonAfter={selectAfter}
+      className="input-bar"
+      placeholder="Please input number"
+    />
+  );
 };
 
 export default InputBar;
