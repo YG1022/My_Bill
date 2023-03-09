@@ -1,4 +1,4 @@
-import { supabase } from '../../../supabaseClient';
+import { supabase } from '../supabaseClient';
 
 const addBillItem = values => {
   return supabase

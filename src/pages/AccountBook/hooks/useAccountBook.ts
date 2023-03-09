@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { PostgrestError } from '@supabase/supabase-js';
-import { getBillItems } from '../services/getBillItems';
+import { getBillItems } from '../../../services/getBillItems';
 
 const useAccountBook = () => {
   const [error, setError] = useState<PostgrestError>(null);

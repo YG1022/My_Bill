@@ -1,4 +1,4 @@
-import { addBillItem } from '../../AccountBook/services/addBillItem';
+import { addBillItem } from '../../../services/addBillItem';
 
 const useInputAmount = form => {
   const layout = {
