@@ -2,7 +2,7 @@ import { supabase } from '../supabaseClient';
 
 const addBillItem = values => {
   return supabase
-    .from('bills')
+    .from('transactions')
     .insert([{ amount: values.amount, category: values.category }])
     .select();
 };
