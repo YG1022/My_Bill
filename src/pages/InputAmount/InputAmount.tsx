@@ -1,5 +1,6 @@
 import { Button, Form, InputNumber, Select } from 'antd';
 import React from 'react';
+import { CustomTags } from '../../components/CustomTags/CustomTags';
 import { useInputAmount } from './hooks/useInputAmount';
 import './InputAmount.scss';
 
@@ -16,8 +17,8 @@ const InputAmount: React.FC = () => {
       >
         <InputNumber
           className='input-bar'
-          formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-          parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+          formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+          parser={value => value!.replace(/\$\s?|(,*)/g, '')}
           placeholder='Please input number'
         />
       </Form.Item>
@@ -31,8 +32,18 @@ const InputAmount: React.FC = () => {
           <Select.Option value='-'>Expenses</Select.Option>
         </Select>
       </Form.Item>
+      <Form.Item className='transactions-tags' name='tags' label='Tags'>
+        <CustomTags />
+      </Form.Item>
       <Form.Item {...tailLayout} shouldUpdate>
-        <Button type='primary' htmlType='submit'>
+        <Button
+          type='primary'
+          htmlType='submit'
+          onClick={e => {
+            e.preventDefault();
+            console.log(form.getFieldsValue());
+          }}
+        >
           Submit
         </Button>
       </Form.Item>
