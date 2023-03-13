@@ -1,8 +1,8 @@
 import { fetchedBillItem } from '../../../constants/types';
 
 const useBillsList = (amountList: Array<fetchedBillItem>, category: string) => {
-  let sumBill: number = 0;
-  sumBill = amountList
+  let totalAmount: number = 0;
+  totalAmount = amountList
     .filter(item => item.category === category)
     .reduce((total, curr) => total + Number(curr.amount), 0);
 
@@ -10,7 +10,7 @@ const useBillsList = (amountList: Array<fetchedBillItem>, category: string) => {
     .filter(item => item.category === category)
     .map(item => item.amount);
 
-  return { sumBill, bills };
+  return { totalAmount, bills };
 };
 
 export { useBillsList };

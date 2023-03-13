@@ -5,7 +5,7 @@ import { useBillsList } from './hooks/useBillsList';
 import './BillsList.scss';
 
 const BillsList: React.FC<billsListProps> = ({ amountList, category }) => {
-  const { bills, sumBill } = useBillsList(amountList, category);
+  const { bills, totalAmount } = useBillsList(amountList, category);
 
   return (
     <div className="bills-list">
@@ -15,7 +15,7 @@ const BillsList: React.FC<billsListProps> = ({ amountList, category }) => {
       <div className="amount-content">
         <span>The amount of all the bills is $</span>
         <span className="amount" data-testid="amount">
-          {sumBill}
+          {totalAmount}
         </span>
       </div>
       <List
