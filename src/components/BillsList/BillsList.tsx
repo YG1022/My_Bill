@@ -5,12 +5,12 @@ import { useBillsList } from './hooks/useBillsList';
 import './BillsList.scss';
 
 const BillsList: React.FC<billsListProps> = ({ amountList, category }) => {
-  const { bills, totalAmount } = useBillsList(amountList, category);
+  const { transactions, totalAmount } = useBillsList(amountList, category);
 
   return (
     <div className="bills-list">
       <Divider className="bills-divider" orientation="left">
-        Bills List
+        Transactions List
       </Divider>
       <div className="amount-content">
         <span>The amount of all the bills is $</span>
@@ -21,8 +21,8 @@ const BillsList: React.FC<billsListProps> = ({ amountList, category }) => {
       <List
         className="list-content"
         bordered
-        dataSource={bills}
-        renderItem={bill => <List.Item>{bill}</List.Item>}
+        dataSource={transactions}
+        renderItem={transaction => <List.Item>{transaction}</List.Item>}
       ></List>
     </div>
   );

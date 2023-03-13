@@ -6,11 +6,11 @@ const useBillsList = (amountList: Array<fetchedBillItem>, category: string) => {
     .filter(item => item.category === category)
     .reduce((total, curr) => total + Number(curr.amount), 0);
 
-  const bills: Array<string> = amountList
+  const transactions: Array<string> = amountList
     .filter(item => item.category === category)
     .map(item => item.amount);
 
-  return { totalAmount, bills };
+  return { totalAmount, transactions };
 };
 
 export { useBillsList };

@@ -36,14 +36,7 @@ const InputAmount: React.FC = () => {
         <CustomTags />
       </Form.Item>
       <Form.Item {...tailLayout} shouldUpdate>
-        <Button
-          type='primary'
-          htmlType='submit'
-          onClick={e => {
-            e.preventDefault();
-            console.log(form.getFieldsValue());
-          }}
-        >
+        <Button type='primary' htmlType='submit'>
           Submit
         </Button>
       </Form.Item>
