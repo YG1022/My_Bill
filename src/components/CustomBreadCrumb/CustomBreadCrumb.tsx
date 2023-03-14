@@ -5,10 +5,7 @@ import { useCustomBreadCrumb } from './hooks/useCustomBreadCrumb';
 const CustomBreadCrumb: React.FC = () => {
   const { routes } = useCustomBreadCrumb();
 
-  return (
-    <Breadcrumb className='site-breadcrumb' routes={routes}>
-    </Breadcrumb>
-  );
+  return <Breadcrumb className="site-breadcrumb" routes={routes}></Breadcrumb>;
 };
 
 export default CustomBreadCrumb;

@@ -9,17 +9,17 @@ const { Header, Footer, Content } = Layout;
 
 const App: React.FC = () => {
   return (
-    <Layout className='app'>
+    <Layout className="app">
       <MenuSider />
       <Layout>
-        <Header className='header'>My Bill</Header>
-        <Content className='layout-content'>
+        <Header className="header">My Bill</Header>
+        <Content className="layout-content">
           <CustomBreadCrumb />
-          <div className='main'>
+          <div className="main">
             <Outlet />
           </div>
         </Content>
-        <Footer className='site-footer'>Saving is a virtue.</Footer>
+        <Footer className="site-footer">Saving is a virtue.</Footer>
       </Layout>
     </Layout>
   );
