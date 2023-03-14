@@ -10,10 +10,10 @@ const BillsList: React.FC<billsListProps> = ({ amountList, category }) => {
   return (
     <div className="bills-list">
       <Divider className="bills-divider" orientation="left">
-        Transactions List
+        {category === '+' ? 'Income' : 'Expenses'} List
       </Divider>
       <div className="amount-content">
-        <span>The amount of all the bills is $</span>
+        <span>The amount of all the {category === '+' ? 'income' : 'expenses'} is $</span>
         <span className="amount" data-testid="amount">
           {totalAmount}
         </span>
@@ -24,10 +24,12 @@ const BillsList: React.FC<billsListProps> = ({ amountList, category }) => {
         dataSource={transactions}
         renderItem={transaction => (
           <List.Item>
-            {transaction.amount}
-            {transaction.tags.split(',').map((tag, index) => (
-              <Tag key={index}>{tag}</Tag>
-            ))}
+            <span className="item-amount">{transaction.amount}</span>
+            <span className="item-tag">
+              {transaction.tags.split(',').map((tag, index) => (
+                <Tag key={index}>{tag}</Tag>
+              ))}
+            </span>
           </List.Item>
         )}
       ></List>
