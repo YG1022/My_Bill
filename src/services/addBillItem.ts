@@ -2,7 +2,7 @@ import { supabase } from '../supabaseClient';
 
 const addBillItem = values => {
   const { tags, ...extraData } = values;
-  const formData = { tags: tags.tags.join(), ...extraData };
+  const formData = { tags: tags.tags, ...extraData };
 
   return supabase
     .from('transactions')

@@ -5,7 +5,7 @@ type fetchedBillItem = {
   amount: string;
   date: string;
   category: string;
-  tags?: string;
+  tags?: Array<string>;
 };
 
 type billsListProps = {

@@ -26,7 +26,7 @@ const BillsList: React.FC<billsListProps> = ({ amountList, category }) => {
           <List.Item>
             <span className="item-amount">{transaction.amount}</span>
             <span className="item-tag">
-              {transaction.tags.split(',').map((tag, index) => (
+              {transaction.tags.map((tag, index) => (
                 <Tag key={index}>{tag}</Tag>
               ))}
             </span>
