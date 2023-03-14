@@ -9,3 +9,8 @@ export const ROUTES_PATH_NAME = {
   input: 'Input',
   bills: 'Bills',
 };
+
+export const breadcrumbNameMap: Record<string, string> = {
+  '/input': 'Input',
+  '/bills': 'Bills',
+};

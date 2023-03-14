@@ -1,15 +1,27 @@
-import { useLocation } from 'react-router-dom';
-import { ROUTES_PATH_NAME } from '../../../constants/routes';
+import React from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { breadcrumbNameMap } from '../../../constants/routes';
 
 const useCustomBreadCrumb = () => {
   const location = useLocation();
 
-  const routes = location.pathname.split('/').map(path => ({
-    path,
-    breadcrumbName: ROUTES_PATH_NAME[path] || path,
-  }));
+  const pathSnippets = location.pathname.split('/').filter(i => i);
+  const extraBreadcrumbItems = pathSnippets.map((_, index) => {
+    const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+    return {
+      key: url,
+      title: <NavLink to={url}>{breadcrumbNameMap[url]}</NavLink>,
+    };
+  });
 
-  return { routes };
+  const breadcrumbItems = [
+    {
+      title: <NavLink to="/">Home</NavLink>,
+      key: 'home',
+    },
+  ].concat(extraBreadcrumbItems);
+
+  return { breadcrumbItems };
 };
 
 export { useCustomBreadCrumb };

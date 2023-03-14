@@ -3,9 +3,9 @@ import { Breadcrumb } from 'antd';
 import { useCustomBreadCrumb } from './hooks/useCustomBreadCrumb';
 
 const CustomBreadCrumb: React.FC = () => {
-  const { routes } = useCustomBreadCrumb();
+  const { breadcrumbItems } = useCustomBreadCrumb();
 
-  return <Breadcrumb className="site-breadcrumb" routes={routes}></Breadcrumb>;
+  return <Breadcrumb className="site-breadcrumb" items={breadcrumbItems}></Breadcrumb>;
 };
 
 export default CustomBreadCrumb;
