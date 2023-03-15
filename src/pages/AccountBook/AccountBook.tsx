@@ -13,7 +13,7 @@ const AccountBook: React.FC = () => {
 
   return (
     <>
-      <Row>
+      <Row gutter={16}>
         <Col span={12}>
           <BillsList amountList={amountList} category={'+'} />
         </Col>
