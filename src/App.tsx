@@ -1,5 +1,5 @@
 import './App.scss';
-import { Layout } from 'antd';
+import { ConfigProvider, Layout } from 'antd';
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import MenuSider from './components/Sider/MenuSider';
@@ -12,18 +12,26 @@ const App: React.FC = () => {
 
   return (
     <Layout className="app">
-      <MenuSider />
-      <Layout>
-        <Header className="header">My Bill</Header>
-        <Content className="layout-content">
-          <CustomBreadCrumb />
-          <div className="main">
-            {location.pathname === '/' && <h1>Welcome to My Bill!</h1>}
-            <Outlet />
-          </div>
-        </Content>
-        <Footer className="site-footer">Saving is a virtue.</Footer>
-      </Layout>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: '#faad14',
+          },
+        }}
+      >
+        <MenuSider />
+        <Layout>
+          <Header className="header">My Bill</Header>
+          <Content className="layout-content">
+            <CustomBreadCrumb />
+            <div className="main">
+              {location.pathname === '/' && <h1>Welcome to My Bill!</h1>}
+              <Outlet />
+            </div>
+          </Content>
+          <Footer className="site-footer">Saving is a virtue.</Footer>
+        </Layout>
+      </ConfigProvider>
     </Layout>
   );
 };

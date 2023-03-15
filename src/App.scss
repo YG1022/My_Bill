@@ -1,6 +1,8 @@
-@import "./styles/variables.scss";
+@import './styles/variables.scss';
 
-body, #app, .app {
+body,
+#app,
+.app {
   flex: 1 0;
   display: flex;
 }
@@ -13,7 +15,7 @@ body, #app, .app {
   .search-holder {
     height: 32px;
     margin: 16px;
-    background: $search-placeholder;
+    background: $camellia-white;
   }
 
   .header {
@@ -52,6 +54,6 @@ body, #app, .app {
   }
 
   .site-footer {
-    text-align: center
+    text-align: center;
   }
 }
