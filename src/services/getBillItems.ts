@@ -1,7 +1,7 @@
-import { supabase } from '../supabaseClient';
+import { supabaseClient } from '../supabaseClient';
 
 const getBillItems = () => {
-    return supabase.from('transactions').select();
+    return supabaseClient.from('transactions').select();
 };
 
 export { getBillItems };
