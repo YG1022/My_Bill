@@ -1,8 +1,9 @@
-import React, { ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Props } from '../constants/types';
 
-const AllTheProviders = ({ children }) => {
+const AllTheProviders: FC<Props> = ({ children }) => {
   return <Router>{children}</Router>;
 };
 

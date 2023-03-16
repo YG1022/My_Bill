@@ -1,4 +1,5 @@
 import { MenuProps } from 'antd';
+import React from 'react';
 
 type fetchedBillItem = {
   id: number;
@@ -15,4 +16,8 @@ type billsListProps = {
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-export { fetchedBillItem, billsListProps, MenuItem };
+interface Props {
+  children: React.ReactNode;
+}
+
+export { fetchedBillItem, billsListProps, MenuItem, Props };
