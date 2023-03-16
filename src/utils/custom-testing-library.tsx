@@ -1,9 +1,8 @@
-import React, { FC, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-// @ts-ignore
-const AllTheProviders: FC = ({ children }) => {
+const AllTheProviders = ({ children }) => {
   return <Router>{children}</Router>;
 };
 
