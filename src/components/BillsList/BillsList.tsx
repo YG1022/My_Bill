@@ -20,10 +20,11 @@ const BillsList: React.FC<billsListProps> = ({ amountList, category }) => {
       </div>
       <List
         className="list-content"
+        data-testid="list-content"
         bordered
         dataSource={transactions}
         renderItem={transaction => (
-          <List.Item>
+          <List.Item data-testid="item">
             <span className="item-amount">{transaction.amount}</span>
             <span className="item-tag">
               {transaction.tags.map((tag, index) => (
