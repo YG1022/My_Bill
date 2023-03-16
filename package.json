@@ -144,6 +144,22 @@
       "jest-watch-typeahead/filename",
       "jest-watch-typeahead/testname"
     ],
-    "resetMocks": true
+    "resetMocks": true,
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/constants/",
+      "<rootDir>/src/App.tsx",
+      "<rootDir>/src/index.js",
+      "<rootDir>/src/setupTests.js",
+      "<rootDir>/src/supabaseClient.js",
+      "<rootDir>/src/utils/"
+    ],
+    "coverageThreshold": {
+      "./src": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    }
   }
 }
