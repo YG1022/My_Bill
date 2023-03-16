@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../../utils/custom-testing-library';
 import React from 'react';
 import CustomBreadCrumb from './CustomBreadCrumb';
 import { useCustomBreadCrumb } from './hooks/useCustomBreadCrumb';
-import { BrowserRouter, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 jest.mock('./hooks/useCustomBreadCrumb');
 const mockedUseCustomBreadCrumb = useCustomBreadCrumb as jest.MockedFunction<typeof useCustomBreadCrumb>;
@@ -18,7 +18,7 @@ describe('CustomBreadCrumb', () => {
     };
     mockedUseCustomBreadCrumb.mockReturnValue(mockUseLocationValue);
 
-    render(<BrowserRouter><CustomBreadCrumb /></BrowserRouter>);
+    render(<CustomBreadCrumb />);
     // Act
 
     // Assert
