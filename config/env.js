@@ -60,6 +60,9 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
 // injected into the application via DefinePlugin in webpack configuration.
 const REACT_APP = /^REACT_APP_/i;
 
+const REACT_APP_SUPABASE_URL='https://wbmdyhfmwoeiwbjpcbny.supabase.co'
+const REACT_APP_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndibWR5aGZtd29laXdianBjYm55Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2Nzc1NDk4ODcsImV4cCI6MTk5MzEyNTg4N30.H616V1F0NIn8Wo7B4DuZCOxvHA5U5yKXPdFZDK4s7ZI'
+
 function getClientEnvironment(publicUrl) {
   const raw = Object.keys(process.env)
     .filter(key => REACT_APP.test(key))
