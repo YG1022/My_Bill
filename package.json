@@ -151,7 +151,9 @@
       "<rootDir>/src/index.js",
       "<rootDir>/src/setupTests.js",
       "<rootDir>/src/supabaseClient.js",
-      "<rootDir>/src/utils/"
+      "<rootDir>/src/utils/",
+      "<rootDir>/src/components/InputBar/",
+      "<rootDir>/src/components/Sider/hooks/menuConfig.tsx"
     ],
     "coverageThreshold": {
       "./src": {
