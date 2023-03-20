@@ -1,12 +1,12 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
-import BillsList from './BillsList';
-import { useBillsList } from './hooks/useBillsList';
+import TransList from './TransList';
+import { useTransList } from './hooks/useTransList';
 
-jest.mock('./hooks/useBillsList');
-const mockedUseBillsList = useBillsList as jest.MockedFunction<typeof useBillsList>;
+jest.mock('./hooks/useTransList');
+const mockedUseBillsList = useTransList as jest.MockedFunction<typeof useTransList>;
 
-describe('BillsList', () => {
+describe('TransList', () => {
   it('should render correctly', () => {
     // Arrange
     mockedUseBillsList.mockReturnValue({
@@ -14,7 +14,7 @@ describe('BillsList', () => {
       totalAmount: 100,
     });
 
-    render(<BillsList amountList={[]} category="+" />);
+    render(<TransList amountList={[]} category="+" />);
     // Act
 
     // Assert
@@ -28,7 +28,7 @@ describe('BillsList', () => {
       totalAmount: 0,
     });
 
-    render(<BillsList amountList={[]} category="+" />);
+    render(<TransList amountList={[]} category="+" />);
     // Act
 
     // Assert

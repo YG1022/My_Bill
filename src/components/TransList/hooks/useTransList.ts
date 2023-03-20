@@ -1,15 +1,15 @@
-import { fetchedBillItem } from '../../../constants/types';
+import { transItem } from '../../../constants/types';
 
-const useBillsList = (amountList: Array<fetchedBillItem>, category: string) => {
+const useTransList = (amountList: Array<transItem>, category: string) => {
   let totalAmount: number = 0;
   totalAmount = amountList
     .filter(item => item.category === category)
     .reduce((total, curr) => total + Number(curr.amount), 0);
 
-  const transactions: Array<fetchedBillItem> = amountList
+  const transactions: Array<transItem> = amountList
     .filter(item => item.category === category);
 
   return { totalAmount, transactions };
 };
 
-export { useBillsList };
+export { useTransList };

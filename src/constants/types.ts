@@ -1,7 +1,7 @@
 import { MenuProps } from 'antd';
 import React from 'react';
 
-type fetchedBillItem = {
+type transItem = {
   id: number;
   amount: string;
   date: string;
@@ -9,8 +9,8 @@ type fetchedBillItem = {
   tags?: Array<string>;
 };
 
-type billsListProps = {
-  amountList: fetchedBillItem[];
+type transListProps = {
+  amountList: transItem[];
   category: string;
 };
 
@@ -20,4 +20,4 @@ interface Props {
   children: React.ReactNode;
 }
 
-export { fetchedBillItem, billsListProps, MenuItem, Props };
+export { transItem, transListProps, MenuItem, Props };

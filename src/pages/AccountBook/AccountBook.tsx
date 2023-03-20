@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './AccountBook.scss';
 import { useAccountBook } from './hooks/useAccountBook';
-import BillsList from '../../components/BillsList/BillsList';
+import TransList from '../../components/TransList/TransList';
 import { Col, Row } from 'antd';
 import { PageContainer } from '../../components/PageContainer/PageContainer';
 
@@ -16,10 +16,10 @@ const AccountBook: React.FC = () => {
     <PageContainer>
       <Row gutter={16}>
         <Col span={12}>
-          <BillsList amountList={amountList} category={'+'} />
+          <TransList amountList={amountList} category={'+'} />
         </Col>
         <Col span={12}>
-          <BillsList amountList={amountList} category={'-'} />
+          <TransList amountList={amountList} category={'-'} />
         </Col>
       </Row>
     </PageContainer>

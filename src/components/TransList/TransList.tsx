@@ -1,11 +1,11 @@
 import { Divider, List, Tag } from 'antd';
 import React from 'react';
-import { billsListProps } from '../../constants/types';
-import { useBillsList } from './hooks/useBillsList';
-import './BillsList.scss';
+import { transListProps } from '../../constants/types';
+import { useTransList } from './hooks/useTransList';
+import './TransList.scss';
 
-const BillsList: React.FC<billsListProps> = ({ amountList, category }) => {
-  const { transactions, totalAmount } = useBillsList(amountList, category);
+const TransList: React.FC<transListProps> = ({ amountList, category }) => {
+  const { transactions, totalAmount } = useTransList(amountList, category);
 
   return (
     <div className="bills-list">
@@ -37,4 +37,4 @@ const BillsList: React.FC<billsListProps> = ({ amountList, category }) => {
     </div>
   );
 };
-export default BillsList;
+export default TransList;
