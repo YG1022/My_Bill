@@ -9,16 +9,11 @@ const { Header, Footer, Content } = Layout;
 
 const App: React.FC = () => {
   const location = useLocation();
+  const themeConfig = { token: { colorPrimary: '#faad14' } };
 
   return (
     <Layout className="app">
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: '#faad14',
-          },
-        }}
-      >
+      <ConfigProvider theme={themeConfig}>
         <MenuSider />
         <Layout>
           <Header className="header">My Bill</Header>
