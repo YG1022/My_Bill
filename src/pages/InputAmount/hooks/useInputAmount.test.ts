@@ -24,7 +24,7 @@ describe('useInputAmount', () => {
 
   beforeEach(() => {
     mockedAddBillItem.mockClear();
-    mockedAddBillItem.mockResolvedValue(mockedResolvedData);
+    mockedAddBillItem.mockResolvedValue(mockedResolvedData as any);
   });
 
   it('should return error correctly', async () => {
