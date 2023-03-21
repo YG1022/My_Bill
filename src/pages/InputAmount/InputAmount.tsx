@@ -4,6 +4,8 @@ import { CustomTags } from '../../components/CustomTags/CustomTags';
 import { useInputAmount } from './hooks/useInputAmount';
 import './InputAmount.scss';
 import { useParams } from 'react-router-dom';
+import { getTransItems } from '../../services/getTransItems';
+import { transItem } from '../../constants/types';
 
 const InputAmount: React.FC = () => {
   const [form] = Form.useForm();
@@ -12,9 +14,16 @@ const InputAmount: React.FC = () => {
 
   useEffect(() => {
     if (params.id) {
-      form.setFieldsValue({ amount: '1000' });
+      getTransItems(Number(params.id)).then(({ data }) => {
+        const { amount, category, tags } = data[0] as transItem;
+        form.setFieldsValue({
+          amount: amount,
+          category: category,
+          tags: { tags: tags },
+        });
+      });
     }
-  });
+  }, [params.id]);
 
   return (
     <Form className='input-amount' {...layout} form={form} name='control-hooks' onFinish={onFinish}>
