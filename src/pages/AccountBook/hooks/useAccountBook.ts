@@ -12,7 +12,7 @@ const useAccountBook = () => {
     if (error) {
       setSqlError(error);
       setTrans([]);
-      console.log(sqlError);
+      console.log('Error: ' + sqlError.message);
     }
     if (data) {
       setTrans(data);
