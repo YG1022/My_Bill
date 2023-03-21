@@ -1,7 +1,7 @@
 import { supabaseClient } from '../supabaseClient';
 
-const getBillItems = () => {
+const getTransItems = () => {
     return supabaseClient.from('transactions').select();
 };
 
-export { getBillItems };
+export { getTransItems };

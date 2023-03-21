@@ -1,4 +1,4 @@
-import { addBillItem } from '../../../services/addBillItem';
+import { addTransItem } from '../../../services/addTransItem';
 
 const useInputAmount = form => {
   const layout = {
@@ -11,7 +11,7 @@ const useInputAmount = form => {
   };
 
   const onFinish = async values => {
-    const { data, error: sqlError } = await addBillItem(values);
+    const { data, error: sqlError } = await addTransItem(values);
     if (sqlError) {
       console.log(sqlError);
     }

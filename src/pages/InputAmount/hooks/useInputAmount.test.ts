@@ -1,9 +1,9 @@
-import { addBillItem } from '../../../services/addBillItem';
+import { addTransItem } from '../../../services/addTransItem';
 import { useInputAmount } from './useInputAmount';
 import { renderHook, act, waitFor } from '@testing-library/react';
 
-jest.mock('../../../services/addBillItem');
-const mockedAddBillItem = addBillItem as jest.MockedFunction<typeof addBillItem>;
+jest.mock('../../../services/addTransItem');
+const mockedAddBillItem = addTransItem as jest.MockedFunction<typeof addTransItem>;
 
 describe('useInputAmount', () => {
   const mockedResolvedError = {

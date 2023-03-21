@@ -1,9 +1,9 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
-import { getBillItems } from '../../../services/getBillItems';
+import { getTransItems } from '../../../services/getTransItems';
 import { useAccountBook } from './useAccountBook';
 
-jest.mock('../../../services/getBillItems');
-const mockedGetBillItems = getBillItems as jest.MockedFunction<typeof getBillItems>;
+jest.mock('../../../services/getTransItems');
+const mockedGetBillItems = getTransItems as jest.MockedFunction<typeof getTransItems>;
 
 describe('useAccountBook custom hook', () => {
   const mockedFetchedData = {

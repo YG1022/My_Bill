@@ -1,6 +1,6 @@
 import { supabaseClient } from '../supabaseClient';
 
-const addBillItem = values => {
+const addTransItem = values => {
   const { tags, ...extraData } = values;
   const formData = { tags: tags.tags, ...extraData };
 
@@ -10,4 +10,4 @@ const addBillItem = values => {
     .select();
 };
 
-export { addBillItem };
+export { addTransItem };

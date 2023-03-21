@@ -1,6 +1,6 @@
 import { waitFor } from '@testing-library/react';
 import { supabaseClient } from '../supabaseClient';
-import { addBillItem } from './addBillItem';
+import { addTransItem } from './addTransItem';
 
 const mockResultData = [{
   data: [{ id: 1, date: '2023-03-17', amount: 100, category: '+', tags: ['tag 1'] }],
@@ -28,7 +28,7 @@ describe('add transaction items', () => {
 
     // Assert
     await waitFor(async () => {
-      return expect(await addBillItem({ tags: '' })).toEqual(mockResultData);
+      return expect(await addTransItem({ tags: '' })).toEqual(mockResultData);
     });
   });
 });
