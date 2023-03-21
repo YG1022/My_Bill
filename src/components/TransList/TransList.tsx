@@ -33,7 +33,7 @@ const TransList: React.FC<transListProps> = ({ amountList, category }) => {
               ))}
             </span>
             <span>
-              <NavLink to={`/input/${transaction.id}`}>Edit</NavLink>
+              <NavLink to={`/transactions/trans-edit/${transaction.id}`}>Edit</NavLink>
             </span>
             <span>
               <Button type="link" className="item-delete" onClick={deleteTrans(transaction.id)}>
