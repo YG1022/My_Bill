@@ -5,10 +5,10 @@ import { useTransStore } from '../../../zustand/useTransStore';
 
 const useAccountBook = () => {
   const [error, setError] = useState<PostgrestError>(null);
-  const { amountList, setTrans } = useTransStore();
+  const { amountList, setTransWithFetchData: setTrans } = useTransStore();
 
   const fetchData = async () => {
-    const { data, error: sqlError } = await getTransItems() as any;
+    const { data, error: sqlError } = (await getTransItems()) as any;
 
     if (sqlError) {
       setError(sqlError);

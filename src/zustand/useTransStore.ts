@@ -5,14 +5,14 @@ import { transItem } from '../constants/types';
 
 interface transState {
   amountList: Array<transItem>;
-  setTrans: (data: Array<transItem>) => void;
+  setTransWithFetchData: (data: Array<transItem>) => void;
 }
 
 export const useTransStore = create<transState>()(
   persist(
     (set, get) => ({
       amountList: [],
-      setTrans: (data: Array<transItem>) =>
+      setTransWithFetchData: (data: Array<transItem>) =>
         set({ amountList: produce(get().amountList, () => data) }),
     }),
     {
