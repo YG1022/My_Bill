@@ -13,8 +13,8 @@ describe('AccountBook', () => {
   beforeEach(() => {
     mockedUseAccountBook.mockReturnValue({
       amountList: [
-        { id: 1, amount: 100, date: '2021-01-01', category: '+', tags: ['Food'] },
-        { id: 2, amount: 200, date: '2021-01-02', category: '-', tags: ['Shopping'] },
+        { id: 1, amount: '100', date: '2021-01-01', category: '+', tags: ['Food'] },
+        { id: 2, amount: '200', date: '2021-01-02', category: '-', tags: ['Shopping'] },
       ],
       fetchData: jest.fn(),
     });
