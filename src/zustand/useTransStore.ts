@@ -12,13 +12,14 @@ export const useTransStore = create<transState>()(
   persist(
     (set, get) => ({
       amountList: [],
-      setTransWithFetchData: (data: Array<transItem>) => set({
-        amountList: produce(get().amountList, () => data),
-      }),
+      setTransWithFetchData: (data: Array<transItem>) =>
+        set({
+          amountList: produce(get().amountList, () => data),
+        }),
     }),
     {
       name: 'trans-storage',
       storage: createJSONStorage(() => sessionStorage),
-    },
-  ),
+    }
+  )
 );
