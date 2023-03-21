@@ -7,7 +7,7 @@ import { ROUTES, ROUTES_PATH_NAME } from '../../../constants/routes';
 const menus: MenuItem[] = [
   {
     key: ROUTES_PATH_NAME.input,
-    label: <NavLink to={ROUTES.input}>Input</NavLink>,
+    label: <NavLink to={ROUTES.transactionInput}>Input</NavLink>,
     icon: <DesktopOutlined />,
   },
   {
