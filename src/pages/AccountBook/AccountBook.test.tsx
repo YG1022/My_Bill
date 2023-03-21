@@ -1,4 +1,4 @@
-import { screen, render } from '@testing-library/react';
+import { screen, render } from '../../utils/custom-testing-library';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import React from 'react';
 import AccountBook from './AccountBook';
