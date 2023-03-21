@@ -19,14 +19,14 @@ describe('getTransItems from supabase', () => {
     });
   });
 
-  it('should get bill items', async () => {
+  it('should get all trans items', async () => {
     // Arrange
 
     // Act
 
     // Assert
     await waitFor(async () => {
-      return expect(await getTransItems()).toEqual( mockResultData );
+      return expect(await getTransItems(null)).toEqual( mockResultData );
     });
   });
 });

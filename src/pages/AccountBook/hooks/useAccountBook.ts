@@ -7,7 +7,7 @@ const useAccountBook = () => {
   const { amountList, setTransWithFetchData: setTrans } = useTransStore();
 
   const fetchData = async () => {
-    const { data, error } = (await getTransItems()) as any;
+    const { data, error } = (await getTransItems(null)) as any;
 
     if (error) {
       setSqlError(error);

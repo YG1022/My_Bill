@@ -1,12 +1,20 @@
 import { Button, Form, InputNumber, Select } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CustomTags } from '../../components/CustomTags/CustomTags';
 import { useInputAmount } from './hooks/useInputAmount';
 import './InputAmount.scss';
+import { useParams } from 'react-router-dom';
 
 const InputAmount: React.FC = () => {
   const [form] = Form.useForm();
   const { layout, tailLayout, onFinish } = useInputAmount(form);
+  const params = useParams();
+
+  useEffect(() => {
+    if (params.id) {
+      form.setFieldsValue({ amount: '1000' });
+    }
+  });
 
   return (
     <Form className='input-amount' {...layout} form={form} name='control-hooks' onFinish={onFinish}>
