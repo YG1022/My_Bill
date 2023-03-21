@@ -6,7 +6,6 @@ import { transItem } from '../constants/types';
 interface transState {
   amountList: Array<transItem>;
   setTransWithFetchData: (data: Array<transItem>) => void;
-  addTransItem: (data: transItem) => void;
 }
 
 export const useTransStore = create<transState>()(
@@ -16,12 +15,6 @@ export const useTransStore = create<transState>()(
       setTransWithFetchData: (data: Array<transItem>) => set({
         amountList: produce(get().amountList, () => data),
       }),
-      addTransItem: (data: transItem) =>
-        set({
-          amountList: produce(get().amountList, draft => {
-            draft.push(data);
-          }),
-        }),
     }),
     {
       name: 'trans-storage',
