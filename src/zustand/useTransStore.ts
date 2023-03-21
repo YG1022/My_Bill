@@ -10,8 +10,6 @@ interface transItemState {
 export const useTransStore = create<transItemState>((set, get) => ({
   amountList: [],
   setTrans: (data: Array<transItem>) => {
-    set(produce(state => {
-      state.amountList = data;
-    }));
+    set({ amountList: produce(get().amountList, () => data)});
   },
 }));
