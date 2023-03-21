@@ -3,6 +3,7 @@ import React from 'react';
 import { transListProps } from '../../constants/types';
 import { useTransList } from './hooks/useTransList';
 import './TransList.scss';
+import { NavLink } from 'react-router-dom';
 
 const TransList: React.FC<transListProps> = ({ amountList, category }) => {
   const { transactions, totalAmount, deleteTrans } = useTransList(amountList, category);
@@ -30,6 +31,9 @@ const TransList: React.FC<transListProps> = ({ amountList, category }) => {
               {transaction.tags.map((tag, index) => (
                 <Tag key={index}>{tag}</Tag>
               ))}
+            </span>
+            <span>
+              <NavLink to={`/input/${transaction.id}`}>Edit</NavLink>
             </span>
             <span>
               <Button type='link' className='item-delete' onClick={deleteTrans(transaction.id)}>
