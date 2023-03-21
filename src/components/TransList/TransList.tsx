@@ -1,28 +1,11 @@
-import { Button, Divider, List, Modal, Tag } from 'antd';
+import { Button, Divider, List, Tag } from 'antd';
 import React from 'react';
 import { transListProps } from '../../constants/types';
 import { useTransList } from './hooks/useTransList';
 import './TransList.scss';
-import { deleteTransItem } from '../../services/deleteTransItem';
 
 const TransList: React.FC<transListProps> = ({ amountList, category }) => {
-  const { transactions, totalAmount } = useTransList(amountList, category);
-
-  const deleteTrans = (id: number) => {
-    const deleteSelectedTrans = async () => {
-      await deleteTransItem(id);
-    };
-
-    return () => {
-      Modal.confirm({
-        title: `Are you really want to destroy this transaction？`,
-        okText: 'Sure',
-        cancelText: 'Cancel',
-        centered: true,
-        onOk: deleteSelectedTrans,
-      });
-    };
-  };
+  const { transactions, totalAmount, deleteTrans } = useTransList(amountList, category);
 
   return (
     <div className='bills-list'>

@@ -12,9 +12,10 @@ describe('TransList', () => {
     mockedUseBillsList.mockReturnValue({
       transactions: [{ id: 1, amount: '100', date: '2020-01-01', category: '+', tags: ['food'] }],
       totalAmount: 100,
+      deleteTrans: jest.fn(),
     });
 
-    render(<TransList amountList={[]} category="+" />);
+    render(<TransList amountList={[]} category='+' />);
     // Act
 
     // Assert
@@ -26,9 +27,10 @@ describe('TransList', () => {
     mockedUseBillsList.mockReturnValue({
       transactions: [],
       totalAmount: 0,
+      deleteTrans: jest.fn(),
     });
 
-    render(<TransList amountList={[]} category="+" />);
+    render(<TransList amountList={[]} category='+' />);
     // Act
 
     // Assert

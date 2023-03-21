@@ -1,4 +1,6 @@
 import { transItem } from '../../../constants/types';
+import { deleteTransItem } from '../../../services/deleteTransItem';
+import { Modal } from 'antd';
 
 const useTransList = (amountList: Array<transItem>, category: string) => {
   let totalAmount: number = 0;
@@ -9,7 +11,23 @@ const useTransList = (amountList: Array<transItem>, category: string) => {
   const transactions: Array<transItem> = amountList
     .filter(item => item.category === category);
 
-  return { totalAmount, transactions };
+  const deleteTrans = (id: number) => {
+    const deleteSelectedTrans = async () => {
+      await deleteTransItem(id);
+    };
+
+    return () => {
+      Modal.confirm({
+        title: `Are you really want to destroy this transaction？`,
+        okText: 'Sure',
+        cancelText: 'Cancel',
+        centered: true,
+        onOk: deleteSelectedTrans,
+      });
+    };
+  };
+
+  return { totalAmount, transactions, deleteTrans };
 };
 
 export { useTransList };
