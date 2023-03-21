@@ -3,7 +3,7 @@ import { getTransItems } from '../../../services/getTransItems';
 import { useAccountBook } from './useAccountBook';
 
 jest.mock('../../../services/getTransItems');
-const mockedGetBillItems = getTransItems as jest.MockedFunction<typeof getTransItems>;
+const mockedGetTransItems = getTransItems as jest.MockedFunction<typeof getTransItems>;
 
 describe('useAccountBook custom hook', () => {
   const mockedFetchedData = {
@@ -18,9 +18,8 @@ describe('useAccountBook custom hook', () => {
   };
 
   beforeEach(() => {
-    mockedGetBillItems.mockClear();
-
-    mockedGetBillItems.mockResolvedValue(mockedFetchedData);
+    mockedGetTransItems.mockClear();
+    mockedGetTransItems.mockResolvedValue(mockedFetchedData);
   });
 
   it('should return amountList', async () => {

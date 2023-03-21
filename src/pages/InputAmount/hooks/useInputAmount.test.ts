@@ -3,7 +3,7 @@ import { useInputAmount } from './useInputAmount';
 import { renderHook, act, waitFor } from '@testing-library/react';
 
 jest.mock('../../../services/addTransItem');
-const mockedAddBillItem = addTransItem as jest.MockedFunction<typeof addTransItem>;
+const mockedAddTransItem = addTransItem as jest.MockedFunction<typeof addTransItem>;
 
 describe('useInputAmount', () => {
   const mockedResolvedError = {
@@ -24,12 +24,12 @@ describe('useInputAmount', () => {
   };
 
   beforeEach(() => {
-    mockedAddBillItem.mockClear();
+    mockedAddTransItem.mockClear();
   });
 
   it('should return error correctly', async () => {
     // Arrange
-    mockedAddBillItem.mockResolvedValue(mockedResolvedError as any);
+    mockedAddTransItem.mockResolvedValue(mockedResolvedError as any);
     const { result } = renderHook(({ mockedForm }) => useInputAmount(mockedForm), { initialProps: { mockedForm } });
     // Act
     await act(() => {
@@ -37,13 +37,13 @@ describe('useInputAmount', () => {
     });
     // Assert
     await waitFor(() => {
-      expect(mockedAddBillItem).toHaveBeenCalledTimes(1);
+      expect(mockedAddTransItem).toHaveBeenCalledTimes(1);
     });
   });
 
   it('should return data correctly', async () => {
     // Arrange
-    mockedAddBillItem.mockResolvedValue(mockedResolvedData as any);
+    mockedAddTransItem.mockResolvedValue(mockedResolvedData as any);
     const { result } = renderHook(({ mockedForm }) => useInputAmount(mockedForm), { initialProps: { mockedForm } });
     // Act
     await act(() => {
@@ -51,7 +51,7 @@ describe('useInputAmount', () => {
     });
     // Assert
     await waitFor(() => {
-      expect(mockedAddBillItem).toHaveBeenCalledTimes(1);
+      expect(mockedAddTransItem).toHaveBeenCalledTimes(1);
     });
   });
 });
