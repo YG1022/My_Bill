@@ -1,16 +1,16 @@
 export const ROUTES = {
   home: '/',
   input: '/input',
-  bills: '/bills',
+  transactions: '/transactions',
 };
 
 export const ROUTES_PATH_NAME = {
   '': 'Home',
   input: 'Input',
-  bills: 'Bills',
+  transactions: 'Transactions',
 };
 
 export const breadcrumbNameMap: Record<string, string> = {
   '/input': 'Input',
-  '/bills': 'Bills',
+  '/transactions': 'Transactions',
 };

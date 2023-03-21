@@ -16,7 +16,7 @@ root.render(
       <Routes>
         <Route path={ROUTES.home} element={<App />}>
           <Route path={ROUTES.input} element={<InputAmount />} />
-          <Route path={ROUTES.bills} element={<AccountBook />} />
+          <Route path={ROUTES.transactions} element={<AccountBook />} />
         </Route>
       </Routes>
     </Router>

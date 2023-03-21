@@ -11,8 +11,8 @@ const menus: MenuItem[] = [
     icon: <DesktopOutlined />,
   },
   {
-    key: ROUTES_PATH_NAME.bills,
-    label: <NavLink to={ROUTES.bills}>Bills</NavLink>,
+    key: ROUTES_PATH_NAME.transactions,
+    label: <NavLink to={ROUTES.transactions}>Transactions</NavLink>,
     icon: <PieChartOutlined />,
   },
 ];
