@@ -1,6 +1,9 @@
 import { addTransItem } from '../../../services/addTransItem';
+import { useSqlErrorStore } from '../../../zustand/useSqlErrorStore';
 
 const useInputAmount = form => {
+  const { sqlError, setSqlError } = useSqlErrorStore();
+
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -11,12 +14,14 @@ const useInputAmount = form => {
   };
 
   const onFinish = async values => {
-    const { data, error: sqlError } = await addTransItem(values);
-    if (sqlError) {
+    const { data, error } = await addTransItem(values);
+    if (error) {
+      setSqlError(error);
       console.log(sqlError);
     }
     if (data) {
       form.resetFields();
+      setSqlError(null);
     }
   };
 

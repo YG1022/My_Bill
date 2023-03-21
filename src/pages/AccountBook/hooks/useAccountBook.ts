@@ -1,23 +1,22 @@
-import { useState } from 'react';
-import { PostgrestError } from '@supabase/supabase-js';
 import { getTransItems } from '../../../services/getTransItems';
 import { useTransStore } from '../../../zustand/useTransStore';
+import { useSqlErrorStore } from '../../../zustand/useSqlErrorStore';
 
 const useAccountBook = () => {
-  const [error, setError] = useState<PostgrestError>(null);
+  const { sqlError, setSqlError } = useSqlErrorStore();
   const { amountList, setTransWithFetchData: setTrans } = useTransStore();
 
   const fetchData = async () => {
-    const { data, error: sqlError } = (await getTransItems()) as any;
+    const { data, error } = (await getTransItems()) as any;
 
-    if (sqlError) {
-      setError(sqlError);
+    if (error) {
+      setSqlError(error);
       setTrans([]);
-      console.log(error);
+      console.log(sqlError);
     }
     if (data) {
       setTrans(data);
-      setError(null);
+      setSqlError(null);
     }
   };
 
