@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './AccountBook.scss';
 import { useAccountBook } from './hooks/useAccountBook';
 import TransList from '../../components/TransList/TransList';
@@ -6,11 +6,7 @@ import { Col, Row } from 'antd';
 import { PageContainer } from '../../components/PageContainer/PageContainer';
 
 const AccountBook: React.FC = () => {
-  const { amountList, fetchData } = useAccountBook();
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { amountList } = useAccountBook();
 
   return (
     <PageContainer>

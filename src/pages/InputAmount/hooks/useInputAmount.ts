@@ -11,6 +11,7 @@ const useInputAmount = form => {
   };
 
   const onFinish = async values => {
+    addTransItem(values);
     const { data, error: sqlError } = await addTransItem(values);
     if (sqlError) {
       console.log(sqlError);

@@ -1,15 +1,21 @@
 import './App.scss';
 import { ConfigProvider, Layout } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import MenuSider from './components/Sider/MenuSider';
 import CustomBreadCrumb from './components/CustomBreadCrumb/CustomBreadCrumb';
+import { useAccountBook } from './pages/AccountBook/hooks/useAccountBook';
 
 const { Header, Footer, Content } = Layout;
 
 const App: React.FC = () => {
   const location = useLocation();
   const themeConfig = { token: { colorPrimary: '#faad14' } };
+  const { amountList, fetchData } = useAccountBook();
+
+  useEffect(() => {
+    fetchData();
+  }, [amountList]);
 
   return (
     <Layout className="app">
