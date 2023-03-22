@@ -4,18 +4,23 @@ import { useSqlErrorStore } from '../../../zustand/useSqlErrorStore';
 
 const useAccountBook = () => {
   const { sqlError, setSqlError } = useSqlErrorStore();
-  const { amountList, setTransWithFetchData: setTrans } = useTransStore();
+  const { amountList, setTransWithFetchData } = useTransStore((state) => {
+    return {
+      amountList: state.amountList,
+      setTransWithFetchData: state.setTransWithFetchData,
+    };
+  });
 
   const fetchData = async () => {
     const { data, error } = (await getTransItems(null)) as any;
 
     if (error) {
       setSqlError(error);
-      setTrans([]);
+      setTransWithFetchData([]);
       console.log('Error: ' + sqlError.message);
     }
     if (data) {
-      setTrans(data);
+      setTransWithFetchData(data);
       setSqlError(null);
     }
   };
