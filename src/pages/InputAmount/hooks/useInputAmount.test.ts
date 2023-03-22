@@ -12,7 +12,8 @@ describe('useInputAmount', () => {
     error: 'Sync Error is occured!',
     status: 200,
     statusText: '',
-  };const mockedResolvedData = {
+  };
+  const mockedResolvedData = {
     count: null,
     data: [{ id: 1, amount: 100, date: '2021-01-01', category: 'income', tags: ['Food'] }],
     error: null,
@@ -30,7 +31,7 @@ describe('useInputAmount', () => {
   it('should return error correctly', async () => {
     // Arrange
     mockedAddTransItem.mockResolvedValue(mockedResolvedError as any);
-    const { result } = renderHook(({ mockedForm }) => useInputAmount(mockedForm), { initialProps: { mockedForm } });
+    const { result } = renderHook(({ mockedForm }) => useInputAmount(mockedForm, null), { initialProps: { mockedForm } });
     // Act
     await act(() => {
       result.current.onFinish({ amount: 100, date: '2021-01-01', category: 'income', tags: ['Food'] });
@@ -44,7 +45,7 @@ describe('useInputAmount', () => {
   it('should return data correctly', async () => {
     // Arrange
     mockedAddTransItem.mockResolvedValue(mockedResolvedData as any);
-    const { result } = renderHook(({ mockedForm }) => useInputAmount(mockedForm), { initialProps: { mockedForm } });
+    const { result } = renderHook(({ mockedForm }) => useInputAmount(mockedForm, null), { initialProps: { mockedForm } });
     // Act
     await act(() => {
       result.current.onFinish({ amount: 100, date: '2021-01-01', category: 'income', tags: ['Food'] });
