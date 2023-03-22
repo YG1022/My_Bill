@@ -54,7 +54,7 @@ const InputAmount: React.FC = () => {
       </Form.Item>
       <Form.Item {...tailLayout} shouldUpdate>
         <Button type='primary' htmlType='submit'>
-          Submit
+          {params.id ? 'Update' : 'Submit'}
         </Button>
       </Form.Item>
     </Form>
