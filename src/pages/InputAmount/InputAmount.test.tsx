@@ -3,7 +3,7 @@ import InputAmount from './InputAmount';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import React from 'react';
 import { Form } from 'antd/lib';
-import { render, screen, act } from '../../utils/custom-testing-library';
+import { act, render, screen } from '../../utils/custom-testing-library';
 import userEvent from '@testing-library/user-event';
 import { waitFor } from '@testing-library/react';
 
@@ -15,6 +15,7 @@ describe('InputAmount', () => {
     mockedUseInputAmount.mockReturnValue({
       layout: { labelCol: { span: 8 }, wrapperCol: { span: 16 } },
       tailLayout: { wrapperCol: { offset: 8, span: 16 } },
+      autoFillInfo: jest.fn(),
       onFinish: jest.fn(),
     });
   });
