@@ -2,6 +2,7 @@ import React from 'react';
 import { screen, render } from '../../utils/custom-testing-library';
 import TransList from './TransList';
 import { useTransList } from './hooks/useTransList';
+import Decimal from 'decimal.js';
 
 jest.mock('./hooks/useTransList');
 const mockedUseBillsList = useTransList as jest.MockedFunction<typeof useTransList>;
@@ -11,11 +12,11 @@ describe('TransList', () => {
     // Arrange
     mockedUseBillsList.mockReturnValue({
       transactions: [{ id: 1, amount: '100', date: '2020-01-01', category: '+', tags: ['food'] }],
-      totalAmount: 100,
+      totalAmount: new Decimal(100),
       deleteTrans: jest.fn(),
     });
 
-    render(<TransList amountList={[]} category='+' />);
+    render(<TransList amountList={[]} category="+" />);
     // Act
 
     // Assert
@@ -26,11 +27,11 @@ describe('TransList', () => {
     // Arrange
     mockedUseBillsList.mockReturnValue({
       transactions: [],
-      totalAmount: 0,
+      totalAmount: new Decimal(0),
       deleteTrans: jest.fn(),
     });
 
-    render(<TransList amountList={[]} category='+' />);
+    render(<TransList amountList={[]} category="+" />);
     // Act
 
     // Assert
