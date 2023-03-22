@@ -2,9 +2,11 @@ import { addTransItem } from '../../../services/addTransItem';
 import { useSqlErrorStore } from '../../../zustand/useSqlErrorStore';
 import { getTransItems } from '../../../services/getTransItems';
 import { transItem } from '../../../constants/types';
+import { useTransStore } from '../../../zustand/useTransStore';
 
 const useInputAmount = (form, id: string | null) => {
   const { sqlError, setSqlError } = useSqlErrorStore();
+  const { addTrans } = useTransStore();
 
   const layout = {
     labelCol: { span: 8 },
@@ -36,6 +38,7 @@ const useInputAmount = (form, id: string | null) => {
       form.resetFields();
       setSqlError(null);
     }
+    addTrans(data[0]);
   };
 
   return { layout, tailLayout, autoFillInfo, onFinish };
