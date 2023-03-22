@@ -6,10 +6,9 @@ import { useTransStore } from '../../../zustand/useTransStore';
 const useTransList = (amountList: Array<transItem>, category: string) => {
   const { deleteTransWithId } = useTransStore();
 
-  let totalAmount: number = 0;
-  totalAmount = amountList
+  const totalAmount: number = amountList
     .filter(item => item.category === category)
-    .reduce((total, curr) => total + Number(curr.amount), 0);
+    .reduce((total, curr) => total + Number(curr.amount), 0) || 0;
 
   const transactions: Array<transItem> = amountList
     .filter(item => item.category === category);
