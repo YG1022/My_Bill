@@ -5,8 +5,8 @@ import { transItem } from '../../../constants/types';
 import { useTransStore } from '../../../zustand/useTransStore';
 
 const useInputAmount = (form, id: string | null) => {
+  const addTrans = useTransStore(state => state.addTrans);
   const setSqlError = useSqlErrorStore(state => state.setSqlError);
-  const { addTrans } = useTransStore();
 
   const layout = {
     labelCol: { span: 8 },
