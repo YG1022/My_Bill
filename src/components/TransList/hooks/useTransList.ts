@@ -1,8 +1,11 @@
 import { transItem } from '../../../constants/types';
 import { deleteTransItem } from '../../../services/deleteTransItem';
 import { Modal } from 'antd';
+import { useTransStore } from '../../../zustand/useTransStore';
 
 const useTransList = (amountList: Array<transItem>, category: string) => {
+  const { deleteTransWithId } = useTransStore();
+
   let totalAmount: number = 0;
   totalAmount = amountList
     .filter(item => item.category === category)
@@ -14,6 +17,8 @@ const useTransList = (amountList: Array<transItem>, category: string) => {
   const deleteTrans = (id: number) => {
     const deleteSelectedTrans = async () => {
       await deleteTransItem(id);
+      deleteTransWithId(id);
+      console.log(amountList);
     };
 
     return () => {
