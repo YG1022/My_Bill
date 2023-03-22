@@ -3,13 +3,14 @@ import React, { useEffect } from 'react';
 import { CustomTags } from '../../components/CustomTags/CustomTags';
 import { useInputAmount } from './hooks/useInputAmount';
 import './InputAmount.scss';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { getTransItems } from '../../services/getTransItems';
 import { transItem } from '../../constants/types';
 
 const InputAmount: React.FC = () => {
   const [form] = Form.useForm();
   const params = useParams();
+  const location = useLocation();
   const { layout, tailLayout, onFinish } = useInputAmount(form, params.id || null);
 
   useEffect(() => {
@@ -24,6 +25,10 @@ const InputAmount: React.FC = () => {
       });
     }
   }, [params.id]);
+
+  useEffect(() => {
+    form.resetFields();
+  }, [location]);
 
   return (
     <Form className='input-amount' {...layout} form={form} name='control-hooks' onFinish={onFinish}>
