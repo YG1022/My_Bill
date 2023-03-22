@@ -37,8 +37,8 @@ const useInputAmount = (form, id: string | null) => {
     if (data) {
       form.resetFields();
       setSqlError(null);
+      addTrans(data[0]);
     }
-    addTrans(data[0]);
   };
 
   return { layout, tailLayout, autoFillInfo, onFinish };
