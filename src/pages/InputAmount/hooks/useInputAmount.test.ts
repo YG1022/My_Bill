@@ -9,7 +9,7 @@ describe('useInputAmount', () => {
   const mockedResolvedError = {
     count: null,
     data: null,
-    error: 'Sync Error is occured!',
+    error: 'Sync Error is occurred!',
     status: 200,
     statusText: '',
   };
