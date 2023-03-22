@@ -5,7 +5,10 @@ import { transItem } from '../../../constants/types';
 import { useTransStore } from '../../../zustand/useTransStore';
 
 const useInputAmount = (form, id: string | null) => {
-  const { sqlError, setSqlError } = useSqlErrorStore();
+  const { sqlError, setSqlError } = useSqlErrorStore((state) => ({
+    sqlError: state.sqlError,
+    setSqlError: state.setSqlError,
+  }));
   const { addTrans } = useTransStore();
 
   const layout = {
