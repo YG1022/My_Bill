@@ -4,25 +4,16 @@ import { CustomTags } from '../../components/CustomTags/CustomTags';
 import { useInputAmount } from './hooks/useInputAmount';
 import './InputAmount.scss';
 import { useLocation, useParams } from 'react-router-dom';
-import { getTransItems } from '../../services/getTransItems';
-import { transItem } from '../../constants/types';
 
 const InputAmount: React.FC = () => {
   const [form] = Form.useForm();
   const params = useParams();
   const location = useLocation();
-  const { layout, tailLayout, onFinish } = useInputAmount(form, params.id || null);
+  const { layout, tailLayout, autoFillInfo, onFinish } = useInputAmount(form, params.id || null);
 
   useEffect(() => {
     if (params.id) {
-      getTransItems(Number(params.id)).then(({ data }) => {
-        const { amount, category, tags } = data[0] as transItem;
-        form.setFieldsValue({
-          amount: amount,
-          category: category,
-          tags: { tags: tags },
-        });
-      });
+      autoFillInfo(params.id);
     }
   }, [params.id]);
 

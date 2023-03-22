@@ -1,5 +1,7 @@
 import { addTransItem } from '../../../services/addTransItem';
 import { useSqlErrorStore } from '../../../zustand/useSqlErrorStore';
+import { getTransItems } from '../../../services/getTransItems';
+import { transItem } from '../../../constants/types';
 
 const useInputAmount = (form, id: string | null) => {
   const { sqlError, setSqlError } = useSqlErrorStore();
@@ -11,6 +13,17 @@ const useInputAmount = (form, id: string | null) => {
 
   const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
+  };
+
+  const autoFillInfo = (id: string): void => {
+    getTransItems(Number(id)).then(({ data }) => {
+      const { amount, category, tags } = data[0] as transItem;
+      form.setFieldsValue({
+        amount: amount,
+        category: category,
+        tags: { tags: tags },
+      });
+    });
   };
 
   const onFinish = async values => {
@@ -25,7 +38,7 @@ const useInputAmount = (form, id: string | null) => {
     }
   };
 
-  return { layout, tailLayout, onFinish };
+  return { layout, tailLayout, autoFillInfo, onFinish };
 };
 
 export { useInputAmount };
