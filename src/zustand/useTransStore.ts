@@ -14,28 +14,24 @@ export const useTransStore = create<transState>()(
   persist(
     (set, get) => ({
       amountList: [],
-      setTransWithFetchData: (data: Array<transItem>) =>
-        set({
-          amountList: data,
-        }),
+
+      setTransWithFetchData: (data: Array<transItem>) => set({ amountList: data }),
+
       deleteTransWithId: (id: number) =>
-        set({
-          amountList: get().amountList.filter(item => item.id !== id),
-        }),
+        set({ amountList: get().amountList.filter(item => item.id !== id) }),
+
       addTrans: (data: transItem) =>
         set({
           amountList: produce(get().amountList, draft => {
-            if (!draft.some(item => item.id === data.id)) {
-              draft.push(data);
-            } else {
-              draft[draft.findIndex(item => item.id === data.id)] = data;
-            }
+            !draft.some(item => item.id === data.id)
+              ? draft.push(data)
+              : (draft[draft.findIndex(item => item.id === data.id)] = data);
           }),
         }),
     }),
     {
       name: 'trans-storage',
       storage: createJSONStorage(() => sessionStorage),
-    },
-  ),
+    }
+  )
 );
