@@ -5,10 +5,7 @@ import { transItem } from '../../../constants/types';
 import { useTransStore } from '../../../zustand/useTransStore';
 
 const useInputAmount = (form, id: string | null) => {
-  const { sqlError, setSqlError } = useSqlErrorStore((state) => ({
-    sqlError: state.sqlError,
-    setSqlError: state.setSqlError,
-  }));
+  const setSqlError = useSqlErrorStore(state => state.setSqlError);
   const { addTrans } = useTransStore();
 
   const layout = {
@@ -35,7 +32,7 @@ const useInputAmount = (form, id: string | null) => {
     const { data, error } = await addTransItem(values, id);
     if (error) {
       setSqlError(error);
-      console.log(sqlError);
+      console.log('Error: ' + useSqlErrorStore.getState().sqlError.message);
     }
     if (data) {
       form.resetFields();
