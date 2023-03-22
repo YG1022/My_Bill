@@ -17,7 +17,6 @@ const useTransList = (amountList: Array<transItem>, category: string) => {
     const deleteSelectedTrans = async () => {
       await deleteTransItem(id);
       deleteTransWithId(id);
-      console.log(amountList);
     };
 
     return () => {

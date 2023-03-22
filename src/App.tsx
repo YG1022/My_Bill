@@ -1,6 +1,6 @@
 import './App.scss';
 import { ConfigProvider, Layout } from 'antd';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import MenuSider from './components/Sider/MenuSider';
 import CustomBreadCrumb from './components/CustomBreadCrumb/CustomBreadCrumb';
@@ -12,25 +12,26 @@ const App: React.FC = () => {
   const location = useLocation();
   const themeConfig = { token: { colorPrimary: '#faad14' } };
   const { amountList, fetchData } = useAccountBook();
+  const { current: transDeps } = useRef(amountList);
 
   useEffect(() => {
     fetchData();
-  }, [amountList]);
+  }, [transDeps]);
 
   return (
-    <Layout className="app">
+    <Layout className='app'>
       <ConfigProvider theme={themeConfig}>
         <MenuSider />
         <Layout>
-          <Header className="header">My Bill</Header>
-          <Content className="layout-content">
+          <Header className='header'>My Bill</Header>
+          <Content className='layout-content'>
             <CustomBreadCrumb />
-            <div className="main">
+            <div className='main'>
               {location.pathname === '/' && <h1>Welcome to My Bill!</h1>}
               <Outlet />
             </div>
           </Content>
-          <Footer className="site-footer">Saving is a virtue.</Footer>
+          <Footer className='site-footer'>Saving is a virtue.</Footer>
         </Layout>
       </ConfigProvider>
     </Layout>
