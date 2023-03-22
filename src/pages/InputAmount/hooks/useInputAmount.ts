@@ -1,7 +1,7 @@
 import { addTransItem } from '../../../services/addTransItem';
 import { useSqlErrorStore } from '../../../zustand/useSqlErrorStore';
 
-const useInputAmount = form => {
+const useInputAmount = (form, id: string | null) => {
   const { sqlError, setSqlError } = useSqlErrorStore();
 
   const layout = {
@@ -14,7 +14,7 @@ const useInputAmount = form => {
   };
 
   const onFinish = async values => {
-    const { data, error } = await addTransItem(values);
+    const { data, error } = await addTransItem(values, id);
     if (error) {
       setSqlError(error);
       console.log(sqlError);

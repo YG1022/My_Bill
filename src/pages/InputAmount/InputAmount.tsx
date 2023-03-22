@@ -9,8 +9,8 @@ import { transItem } from '../../constants/types';
 
 const InputAmount: React.FC = () => {
   const [form] = Form.useForm();
-  const { layout, tailLayout, onFinish } = useInputAmount(form);
   const params = useParams();
+  const { layout, tailLayout, onFinish } = useInputAmount(form, params.id || null);
 
   useEffect(() => {
     if (params.id) {
