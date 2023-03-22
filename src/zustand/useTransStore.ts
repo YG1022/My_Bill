@@ -25,7 +25,11 @@ export const useTransStore = create<transState>()(
       addTrans: (data: transItem) =>
         set({
           amountList: produce(get().amountList, draft => {
-            draft.push(data);
+            if (!draft.some(item => item.id === data.id)) {
+              draft.push(data);
+            } else {
+              draft[draft.findIndex(item => item.id === data.id)] = data;
+            }
           }),
         }),
     }),
