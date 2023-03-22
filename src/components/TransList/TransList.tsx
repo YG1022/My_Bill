@@ -16,7 +16,7 @@ const TransList: React.FC<transListProps> = ({ amountList, category }) => {
       <div className="amount-content">
         <span>The amount of all the {category === '+' ? 'income' : 'expenses'} is $</span>
         <span className="amount" data-testid="amount">
-          {totalAmount}
+          {totalAmount.toString()}
         </span>
       </div>
       <List
