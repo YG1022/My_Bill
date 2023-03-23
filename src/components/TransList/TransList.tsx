@@ -31,6 +31,7 @@ const TransList: React.FC<transListProps> = ({ amountList, category }) => {
               <Checkbox
                 onChange={(e: CheckboxChangeEvent) => {
                   console.log(`checked = ${e.target.checked}`);
+                  console.log(transaction.id);
                 }}
               />
             </span>

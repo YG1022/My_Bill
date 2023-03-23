@@ -1,7 +1,7 @@
 import { transItem } from '../../../constants/types';
 import { deleteTransItem } from '../../../services/deleteTransItem';
 import { Modal } from 'antd';
-import { useTransStore } from '../../../zustand/useTransStore';
+import { useTransStore } from '../../../stores/useTransStore';
 import Decimal from 'decimal.js';
 
 const useTransList = (amountList: Array<transItem>, category: string) => {

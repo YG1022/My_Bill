@@ -1,8 +1,8 @@
 import { addTransItem } from '../../../services/addTransItem';
-import { useSqlErrorStore } from '../../../zustand/useSqlErrorStore';
+import { useSqlErrorStore } from '../../../stores/useSqlErrorStore';
 import { getTransItems } from '../../../services/getTransItems';
 import { transItem } from '../../../constants/types';
-import { useTransStore } from '../../../zustand/useTransStore';
+import { useTransStore } from '../../../stores/useTransStore';
 
 const useInputAmount = (form, id: string | null) => {
   const addTrans = useTransStore(state => state.addTrans);

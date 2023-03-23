@@ -1,10 +1,10 @@
 import { getTransItems } from '../../../services/getTransItems';
-import { useTransStore } from '../../../zustand/useTransStore';
-import { useSqlErrorStore } from '../../../zustand/useSqlErrorStore';
+import { useTransStore } from '../../../stores/useTransStore';
+import { useSqlErrorStore } from '../../../stores/useSqlErrorStore';
 
 const useAccountBook = () => {
   const { sqlError, setSqlError } = useSqlErrorStore();
-  const { amountList, setTransWithFetchData } = useTransStore((state) => {
+  const { amountList, setTransWithFetchData } = useTransStore(state => {
     return {
       amountList: state.amountList,
       setTransWithFetchData: state.setTransWithFetchData,
