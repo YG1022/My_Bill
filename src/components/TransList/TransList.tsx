@@ -1,4 +1,4 @@
-import { Button, Checkbox, Divider, List, Modal, Tag } from 'antd';
+import { Button, Checkbox, Divider, List, Tag } from 'antd';
 import React from 'react';
 import { transListProps } from '../../constants/types';
 import { useTransList } from './hooks/useTransList';
@@ -6,13 +6,17 @@ import './TransList.scss';
 import { NavLink } from 'react-router-dom';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { useTransStore } from '../../stores/useTransStore';
+import { shallow } from 'zustand/shallow';
 
 const TransList: React.FC<transListProps> = ({ amountList, category }) => {
   const { transactions, totalAmount, deleteTrans } = useTransList(amountList, category);
-  const { selectedId, setSelectedId } = useTransStore(state => ({
-    selectedId: state.selectedId,
-    setSelectedId: state.setSelectedId,
-  }));
+  const { selectedId, setSelectedId } = useTransStore(
+    state => ({
+      selectedId: state.selectedId,
+      setSelectedId: state.setSelectedId,
+    }),
+    shallow
+  );
 
   return (
     <div className="bills-list">
