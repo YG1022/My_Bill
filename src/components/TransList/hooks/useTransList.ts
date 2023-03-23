@@ -12,13 +12,13 @@ const useTransList = (amountList: Array<transItem>, category: string) => {
       deleteTransWithIds: state.deleteTransWithIds,
       clearSelectedId: state.clearSelectedId,
     }),
-    shallow
+    shallow,
   );
 
   const totalAmount: Decimal = new Decimal(
     amountList
       .filter(item => item.category === category)
-      .reduce((total, curr) => Decimal.add(total, curr.amount), new Decimal(0)) || 0
+      .reduce((total, curr) => Decimal.add(total, curr.amount), new Decimal(0)) || 0,
   );
 
   const transactions: Array<transItem> = amountList.filter(item => item.category === category);
