@@ -23,15 +23,27 @@ const useTransList = (amountList: Array<transItem>, category: string) => {
 
   const transactions: Array<transItem> = amountList.filter(item => item.category === category);
 
-  const deleteTrans = (id: number) => {
-    const deleteSelectedTrans = async () => {
+  const deleteTrans = (id: number | number[]) => {
+    const handleId = async (id: number) => {
       await deleteTransItem(id);
       deleteTransWithId(id);
+    };
+    const handleIds = async (ids: number[]) => {
+      ids.forEach(async id => await deleteTransItem(id));
+
+      deleteTransWithIds(ids);
+      clearSelectedId();
+    };
+
+    const deleteSelectedTrans = async () => {
+      typeof id === 'number' ? await handleId(id) : await handleIds(id);
     };
 
     return () => {
       Modal.confirm({
-        title: `Are you really want to destroy this transaction？`,
+        title: `Are you really want to destroy ${
+          typeof id === 'number' ? 'this rtansaction' : 'selected transactions'
+        }?`,
         okText: 'Sure',
         cancelText: 'Cancel',
         centered: true,
@@ -40,26 +52,7 @@ const useTransList = (amountList: Array<transItem>, category: string) => {
     };
   };
 
-  const deleteSelectedTransItems = (selectedId: number[]) => {
-    const deleteMultiSelectedTrans = async () => {
-      selectedId.forEach(async id => await deleteTransItem(id));
-
-      deleteTransWithIds(selectedId);
-      clearSelectedId();
-    };
-
-    return () => {
-      Modal.confirm({
-        title: `Are you really want to destroy selected transactions?`,
-        okText: 'Sure',
-        cancelText: 'Cancel',
-        centered: true,
-        onOk: deleteMultiSelectedTrans,
-      });
-    };
-  };
-
-  return { totalAmount, transactions, deleteTrans, deleteSelectedTransItems };
+  return { totalAmount, transactions, deleteTrans };
 };
 
 export { useTransList };

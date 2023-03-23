@@ -8,10 +8,7 @@ import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { useTransStore } from '../../stores/useTransStore';
 
 const TransList: React.FC<transListProps> = ({ amountList, category }) => {
-  const { transactions, totalAmount, deleteTrans, deleteSelectedTransItems } = useTransList(
-    amountList,
-    category
-  );
+  const { transactions, totalAmount, deleteTrans } = useTransList(amountList, category);
   const { selectedId, setSelectedId } = useTransStore(state => ({
     selectedId: state.selectedId,
     setSelectedId: state.setSelectedId,
@@ -27,11 +24,7 @@ const TransList: React.FC<transListProps> = ({ amountList, category }) => {
         <span className="amount" data-testid="amount">
           {totalAmount.toString()}
         </span>
-        <Button
-          type="link"
-          className="delete-selected"
-          onClick={deleteSelectedTransItems(selectedId)}
-        >
+        <Button type="link" className="delete-selected" onClick={deleteTrans(selectedId)}>
           Delete
         </Button>
       </div>
