@@ -42,7 +42,7 @@ const useTransList = (amountList: Array<transItem>, category: string) => {
     return () => {
       Modal.confirm({
         title: `Are you really want to destroy ${
-          typeof id === 'number' ? 'this rtansaction' : 'selected transactions'
+          typeof id === 'number' ? 'this transaction' : 'selected transactions'
         }?`,
         okText: 'Sure',
         cancelText: 'Cancel',
