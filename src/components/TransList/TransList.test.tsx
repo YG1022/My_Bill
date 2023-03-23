@@ -14,6 +14,7 @@ describe('TransList', () => {
       transactions: [{ id: 1, amount: '100', date: '2020-01-01', category: '+', tags: ['food'] }],
       totalAmount: new Decimal(100),
       deleteTrans: jest.fn(),
+      deleteSelectedTransItems: jest.fn(),
     });
 
     render(<TransList amountList={[]} category="+" />);
@@ -29,6 +30,7 @@ describe('TransList', () => {
       transactions: [],
       totalAmount: new Decimal(0),
       deleteTrans: jest.fn(),
+      deleteSelectedTransItems: jest.fn(),
     });
 
     render(<TransList amountList={[]} category="+" />);

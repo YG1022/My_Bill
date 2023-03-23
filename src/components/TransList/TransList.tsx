@@ -1,13 +1,21 @@
-import { Button, Checkbox, Divider, List, Tag } from 'antd';
+import { Button, Checkbox, Divider, List, Modal, Tag } from 'antd';
 import React from 'react';
 import { transListProps } from '../../constants/types';
 import { useTransList } from './hooks/useTransList';
 import './TransList.scss';
 import { NavLink } from 'react-router-dom';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
+import { useTransStore } from '../../stores/useTransStore';
 
 const TransList: React.FC<transListProps> = ({ amountList, category }) => {
-  const { transactions, totalAmount, deleteTrans } = useTransList(amountList, category);
+  const { transactions, totalAmount, deleteTrans, deleteSelectedTransItems } = useTransList(
+    amountList,
+    category
+  );
+  const { selectedId, setSelectedId } = useTransStore(state => ({
+    selectedId: state.selectedId,
+    setSelectedId: state.setSelectedId,
+  }));
 
   return (
     <div className="bills-list">
@@ -19,6 +27,13 @@ const TransList: React.FC<transListProps> = ({ amountList, category }) => {
         <span className="amount" data-testid="amount">
           {totalAmount.toString()}
         </span>
+        <Button
+          type="link"
+          className="delete-selected"
+          onClick={deleteSelectedTransItems(selectedId)}
+        >
+          Delete
+        </Button>
       </div>
       <List
         className="list-content"
@@ -27,28 +42,17 @@ const TransList: React.FC<transListProps> = ({ amountList, category }) => {
         dataSource={transactions}
         renderItem={transaction => (
           <List.Item data-testid="item">
-            <span>
-              <Checkbox
-                onChange={(e: CheckboxChangeEvent) => {
-                  console.log(`checked = ${e.target.checked}`);
-                  console.log(transaction.id);
-                }}
-              />
-            </span>
+            <Checkbox onChange={(e: CheckboxChangeEvent) => setSelectedId(transaction.id)} />
             <span className="item-amount">{transaction.amount}</span>
             <span className="item-tag">
               {transaction.tags.map((tag, index) => (
                 <Tag key={index}>{tag}</Tag>
               ))}
             </span>
-            <span>
-              <NavLink to={`/transactions/trans-edit/${transaction.id}`}>Edit</NavLink>
-            </span>
-            <span>
-              <Button type="link" className="item-delete" onClick={deleteTrans(transaction.id)}>
-                Delete
-              </Button>
-            </span>
+            <NavLink to={`/transactions/trans-edit/${transaction.id}`}>Edit</NavLink>
+            <Button type="link" className="item-delete" onClick={deleteTrans(transaction.id)}>
+              Delete
+            </Button>
           </List.Item>
         )}
       ></List>

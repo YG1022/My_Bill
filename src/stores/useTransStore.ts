@@ -7,7 +7,11 @@ interface transState {
   amountList: Array<transItem>;
   setTransWithFetchData: (data: Array<transItem>) => void;
   deleteTransWithId: (id: number) => void;
+  deleteTransWithIds: (ids: Array<number>) => void;
   addTrans: (data: transItem) => void;
+  selectedId: Array<number>;
+  setSelectedId: (id: number) => void;
+  clearSelectedId: () => void;
 }
 
 export const useTransStore = create<transState>()(
@@ -20,6 +24,9 @@ export const useTransStore = create<transState>()(
       deleteTransWithId: (id: number) =>
         set({ amountList: get().amountList.filter(item => item.id !== id) }),
 
+      deleteTransWithIds: (ids: Array<number>) =>
+        set({ amountList: get().amountList.filter(item => !ids.includes(item.id)) }),
+
       addTrans: (data: transItem) =>
         set({
           amountList: produce(get().amountList, draft => {
@@ -28,6 +35,17 @@ export const useTransStore = create<transState>()(
               : (draft[draft.findIndex(item => item.id === data.id)] = data);
           }),
         }),
+
+      selectedId: [],
+
+      setSelectedId: (id: number) =>
+        set({
+          selectedId: produce(get().selectedId, draft => {
+            draft.includes(id) ? draft.splice(draft.indexOf(id), 1) : draft.push(id);
+          }),
+        }),
+
+      clearSelectedId: () => set({ selectedId: [] }),
     }),
     {
       name: 'trans-storage',

@@ -3,9 +3,17 @@ import { deleteTransItem } from '../../../services/deleteTransItem';
 import { Modal } from 'antd';
 import { useTransStore } from '../../../stores/useTransStore';
 import Decimal from 'decimal.js';
+import { shallow } from 'zustand/shallow';
 
 const useTransList = (amountList: Array<transItem>, category: string) => {
   const { deleteTransWithId } = useTransStore();
+  const { deleteTransWithIds, clearSelectedId } = useTransStore(
+    state => ({
+      deleteTransWithIds: state.deleteTransWithIds,
+      clearSelectedId: state.clearSelectedId,
+    }),
+    shallow
+  );
 
   const totalAmount: Decimal = new Decimal(
     amountList
@@ -32,7 +40,26 @@ const useTransList = (amountList: Array<transItem>, category: string) => {
     };
   };
 
-  return { totalAmount, transactions, deleteTrans };
+  const deleteSelectedTransItems = (selectedId: number[]) => {
+    const deleteMultiSelectedTrans = async () => {
+      selectedId.forEach(async id => await deleteTransItem(id));
+
+      deleteTransWithIds(selectedId);
+      clearSelectedId();
+    };
+
+    return () => {
+      Modal.confirm({
+        title: `Are you really want to destroy selected transactions?`,
+        okText: 'Sure',
+        cancelText: 'Cancel',
+        centered: true,
+        onOk: deleteMultiSelectedTrans,
+      });
+    };
+  };
+
+  return { totalAmount, transactions, deleteTrans, deleteSelectedTransItems };
 };
 
 export { useTransList };
