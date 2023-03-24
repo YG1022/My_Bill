@@ -38,14 +38,13 @@ export const useTransStore = create<transState>()(
 
       selectedId: [],
 
-      setSelectedId: (ids: number[]) =>
-        set({ selectedId: ids }),
+      setSelectedId: (ids: number[]) => set({ selectedId: ids }),
 
       clearSelectedId: () => set({ selectedId: [] }),
     }),
     {
       name: 'trans-storage',
       storage: createJSONStorage(() => sessionStorage),
-    },
-  ),
+    }
+  )
 );

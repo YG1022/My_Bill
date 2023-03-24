@@ -14,13 +14,13 @@ const useTransList = (amountList: Array<transItem>, category: string) => {
       setSelectedId: state.setSelectedId,
       clearSelectedId: state.clearSelectedId,
     }),
-    shallow,
+    shallow
   );
 
   const totalAmount: Decimal = new Decimal(
     amountList
       .filter(item => item.category === category)
-      .reduce((total, curr) => Decimal.add(total, curr.amount), new Decimal(0)) || 0,
+      .reduce((total, curr) => Decimal.add(total, curr.amount), new Decimal(0)) || 0
   );
 
   const transactions: Array<transItem> = amountList.filter(item => item.category === category);
@@ -42,7 +42,8 @@ const useTransList = (amountList: Array<transItem>, category: string) => {
       clearSelectedId();
     };
 
-    const deleteSelectedTrans = async () => typeof id === 'number' ? await handleId(id) : await handleIds(id);
+    const deleteSelectedTrans = async () =>
+      typeof id === 'number' ? await handleId(id) : await handleIds(id);
 
     return () => {
       Modal.confirm({
