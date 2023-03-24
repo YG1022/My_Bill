@@ -1,6 +1,6 @@
 import { Button, Divider, Table } from 'antd';
 import React, { useEffect, useRef } from 'react';
-import { transItem, transListProps } from '../../constants/types';
+import { transListProps } from '../../constants/types';
 import { useTransList } from './hooks/useTransList';
 import './TransList.scss';
 import { useTransStore } from '../../stores/useTransStore';
@@ -8,11 +8,10 @@ import { shallow } from 'zustand/shallow';
 import { getColumns } from './hooks/getColumns';
 
 const TransList: React.FC<transListProps> = ({ amountList, category }) => {
-  const { transactions, totalAmount, deleteTrans } = useTransList(amountList, category);
-  const { selectedId, setSelectedId, clearSelectedId } = useTransStore(
+  const { transactions, totalAmount, rowSelection, deleteTrans } = useTransList(amountList, category);
+  const { selectedId, clearSelectedId } = useTransStore(
     state => ({
       selectedId: state.selectedId,
-      setSelectedId: state.setSelectedId,
       clearSelectedId: state.clearSelectedId,
     }),
     shallow,
@@ -22,11 +21,6 @@ const TransList: React.FC<transListProps> = ({ amountList, category }) => {
   useEffect(() => {
     clearSelectedId();
   }, [idsDeps]);
-
-  const rowSelection = {
-    onChange: (selectedRowKeys: React.Key[]) => setSelectedId(selectedRowKeys as number[]),
-    getCheckboxProps: (record: transItem) => ({ name: record.amount }),
-  };
 
   return (
     <div className='bills-list'>

@@ -4,12 +4,14 @@ import { Modal } from 'antd';
 import { useTransStore } from '../../../stores/useTransStore';
 import Decimal from 'decimal.js';
 import { shallow } from 'zustand/shallow';
+import React from 'react';
 
 const useTransList = (amountList: Array<transItem>, category: string) => {
   const { deleteTransWithId } = useTransStore();
-  const { deleteTransWithIds, clearSelectedId } = useTransStore(
+  const { deleteTransWithIds, setSelectedId, clearSelectedId } = useTransStore(
     state => ({
       deleteTransWithIds: state.deleteTransWithIds,
+      setSelectedId: state.setSelectedId,
       clearSelectedId: state.clearSelectedId,
     }),
     shallow,
@@ -23,6 +25,11 @@ const useTransList = (amountList: Array<transItem>, category: string) => {
 
   const transactions: Array<transItem> = amountList.filter(item => item.category === category);
 
+  const rowSelection = {
+    onChange: (selectedRowKeys: React.Key[]) => setSelectedId(selectedRowKeys as number[]),
+    getCheckboxProps: (record: transItem) => ({ name: record.amount }),
+  };
+
   const deleteTrans = (id: number | number[]) => {
     const handleId = async (id: number) => {
       await deleteTransItem(id);
@@ -35,9 +42,7 @@ const useTransList = (amountList: Array<transItem>, category: string) => {
       clearSelectedId();
     };
 
-    const deleteSelectedTrans = async () => {
-      typeof id === 'number' ? await handleId(id) : await handleIds(id);
-    };
+    const deleteSelectedTrans = async () => typeof id === 'number' ? await handleId(id) : await handleIds(id);
 
     return () => {
       Modal.confirm({
@@ -52,7 +57,7 @@ const useTransList = (amountList: Array<transItem>, category: string) => {
     };
   };
 
-  return { totalAmount, transactions, deleteTrans };
+  return { totalAmount, transactions, rowSelection, deleteTrans };
 };
 
 export { useTransList };
