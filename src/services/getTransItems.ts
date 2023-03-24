@@ -2,9 +2,7 @@ import { supabaseClient } from '../supabaseClient';
 import { transItem } from '../constants/types';
 import { PostgrestError } from '@supabase/supabase-js';
 
-const getTransItems = async (
-  id?: number
-): Promise<{ data: transItem[]; error: PostgrestError }> => {
+const getTransItems = async (id?: number): Promise<{ data: transItem[]; error: PostgrestError }> => {
   if (id) {
     const { data, error } = await supabaseClient
       .from('transactions')
