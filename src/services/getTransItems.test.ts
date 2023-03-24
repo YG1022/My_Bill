@@ -25,7 +25,7 @@ describe('getTransItems from supabase', () => {
 
     // Assert
     await waitFor(async () => {
-      return expect(await getTransItems(null)).toEqual(mockResultData);
+      return expect(await getTransItems()).toEqual(mockResultData);
     });
   });
 });

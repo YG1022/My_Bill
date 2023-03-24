@@ -12,7 +12,7 @@ const useAccountBook = () => {
   });
 
   const fetchData = async () => {
-    const { data, error } = (await getTransItems(null)) as any;
+    const { data, error } = await getTransItems();
 
     if (error) {
       setSqlError(error);
