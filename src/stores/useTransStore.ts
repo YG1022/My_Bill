@@ -10,7 +10,7 @@ interface transState {
   deleteTransWithIds: (ids: Array<number>) => void;
   addTrans: (data: transItem) => void;
   selectedId: Array<number>;
-  setSelectedId: (id: number) => void;
+  setSelectedId: (ids: number[]) => void;
   clearSelectedId: () => void;
 }
 
@@ -38,18 +38,14 @@ export const useTransStore = create<transState>()(
 
       selectedId: [],
 
-      setSelectedId: (id: number) =>
-        set({
-          selectedId: produce(get().selectedId, draft => {
-            draft.includes(id) ? draft.splice(draft.indexOf(id), 1) : draft.push(id);
-          }),
-        }),
+      setSelectedId: (ids: number[]) =>
+        set({ selectedId: ids }),
 
       clearSelectedId: () => set({ selectedId: [] }),
     }),
     {
       name: 'trans-storage',
       storage: createJSONStorage(() => sessionStorage),
-    }
-  )
+    },
+  ),
 );
