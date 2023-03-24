@@ -1,37 +1,14 @@
-import { Button, Form, InputNumber, Modal, Select } from 'antd';
+import { Button, Form, InputNumber, Select } from 'antd';
 import React, { useEffect } from 'react';
 import { CustomTags } from '../../components/CustomTags/CustomTags';
 import { useInputAmount } from './hooks/useInputAmount';
 import './InputAmount.scss';
-import { useNavigate, useParams } from 'react-router-dom';
-import { deleteTransItem } from '../../services/deleteTransItem';
-import { useTransStore } from '../../stores/useTransStore';
+import { useParams } from 'react-router-dom';
 
 const InputAmount: React.FC = () => {
   const [form] = Form.useForm();
   const params = useParams();
-  const { layout, tailLayout, autoFillInfo, onFinish } = useInputAmount(form, params.id || null);
-
-  const deleteTransWithId = useTransStore(state => state.deleteTransWithId);
-  const navigate = useNavigate();
-  const del = (formerId) => {
-    const id = Number(formerId);
-    const deleteSelectedTrans = async () => {
-      await deleteTransItem(id);
-      deleteTransWithId(id);
-      navigate(`/transactions/all`);
-    };
-
-    return () => {
-      Modal.confirm({
-        title: `Are you really want to destroy this transaction?`,
-        okText: 'Sure',
-        cancelText: 'Cancel',
-        centered: true,
-        onOk: deleteSelectedTrans,
-      });
-    };
-  };
+  const { layout, tailLayout, autoFillInfo, onFinish, deleteTransOnEditPage } = useInputAmount(form, params.id || null);
 
   useEffect(() => {
     if (params.id) {
@@ -73,7 +50,7 @@ const InputAmount: React.FC = () => {
         </Button>
       </Form.Item>
       <div>
-        {params.id && (<Button onClick={del(params.id)}>Delete</Button>)}
+        {params.id && (<Button onClick={deleteTransOnEditPage(params.id)}>Delete</Button>)}
       </div>
     </Form>
   );

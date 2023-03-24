@@ -3,10 +3,15 @@ import { useSqlErrorStore } from '../../../stores/useSqlErrorStore';
 import { getTransItems } from '../../../services/getTransItems';
 import { transItem } from '../../../constants/types';
 import { useTransStore } from '../../../stores/useTransStore';
+import { deleteTransItem } from '../../../services/deleteTransItem';
+import { Modal } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 const useInputAmount = (form, id: string | null) => {
   const addTrans = useTransStore(state => state.addTrans);
   const setSqlError = useSqlErrorStore(state => state.setSqlError);
+  const deleteTransWithId = useTransStore(state => state.deleteTransWithId);
+  const navigate = useNavigate();
 
   const layout = {
     labelCol: { span: 8 },
@@ -41,7 +46,26 @@ const useInputAmount = (form, id: string | null) => {
     }
   };
 
-  return { layout, tailLayout, autoFillInfo, onFinish };
+  const deleteTransOnEditPage = (formerId) => {
+    const id = Number(formerId);
+    const deleteSelectedTrans = async () => {
+      await deleteTransItem(id);
+      deleteTransWithId(id);
+      navigate(`/transactions/all`);
+    };
+
+    return () => {
+      Modal.confirm({
+        title: `Are you really want to destroy this transaction?`,
+        okText: 'Sure',
+        cancelText: 'Cancel',
+        centered: true,
+        onOk: deleteSelectedTrans,
+      });
+    };
+  };
+
+  return { layout, tailLayout, autoFillInfo, onFinish, deleteTransOnEditPage };
 };
 
 export { useInputAmount };

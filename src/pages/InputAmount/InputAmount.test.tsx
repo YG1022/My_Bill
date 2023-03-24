@@ -17,6 +17,7 @@ describe('InputAmount', () => {
       tailLayout: { wrapperCol: { offset: 8, span: 16 } },
       autoFillInfo: jest.fn(),
       onFinish: jest.fn(),
+      deleteTransOnEditPage: jest.fn(),
     });
   });
 
