@@ -27,7 +27,6 @@ const useTransList = (amountList: Array<transItem>, category: string) => {
 
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[]) => setSelectedId(selectedRowKeys as number[]),
-    getCheckboxProps: (record: transItem) => ({ name: record.amount }),
   };
 
   const deleteTrans = (id: number | number[]) => {
