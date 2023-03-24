@@ -1,11 +1,12 @@
-import { Button, Checkbox, Divider, List, Tag } from 'antd';
+import { Button, Divider, Table, Tag } from 'antd';
 import React, { useEffect, useRef } from 'react';
-import { transListProps } from '../../constants/types';
+import { transItem, transListProps } from '../../constants/types';
 import { useTransList } from './hooks/useTransList';
 import './TransList.scss';
 import { NavLink } from 'react-router-dom';
 import { useTransStore } from '../../stores/useTransStore';
 import { shallow } from 'zustand/shallow';
+import { ColumnsType } from 'antd/es/table';
 
 const TransList: React.FC<transListProps> = ({ amountList, category }) => {
   const { transactions, totalAmount, deleteTrans } = useTransList(amountList, category);
@@ -23,6 +24,43 @@ const TransList: React.FC<transListProps> = ({ amountList, category }) => {
     clearSelectedId();
   }, [idsDeps]);
 
+  const columns: ColumnsType<transItem> = [
+    {
+      title: 'Amount',
+      dataIndex: 'amount',
+      width: 120,
+    },
+    {
+      title: 'Tags',
+      dataIndex: 'tags',
+      ellipsis: true,
+      render: (tags: string[]) => (
+        <span className='trans-tags'>
+          {tags.map((tag, index) => (
+            <Tag key={index}>{tag}</Tag>
+          ))}
+        </span>
+      ),
+    },
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      render: (_text, record: transItem) => (
+        <span className='trans-actions'>
+          <NavLink to={`/transactions/trans-edit/${record.id}`}>Edit</NavLink>
+          <Button type='link' className='item-delete' onClick={deleteTrans(record.id)}>
+            Delete
+          </Button>
+        </span>
+      ),
+    },
+  ];
+
+  const rowSelection = {
+    onChange: (selectedRowKeys: React.Key[]) => setSelectedId(selectedRowKeys as number[]),
+    getCheckboxProps: (record: transItem) => ({ name: record.amount }),
+  };
+
   return (
     <div className='bills-list'>
       <Divider className='bills-divider' orientation='left'>
@@ -37,30 +75,12 @@ const TransList: React.FC<transListProps> = ({ amountList, category }) => {
           Delete
         </Button>
       </div>
-      <List
-        className='list-content'
-        data-testid='list-content'
-        bordered
+      <Table
+        rowSelection={{ type: 'checkbox', ...rowSelection }}
+        rowKey={record => record.id}
+        columns={columns}
         dataSource={transactions}
-        renderItem={transaction => (
-          <List.Item data-testid='item'>
-            <Checkbox
-              checked={selectedId.includes(transaction.id)}
-              onChange={() => setSelectedId(transaction.id)}
-            />
-            <span className='item-amount'>{transaction.amount}</span>
-            <span className='item-tag'>
-              {transaction.tags.map((tag, index) => (
-                <Tag key={index}>{tag}</Tag>
-              ))}
-            </span>
-            <NavLink to={`/transactions/trans-edit/${transaction.id}`}>Edit</NavLink>
-            <Button type='link' className='item-delete' onClick={deleteTrans(transaction.id)}>
-              Delete
-            </Button>
-          </List.Item>
-        )}
-      ></List>
+      />
     </div>
   );
 };
