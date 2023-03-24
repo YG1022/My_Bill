@@ -1,14 +1,37 @@
-import { Button, Form, InputNumber, Select } from 'antd';
+import { Button, Form, InputNumber, Modal, Select } from 'antd';
 import React, { useEffect } from 'react';
 import { CustomTags } from '../../components/CustomTags/CustomTags';
 import { useInputAmount } from './hooks/useInputAmount';
 import './InputAmount.scss';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { deleteTransItem } from '../../services/deleteTransItem';
+import { useTransStore } from '../../stores/useTransStore';
 
 const InputAmount: React.FC = () => {
   const [form] = Form.useForm();
   const params = useParams();
   const { layout, tailLayout, autoFillInfo, onFinish } = useInputAmount(form, params.id || null);
+
+  const deleteTransWithId = useTransStore(state => state.deleteTransWithId);
+  const navigate = useNavigate();
+  const del = (formerId) => {
+    const id = Number(formerId);
+    const deleteSelectedTrans = async () => {
+      await deleteTransItem(id);
+      deleteTransWithId(id);
+      navigate(`/transactions/all`);
+    };
+
+    return () => {
+      Modal.confirm({
+        title: `Are you really want to destroy this transaction?`,
+        okText: 'Sure',
+        cancelText: 'Cancel',
+        centered: true,
+        onOk: deleteSelectedTrans,
+      });
+    };
+  };
 
   useEffect(() => {
     if (params.id) {
@@ -18,37 +41,40 @@ const InputAmount: React.FC = () => {
   }, [params.id]);
 
   return (
-    <Form className="input-amount" {...layout} form={form} name="control-hooks" onFinish={onFinish}>
+    <Form className='input-amount' {...layout} form={form} name='control-hooks' onFinish={onFinish}>
       <Form.Item
-        name="amount"
-        label="Amount"
+        name='amount'
+        label='Amount'
         rules={[{ required: true, message: 'Please input number!' }]}
       >
         <InputNumber
-          className="input-bar"
+          className='input-bar'
           formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           parser={value => value!.replace(/\$\s?|(,*)/g, '')}
-          placeholder="Please input number"
+          placeholder='Please input number'
         />
       </Form.Item>
       <Form.Item
-        name="category"
-        label="Category"
+        name='category'
+        label='Category'
         rules={[{ required: true, message: 'Please select category!' }]}
       >
-        <Select className="select-bar">
-          <Select.Option value="+">Income</Select.Option>
-          <Select.Option value="-">Expenses</Select.Option>
+        <Select className='select-bar'>
+          <Select.Option value='+'>Income</Select.Option>
+          <Select.Option value='-'>Expenses</Select.Option>
         </Select>
       </Form.Item>
-      <Form.Item className="transactions-tags" name="tags" label="Tags">
+      <Form.Item className='transactions-tags' name='tags' label='Tags'>
         <CustomTags />
       </Form.Item>
       <Form.Item {...tailLayout} shouldUpdate>
-        <Button type="primary" htmlType="submit">
+        <Button type='primary' htmlType='submit'>
           {params.id ? 'Update' : 'Submit'}
         </Button>
       </Form.Item>
+      <div>
+        {params.id && (<Button onClick={del(params.id)}>Delete</Button>)}
+      </div>
     </Form>
   );
 };
