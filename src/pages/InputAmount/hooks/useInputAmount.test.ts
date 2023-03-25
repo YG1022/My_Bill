@@ -1,6 +1,7 @@
 import { addTransItem } from '../../../services/addTransItem';
 import { useInputAmount } from './useInputAmount';
 import { renderHook, act, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('../../../services/addTransItem');
 const mockedAddTransItem = addTransItem as jest.MockedFunction<typeof addTransItem>;
@@ -31,7 +32,10 @@ describe('useInputAmount', () => {
   it('should return error correctly', async () => {
     // Arrange
     mockedAddTransItem.mockResolvedValue(mockedResolvedError as any);
-    const { result } = renderHook(({ mockedForm }) => useInputAmount(mockedForm, null), { initialProps: { mockedForm } });
+    const { result } = renderHook(({ mockedForm }) => useInputAmount(mockedForm, null), {
+      initialProps: { mockedForm },
+      wrapper: MemoryRouter,
+    });
     // Act
     await act(() => {
       result.current.onFinish({ amount: '100', date: '2021-01-01', tags: ['Food'] });
@@ -45,7 +49,10 @@ describe('useInputAmount', () => {
   it('should return data correctly', async () => {
     // Arrange
     mockedAddTransItem.mockResolvedValue(mockedResolvedData as any);
-    const { result } = renderHook(({ mockedForm }) => useInputAmount(mockedForm, null), { initialProps: { mockedForm } });
+    const { result } = renderHook(({ mockedForm }) => useInputAmount(mockedForm, null), {
+      initialProps: { mockedForm },
+      wrapper: MemoryRouter,
+    });
     // Act
     await act(() => {
       result.current.onFinish({ amount: '100', date: '2021-01-01', tags: ['Food'] });
