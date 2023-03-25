@@ -29,7 +29,7 @@ describe('InputAmount', () => {
     const view = renderer.getRenderOutput();
     // Assert
     expect(view.type).toEqual(Form);
-    expect(view.props.children.length).toBe(4);
+    expect(view.props.children.length).toBe(5);
   });
 
   it('should show message when no number input', async () => {
