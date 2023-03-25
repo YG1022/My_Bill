@@ -40,6 +40,7 @@ const TransList: React.FC<transListProps> = ({ amountList, category }) => {
         </Button>
       </div>
       <Table
+        data-testid="list-content"
         rowSelection={{ type: 'checkbox', ...rowSelection }}
         rowKey={record => record.id}
         columns={getColumns(deleteTrans)}
