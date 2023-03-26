@@ -3,9 +3,8 @@ import InputAmount from './InputAmount';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import React from 'react';
 import { Form } from 'antd/lib';
-import { act, render, screen } from '../../utils/custom-testing-library';
+import { render, screen, waitFor, waitForElementToBeRemoved } from '../../utils/custom-testing-library';
 import userEvent from '@testing-library/user-event';
-import { waitFor } from '@testing-library/react';
 
 jest.mock('./hooks/useInputAmount');
 const mockedUseInputAmount = useInputAmount as jest.MockedFunction<typeof useInputAmount>;
@@ -32,18 +31,19 @@ describe('InputAmount', () => {
     expect(view.props.children.length).toBe(5);
   });
 
-  it('should show message when no number input', async () => {
+  it('should show message when no number input', () => {
     // Arrange
     render(<InputAmount />);
     // Act
-    await act(async () => {
-      await userEvent.type(screen.getByRole('spinbutton', { name: 'Amount' }), 'test 1');
-      await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
-    });
+    userEvent.type(screen.getByRole('spinbutton', { name: 'Amount' }), 'test 1');
+    userEvent.click(screen.getByRole('combobox', { name: 'Category' }));
+    userEvent.click(screen.getByRole('button', { name: 'Submit' }));
     // Assert
-    await waitFor(() => {
+    waitFor(async () => {
       expect(screen.getByText('Please input number!')).toBeInTheDocument();
+      await waitForElementToBeRemoved(() => screen.getByText('Please input number!'));
       expect(screen.getByText('Please select category!')).toBeInTheDocument();
+      await waitForElementToBeRemoved(() => screen.getByText('Please select category!'));
     });
   });
 });
