@@ -2,27 +2,32 @@ import React from 'react';
 import { render, screen, waitFor } from '../../utils/custom-testing-library';
 import userEvent from '@testing-library/user-event';
 import { CustomTags } from './CustomTags';
+import { waitForElementToBeRemoved } from '@testing-library/react';
 
 describe('CourseTags', () => {
   const formValue = { name: 'tag name' };
   const mockedOnChange = jest.fn();
 
-  const createTag = async (tagName) => {
+  const createTag = async (tagName: string) => {
     await userEvent.click(screen.getByText('New Tag'));
     await userEvent.type(screen.getByTestId('tag-input'), tagName);
     await userEvent.click(document.body);
   };
 
-  it('should add tag correctly', async () => {
+  it('should add tag correctly', () => {
     // Arrange
     render(<CustomTags value={formValue} onChange={mockedOnChange} />);
     // Act
-    await createTag('tag 1');
+    createTag('tag 1');
     // Assert
-    await waitFor(() => {
+    waitFor(async () => {
       expect(screen.getByText('New Tag')).toBeInTheDocument();
+      await waitForElementToBeRemoved(() => screen.getByText('New Tag'));
       expect(screen.getByText('tag 1')).toBeInTheDocument();
-      expect(mockedOnChange).toBeCalledWith({ ...formValue, tags: ['Food', 'Transfer', 'Shopping', 'tag 1'] });
+      expect(mockedOnChange).toBeCalledWith({
+        ...formValue,
+        tags: ['Food', 'Transfer', 'Shopping', 'tag 1'],
+      });
     });
   });
 
@@ -60,7 +65,7 @@ describe('CourseTags', () => {
     // Arrange
     render(<CustomTags value={formValue} onChange={mockedOnChange} />);
     // Act
-    await createTag('1234567');
+    createTag('1234567').then(r => console.log(r));
     // Assert
     await waitFor(() => {
       expect(screen.getByText('123456...')).toBeInTheDocument();
@@ -79,7 +84,10 @@ describe('CourseTags', () => {
       expect(screen.queryByText('tag 1')).not.toBeInTheDocument();
       expect(screen.getByText('tag 2')).toBeInTheDocument();
       expect(mockedOnChange).toBeCalledTimes(4);
-      expect(mockedOnChange).lastCalledWith({ ...formValue, tags: ['Food', 'Transfer', 'Shopping', 'tag 2'] });
+      expect(mockedOnChange).lastCalledWith({
+        ...formValue,
+        tags: ['Food', 'Transfer', 'Shopping', 'tag 2'],
+      });
     });
   });
 
