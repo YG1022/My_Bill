@@ -91,7 +91,7 @@ const Registration: React.FC = () => {
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
-            Register
+            Finiliaze Profiles
           </Button>
         </Form.Item>
       </Form>
