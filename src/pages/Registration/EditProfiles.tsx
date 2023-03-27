@@ -1,8 +1,12 @@
 import { Button, Form, Input, Select } from 'antd';
 import React from 'react';
 import { PageContainer } from '../../components/PageContainer/PageContainer';
+import { useNavigate } from 'react-router-dom';
+import createProfile from '../../services/createProfile';
+import { ROUTES } from '../../constants/routes';
 
 const EditProfiles = () => {
+  const navigateTo = useNavigate();
   const [form] = Form.useForm();
 
   const prefixSelector = (
@@ -36,8 +40,9 @@ const EditProfiles = () => {
     },
   };
 
-  const finilizeProfiles = (values: any) => {
-    console.log('Received values of form: ', values);
+  const finilizeProfiles = async () => {
+    await createProfile(form.getFieldsValue());
+    navigateTo(ROUTES.home);
   };
 
   return (
