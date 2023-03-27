@@ -1,12 +1,14 @@
 import { Button, Form, Input } from 'antd';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PageContainer } from '../../components/PageContainer/PageContainer';
 
 const Registration: React.FC = () => {
+  const navigateTo = useNavigate();
   const [form] = Form.useForm();
 
-  const toNextStep = (values: any) => {
-    console.log('Received values of form: ', values);
+  const toNextStep = () => {
+    navigateTo('/user/profiles-edit');
   };
 
   const formItemLayout = {

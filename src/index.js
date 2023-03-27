@@ -8,6 +8,7 @@ import AccountBook from './pages/AccountBook/AccountBook';
 import InputAmount from './pages/InputAmount/InputAmount';
 import { ROUTES } from './constants/routes';
 import Registration from './pages/Registration/Registration';
+import EditProfiles from './pages/Registration/EditProfiles';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -16,7 +17,8 @@ root.render(
     <Router>
       <Routes>
         <Route path={ROUTES.home} element={<App />}>
-          <Route path={'/user/registor'} element={<Registration />} />
+          <Route path={'/user/Register'} element={<Registration />} />
+          <Route path={'/user/profiles-edit'} element={<EditProfiles />} />
           <Route path={ROUTES.transactionInput} element={<InputAmount />} />
           <Route path={ROUTES.transactions} element={<AccountBook />} />
           <Route path={ROUTES.transactionEdit} element={<InputAmount />} />
