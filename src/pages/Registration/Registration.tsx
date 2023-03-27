@@ -2,13 +2,15 @@ import { Button, Form, Input } from 'antd';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageContainer } from '../../components/PageContainer/PageContainer';
+import createUser from '../../services/createUser';
 
 const Registration: React.FC = () => {
   const navigateTo = useNavigate();
   const [form] = Form.useForm();
 
-  const toNextStep = () => {
+  const toNextStep = async () => {
     navigateTo('/user/profiles-edit');
+    await createUser(form.getFieldsValue());
   };
 
   const formItemLayout = {
@@ -39,22 +41,22 @@ const Registration: React.FC = () => {
       <Form
         {...formItemLayout}
         form={form}
-        name="register"
+        name='register'
         onFinish={toNextStep}
         style={{ maxWidth: 600 }}
         scrollToFirstError
       >
         <Form.Item
-          label="Account Name"
-          name="accountname"
-          tooltip="What do you want others to call you?"
+          label='Account Name'
+          name='accountname'
+          tooltip='What do you want others to call you?'
           rules={[{ required: true, message: 'Please input your account name!', whitespace: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label="Password"
-          name="password"
+          label='Password'
+          name='password'
           rules={[
             {
               required: true,
@@ -66,8 +68,8 @@ const Registration: React.FC = () => {
           <Input.Password />
         </Form.Item>
         <Form.Item
-          label="Confirm Password"
-          name="confirmPassword"
+          label='Confirm Password'
+          name='confirmpassword'
           dependencies={['password']}
           hasFeedback
           rules={[
@@ -81,7 +83,7 @@ const Registration: React.FC = () => {
                   return Promise.resolve();
                 }
                 return Promise.reject(
-                  new Error('The two passwords that you entered do not match!')
+                  new Error('The two passwords that you entered do not match!'),
                 );
               },
             }),
@@ -90,7 +92,7 @@ const Registration: React.FC = () => {
           <Input.Password />
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
+          <Button type='primary' htmlType='submit'>
             Finiliaze Profiles
           </Button>
         </Form.Item>
