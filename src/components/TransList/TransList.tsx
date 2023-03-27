@@ -1,4 +1,5 @@
-import { Button, Divider, Table } from 'antd';
+import { DeleteTwoTone } from '@ant-design/icons';
+import { Button, Divider, Table, Tooltip } from 'antd';
 import React, { useEffect, useRef } from 'react';
 import { transListProps } from '../../constants/types';
 import { useTransList } from './hooks/useTransList';
@@ -35,9 +36,11 @@ const TransList: React.FC<transListProps> = ({ amountList, category }) => {
         <span className="amount" data-testid="amount">
           {totalAmount.toString()}
         </span>
-        <Button type="link" className="delete-selected" onClick={deleteTrans(selectedId)}>
-          Delete
-        </Button>
+        <Tooltip title="Delete Selected Trans">
+          <Button type="link" className="delete-selected" onClick={deleteTrans(selectedId)}>
+            <DeleteTwoTone />
+          </Button>
+        </Tooltip>
       </div>
       <Table
         data-testid="list-content"
