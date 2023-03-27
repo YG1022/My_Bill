@@ -23,6 +23,7 @@ type Props = {
 type user = {
   accountname: string;
   password: string;
+  confirmpassword: string;
 }
 
 export { transItem, transListProps, MenuItem, Props, user };
