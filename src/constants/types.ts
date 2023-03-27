@@ -16,8 +16,13 @@ type transListProps = {
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-interface Props {
+type Props = {
   children: React.ReactNode;
 }
 
-export { transItem, transListProps, MenuItem, Props };
+type user = {
+  accountname: string;
+  password: string;
+}
+
+export { transItem, transListProps, MenuItem, Props, user };
