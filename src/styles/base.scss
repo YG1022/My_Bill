@@ -1,23 +1,20 @@
-@import "variables";
+@import 'variables';
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html,
 body {
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    display: flex;
-    min-height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  min-height: 100%;
 }
 
 body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: $font-family;
-    font-size: $basic-font-size;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $font-family;
+  font-size: $basic-font-size;
 }
