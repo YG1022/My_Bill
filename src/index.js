@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './styles/index.scss';
 import App from './App';
 import reportWebVitals from './utils/reportWebVitals';
+import HomePage from './pages/Home/HomePage';
 import AccountBook from './pages/AccountBook/AccountBook';
 import InputAmount from './pages/InputAmount/InputAmount';
 import { ROUTES } from './constants/routes';
@@ -16,9 +17,10 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
+        <Route path={ROUTES.registration} element={<Registration />} />
+        <Route path={ROUTES.profilesEdit} element={<EditProfiles />} />
         <Route path={ROUTES.home} element={<App />}>
-          <Route path={'/user/Register'} element={<Registration />} />
-          <Route path={'/user/profiles-edit'} element={<EditProfiles />} />
+          <Route index element={<HomePage />} />
           <Route path={ROUTES.transactionInput} element={<InputAmount />} />
           <Route path={ROUTES.transactions} element={<AccountBook />} />
           <Route path={ROUTES.transactionEdit} element={<InputAmount />} />

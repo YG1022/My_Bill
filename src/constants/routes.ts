@@ -1,5 +1,7 @@
 export const ROUTES = {
   home: '/',
+  registration: '/user/Register',
+  profilesEdit: '/user/profiles-edit',
   transactions: '/transactions/all',
   transactionInput: '/transactions/input',
   transactionEdit: '/transactions/trans-edit/:id',
