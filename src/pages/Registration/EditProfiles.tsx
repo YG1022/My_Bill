@@ -30,7 +30,10 @@ const EditProfiles = () => {
   const dateFormat = 'YYYY/MM/DD';
 
   const finilizeProfiles = async () => {
-    await createProfile(form.getFieldsValue());
+    const { birthday, ...extraData } = form.getFieldsValue();
+    const postData = { birthday: birthday?.format('YYYY/MM/DD'), ...extraData };
+
+    await createProfile(postData);
     navigateTo(ROUTES.home);
   };
 
