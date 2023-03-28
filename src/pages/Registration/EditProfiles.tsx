@@ -11,7 +11,7 @@ const EditProfiles = () => {
 
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
-      <Select style={{ width: 70 }}>
+      <Select>
         <Select.Option value="86">+86</Select.Option>
         <Select.Option value="852">+852</Select.Option>
       </Select>
