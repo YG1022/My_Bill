@@ -88,9 +88,8 @@ const EditProfiles = () => {
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
-        </Form.Item>
-        <Form.Item {...tailFormItemLayout}>
           <Button
+            style={{ marginLeft: 30 }}
             type="primary"
             onClick={async () => {
               await createProfile(form.getFieldsValue());
