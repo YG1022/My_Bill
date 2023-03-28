@@ -2,6 +2,7 @@ import { Button, Form, Input } from 'antd';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageContainer } from '../../components/PageContainer/PageContainer';
+import { ROUTES } from '../../constants/routes';
 import createUser from '../../services/createUser';
 
 const Registration: React.FC = () => {
@@ -9,7 +10,7 @@ const Registration: React.FC = () => {
   const [form] = Form.useForm();
 
   const toNextStep = async () => {
-    navigateTo('/user/profiles-edit');
+    navigateTo(ROUTES.profilesEdit);
     await createUser(form.getFieldsValue());
   };
 
