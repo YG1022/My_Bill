@@ -18,20 +18,21 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 type Props = {
   children: React.ReactNode;
-}
+};
 
 type user = {
   accountname: string;
   password: string;
   confirmpassword: string;
-}
+};
 
 type profile = {
   email: string;
+  realname: string;
+  gender: string;
   prefix: string;
   phonenumber: string;
-  introduction: string;
-  gender: string;
-}
+  birthday: string;
+};
 
 export { transItem, transListProps, MenuItem, Props, user, profile };
