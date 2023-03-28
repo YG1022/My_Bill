@@ -32,7 +32,14 @@ const Registration: React.FC = () => {
         form={form}
         name="register"
         onFinish={toNextStep}
-        style={{ maxWidth: 600 }}
+        style={{
+          maxWidth: 600,
+          margin: '0 auto',
+          marginBlock: 280,
+          padding: 50,
+          borderRadius: 10,
+          boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)',
+        }}
         scrollToFirstError
       >
         <Form.Item

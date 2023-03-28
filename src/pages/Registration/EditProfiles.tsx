@@ -10,10 +10,10 @@ const EditProfiles = () => {
   const [form] = Form.useForm();
 
   const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
+    <Form.Item name='prefix' noStyle>
       <Select>
-        <Select.Option value="86">+86</Select.Option>
-        <Select.Option value="852">+852</Select.Option>
+        <Select.Option value='86'>+86</Select.Option>
+        <Select.Option value='852'>+852</Select.Option>
       </Select>
     </Form.Item>
   );
@@ -42,15 +42,22 @@ const EditProfiles = () => {
       <Form
         {...formItemLayout}
         form={form}
-        name="editprofiles"
+        name='editprofiles'
         onFinish={finilizeProfiles}
         initialValues={{ prefix: '86' }}
-        style={{ maxWidth: 600 }}
+        style={{
+          maxWidth: 600,
+          margin: '0 auto',
+          marginBlock: 230,
+          padding: 50,
+          borderRadius: 10,
+          boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)',
+        }}
         scrollToFirstError
       >
         <Form.Item
-          label="E-mail"
-          name="email"
+          label='E-mail'
+          name='email'
           rules={[
             {
               type: 'email',
@@ -62,35 +69,35 @@ const EditProfiles = () => {
             },
           ]}
         >
-          <Input placeholder="Please input your E-mail!" />
+          <Input placeholder='Please input your E-mail!' />
         </Form.Item>
-        <Form.Item label="Real Name" name="realname" tooltip="Your name in the real world!">
-          <Input placeholder="Please input your real name!" />
+        <Form.Item label='Real Name' name='realname' tooltip='Your name in the real world!'>
+          <Input placeholder='Please input your real name!' />
         </Form.Item>
-        <Form.Item label="Gender" name="gender">
-          <Select placeholder="Please select your gender!">
-            <Select.Option value="male">Male</Select.Option>
-            <Select.Option value="female">Female</Select.Option>
-            <Select.Option value="other">Other</Select.Option>
+        <Form.Item label='Gender' name='gender'>
+          <Select placeholder='Please select your gender!'>
+            <Select.Option value='male'>Male</Select.Option>
+            <Select.Option value='female'>Female</Select.Option>
+            <Select.Option value='other'>Other</Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item label="Phone Number" name="phonenumber">
+        <Form.Item label='Phone Number' name='phonenumber'>
           <Input
             addonBefore={prefixSelector}
             style={{ width: '100%' }}
-            placeholder="Please input your phone number!"
+            placeholder='Please input your phone number!'
           />
         </Form.Item>
-        <Form.Item label="Birthday" name="birthday" rules={[{ type: 'date' }]}>
-          <DatePicker style={{ width: 333.33 }} format={dateFormat} placeholder="Select your birthday!" />
+        <Form.Item label='Birthday' name='birthday' rules={[{ type: 'date' }]}>
+          <DatePicker style={{ width: 333.33 }} format={dateFormat} placeholder='Select your birthday!' />
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
+          <Button type='primary' htmlType='submit'>
             Submit
           </Button>
           <Button
             style={{ marginLeft: 30 }}
-            type="primary"
+            type='primary'
             onClick={async () => {
               await createProfile(form.getFieldsValue());
             }}
