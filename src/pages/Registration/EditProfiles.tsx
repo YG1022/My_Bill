@@ -10,10 +10,10 @@ const EditProfiles = () => {
   const [form] = Form.useForm();
 
   const prefixSelector = (
-    <Form.Item name='prefix' noStyle>
+    <Form.Item name="prefix" noStyle>
       <Select style={{ width: 70 }}>
-        <Select.Option value='86'>+86</Select.Option>
-        <Select.Option value='852'>+852</Select.Option>
+        <Select.Option value="86">+86</Select.Option>
+        <Select.Option value="852">+852</Select.Option>
       </Select>
     </Form.Item>
   );
@@ -50,15 +50,15 @@ const EditProfiles = () => {
       <Form
         {...formItemLayout}
         form={form}
-        name='editprofiles'
+        name="editprofiles"
         onFinish={finilizeProfiles}
         initialValues={{ prefix: '86' }}
         style={{ maxWidth: 600 }}
         scrollToFirstError
       >
         <Form.Item
-          label='E-mail'
-          name='email'
+          label="E-mail"
+          name="email"
           rules={[
             {
               type: 'email',
@@ -66,32 +66,32 @@ const EditProfiles = () => {
             },
           ]}
         >
-          <Input placeholder='Please input your E-mail!' />
+          <Input placeholder="Please input your E-mail!" />
         </Form.Item>
-        <Form.Item label='Phone Number' name='phonenumber'>
+        <Form.Item label="Phone Number" name="phonenumber">
           <Input
             addonBefore={prefixSelector}
             style={{ width: '100%' }}
-            placeholder='Please input your phone number!'
+            placeholder="Please input your phone number!"
           />
         </Form.Item>
-        <Form.Item label='Introduction' name='introduction'>
+        <Form.Item label="Introduction" name="introduction">
           <Input.TextArea
             showCount
             maxLength={100}
-            placeholder='Please input Introduction of yourself!'
+            placeholder="Please input Introduction of yourself!"
           />
         </Form.Item>
-        <Form.Item label='Gender' name='gender'>
-          <Select placeholder='Please select your gender!'>
-            <Select.Option value='male'>Male</Select.Option>
-            <Select.Option value='female'>Female</Select.Option>
-            <Select.Option value='other'>Other</Select.Option>
+        <Form.Item label="Gender" name="gender">
+          <Select placeholder="Please select your gender!">
+            <Select.Option value="male">Male</Select.Option>
+            <Select.Option value="female">Female</Select.Option>
+            <Select.Option value="other">Other</Select.Option>
           </Select>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
-          <Button type='primary' htmlType='submit'>
-            Register
+          <Button type="primary" htmlType="submit">
+            Submit
           </Button>
         </Form.Item>
       </Form>

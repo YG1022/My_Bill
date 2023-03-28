@@ -41,22 +41,22 @@ const Registration: React.FC = () => {
       <Form
         {...formItemLayout}
         form={form}
-        name='register'
+        name="register"
         onFinish={toNextStep}
         style={{ maxWidth: 600 }}
         scrollToFirstError
       >
         <Form.Item
-          label='Account Name'
-          name='accountname'
-          tooltip='What do you want others to call you?'
+          label="Account Name"
+          name="accountname"
+          tooltip="What do you want others to call you?"
           rules={[{ required: true, message: 'Please input your account name!', whitespace: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label='Password'
-          name='password'
+          label="Password"
+          name="password"
           rules={[
             {
               required: true,
@@ -68,8 +68,8 @@ const Registration: React.FC = () => {
           <Input.Password />
         </Form.Item>
         <Form.Item
-          label='Confirm Password'
-          name='confirmpassword'
+          label="Confirm Password"
+          name="confirmpassword"
           dependencies={['password']}
           hasFeedback
           rules={[
@@ -83,7 +83,7 @@ const Registration: React.FC = () => {
                   return Promise.resolve();
                 }
                 return Promise.reject(
-                  new Error('The two passwords that you entered do not match!'),
+                  new Error('The two passwords that you entered do not match!')
                 );
               },
             }),
@@ -92,8 +92,8 @@ const Registration: React.FC = () => {
           <Input.Password />
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
-          <Button type='primary' htmlType='submit'>
-            Finiliaze Profiles
+          <Button type="primary" htmlType="submit">
+            Register
           </Button>
         </Form.Item>
       </Form>
