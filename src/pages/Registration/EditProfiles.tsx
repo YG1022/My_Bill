@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Select } from 'antd';
+import { Button, DatePicker, Form, Input, Row, Select } from 'antd';
 import React from 'react';
 import { PageContainer } from '../../components/PageContainer/PageContainer';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -39,73 +39,73 @@ const EditProfiles = () => {
 
   return (
     <PageContainer>
-      <Form
-        {...formItemLayout}
-        form={form}
-        name='editprofiles'
-        onFinish={finilizeProfiles}
-        initialValues={{ prefix: '86' }}
-        style={{
-          maxWidth: 600,
-          margin: '0 auto',
-          marginBlock: 230,
-          padding: 50,
-          borderRadius: 10,
-          boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)',
-        }}
-        scrollToFirstError
-      >
-        <Form.Item
-          label='E-mail'
-          name='email'
-          rules={[
-            {
-              type: 'email',
-              message: 'The input is not valid E-mail!',
-            },
-            {
-              required: true,
-              message: 'Please input your E-mail!',
-            },
-          ]}
+      <Row style={{ minHeight: '100%', alignItems: 'center', justifyContent: 'center' }}>
+        <Form
+          {...formItemLayout}
+          form={form}
+          name='editprofiles'
+          onFinish={finilizeProfiles}
+          initialValues={{ prefix: '86' }}
+          style={{
+            width: 600,
+            padding: 50,
+            borderRadius: 10,
+            boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)',
+          }}
+          scrollToFirstError
         >
-          <Input placeholder='Please input your E-mail!' />
-        </Form.Item>
-        <Form.Item label='Real Name' name='realname' tooltip='Your name in the real world!'>
-          <Input placeholder='Please input your real name!' />
-        </Form.Item>
-        <Form.Item label='Gender' name='gender'>
-          <Select placeholder='Please select your gender!'>
-            <Select.Option value='male'>Male</Select.Option>
-            <Select.Option value='female'>Female</Select.Option>
-            <Select.Option value='other'>Other</Select.Option>
-          </Select>
-        </Form.Item>
-        <Form.Item label='Phone Number' name='phonenumber'>
-          <Input
-            addonBefore={prefixSelector}
-            style={{ width: '100%' }}
-            placeholder='Please input your phone number!'
-          />
-        </Form.Item>
-        <Form.Item label='Birthday' name='birthday' rules={[{ type: 'date' }]}>
-          <DatePicker style={{ width: 333.33 }} format={dateFormat} placeholder='Select your birthday!' />
-        </Form.Item>
-        <Form.Item {...tailFormItemLayout}>
-          <Button type='primary' htmlType='submit'>
-            Submit
-          </Button>
-          <Button
-            style={{ marginLeft: 30 }}
-            type='primary'
-            onClick={async () => {
-              await createProfile(form.getFieldsValue());
-            }}
+          <Form.Item
+            label='E-mail'
+            name='email'
+            rules={[
+              {
+                type: 'email',
+                message: 'The input is not valid E-mail!',
+              },
+              {
+                required: true,
+                message: 'Please input your E-mail!',
+              },
+            ]}
           >
-            <NavLink to={ROUTES.home}>Skip</NavLink>
-          </Button>
-        </Form.Item>
-      </Form>
+            <Input placeholder='Please input your E-mail!' />
+          </Form.Item>
+          <Form.Item label='Real Name' name='realname' tooltip='Your name in the real world!'>
+            <Input placeholder='Please input your real name!' />
+          </Form.Item>
+          <Form.Item label='Gender' name='gender'>
+            <Select placeholder='Please select your gender!'>
+              <Select.Option value='male'>Male</Select.Option>
+              <Select.Option value='female'>Female</Select.Option>
+              <Select.Option value='other'>Other</Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item label='Phone Number' name='phonenumber'>
+            <Input
+              addonBefore={prefixSelector}
+              style={{ width: '100%' }}
+              placeholder='Please input your phone number!'
+            />
+          </Form.Item>
+          <Form.Item label='Birthday' name='birthday' rules={[{ type: 'date' }]}>
+            <DatePicker style={{ width: 333.33 }} format={dateFormat} placeholder='Select your birthday!' />
+          </Form.Item>
+          <Form.Item {...tailFormItemLayout}>
+            <Button type='primary' htmlType='submit'>
+              Submit
+            </Button>
+            <Button
+              style={{ marginLeft: 30 }}
+              type='primary'
+              onClick={async () => {
+                await createProfile(form.getFieldsValue());
+              }}
+            >
+              <NavLink to={ROUTES.home}>Skip</NavLink>
+            </Button>
+          </Form.Item>
+        </Form>
+      </Row>
     </PageContainer>
   );
 };

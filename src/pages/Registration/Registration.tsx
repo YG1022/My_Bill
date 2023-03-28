@@ -1,4 +1,4 @@
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Row } from 'antd';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageContainer } from '../../components/PageContainer/PageContainer';
@@ -27,72 +27,72 @@ const Registration: React.FC = () => {
 
   return (
     <PageContainer>
-      <Form
-        {...formItemLayout}
-        form={form}
-        name="register"
-        onFinish={toNextStep}
-        style={{
-          maxWidth: 600,
-          margin: '0 auto',
-          marginBlock: 280,
-          padding: 50,
-          borderRadius: 10,
-          boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)',
-        }}
-        scrollToFirstError
-      >
-        <Form.Item
-          label="Account Name"
-          name="accountname"
-          tooltip="What do you want others to call you?"
-          rules={[{ required: true, message: 'Please input your account name!', whitespace: true }]}
+      <Row style={{ minHeight: '100%', alignItems: 'center', justifyContent: 'center' }}>
+        <Form
+          {...formItemLayout}
+          form={form}
+          name='register'
+          onFinish={toNextStep}
+          style={{
+            width: 600,
+            padding: 50,
+            borderRadius: 10,
+            boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)',
+          }}
+          scrollToFirstError
         >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your password!',
-            },
-          ]}
-          hasFeedback
-        >
-          <Input.Password />
-        </Form.Item>
-        <Form.Item
-          label="Confirm Password"
-          name="confirmpassword"
-          dependencies={['password']}
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: 'Please confirm your password!',
-            },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue('password') === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  new Error('The two passwords that you entered do not match!')
-                );
+          <Form.Item
+            label='Account Name'
+            name='accountname'
+            tooltip='What do you want others to call you?'
+            rules={[{ required: true, message: 'Please input your account name!', whitespace: true }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label='Password'
+            name='password'
+            rules={[
+              {
+                required: true,
+                message: 'Please input your password!',
               },
-            }),
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-        <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Register
-          </Button>
-        </Form.Item>
-      </Form>
+            ]}
+            hasFeedback
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item
+            label='Confirm Password'
+            name='confirmpassword'
+            dependencies={['password']}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: 'Please confirm your password!',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error('The two passwords that you entered do not match!'),
+                  );
+                },
+              }),
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item {...tailFormItemLayout}>
+            <Button type='primary' htmlType='submit'>
+              Register
+            </Button>
+          </Form.Item>
+        </Form>
+      </Row>
     </PageContainer>
   );
 };
