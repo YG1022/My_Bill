@@ -1,4 +1,4 @@
-import { Button, Form, Input, Select } from 'antd';
+import { Button, DatePicker, Form, Input, Select } from 'antd';
 import React from 'react';
 import { PageContainer } from '../../components/PageContainer/PageContainer';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -27,6 +27,7 @@ const EditProfiles = () => {
       sm: { span: 16, offset: 8 },
     },
   };
+  const dateFormat = 'YYYY/MM/DD';
 
   const finilizeProfiles = async () => {
     await createProfile(form.getFieldsValue());
@@ -60,19 +61,8 @@ const EditProfiles = () => {
         >
           <Input placeholder="Please input your E-mail!" />
         </Form.Item>
-        <Form.Item label="Phone Number" name="phonenumber">
-          <Input
-            addonBefore={prefixSelector}
-            style={{ width: '100%' }}
-            placeholder="Please input your phone number!"
-          />
-        </Form.Item>
-        <Form.Item label="Introduction" name="introduction">
-          <Input.TextArea
-            showCount
-            maxLength={100}
-            placeholder="Please input Introduction of yourself!"
-          />
+        <Form.Item label="Real Name" name="realname" tooltip="Your name in the real world!">
+          <Input placeholder="Please input your real name!" />
         </Form.Item>
         <Form.Item label="Gender" name="gender">
           <Select placeholder="Please select your gender!">
@@ -80,6 +70,16 @@ const EditProfiles = () => {
             <Select.Option value="female">Female</Select.Option>
             <Select.Option value="other">Other</Select.Option>
           </Select>
+        </Form.Item>
+        <Form.Item label="Phone Number" name="phonenumber">
+          <Input
+            addonBefore={prefixSelector}
+            style={{ width: '100%' }}
+            placeholder="Please input your phone number!"
+          />
+        </Form.Item>
+        <Form.Item label="Birthday" name="birthday" rules={[{ type: 'date' }]}>
+          <DatePicker style={{ width: 333.33 }} format={dateFormat} placeholder="Select your birthday!" />
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
