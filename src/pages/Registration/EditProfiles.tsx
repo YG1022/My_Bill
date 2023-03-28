@@ -1,7 +1,7 @@
 import { Button, Form, Input, Select } from 'antd';
 import React from 'react';
 import { PageContainer } from '../../components/PageContainer/PageContainer';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import createProfile from '../../services/createProfile';
 import { ROUTES } from '../../constants/routes';
 
@@ -84,6 +84,16 @@ const EditProfiles = () => {
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Submit
+          </Button>
+        </Form.Item>
+        <Form.Item {...tailFormItemLayout}>
+          <Button
+            type="primary"
+            onClick={async () => {
+              await createProfile(form.getFieldsValue());
+            }}
+          >
+            <NavLink to={ROUTES.home}>Skip</NavLink>
           </Button>
         </Form.Item>
       </Form>
