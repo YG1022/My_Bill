@@ -64,6 +64,10 @@ const EditProfiles = () => {
               type: 'email',
               message: 'The input is not valid E-mail!',
             },
+            {
+              required: true,
+              message: 'Please input your E-mail!',
+            },
           ]}
         >
           <Input placeholder="Please input your E-mail!" />
