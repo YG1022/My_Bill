@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Select } from 'antd';
-const RegisterDerivativeUtils = () => {
+
+const RegisterDerivativeUtils = (form) => {
   const formItemLayout = {
     labelCol: { xs: { span: 24 }, sm: { span: 8 } },
     wrapperCol: { xs: { span: 24 }, sm: { span: 16 } },
@@ -23,7 +24,17 @@ const RegisterDerivativeUtils = () => {
       </Select>
     </Form.Item>
   );
-  return { prefixSelector, formItemLayout, tailFormItemLayout, dateFormat };
+
+  const passwordValidator = {
+    validator(_, value) {
+      if (!value || form.getFieldValue('password') === value) {
+        return Promise.resolve();
+      }
+      return Promise.reject(new Error('The two passwords that you entered do not match!'));
+    },
+  };
+
+  return { prefixSelector, formItemLayout, tailFormItemLayout, dateFormat, passwordValidator };
 };
 
 export default RegisterDerivativeUtils;
