@@ -1,21 +1,17 @@
-import { supabaseClient } from '../../../supabaseClient';
 import createProfile from '../../../services/createProfile';
 import { ROUTES } from '../../../constants/routes';
 import { useNavigate } from 'react-router-dom';
+import repeatabilityCheck from '../../../services/repeatabilityCheck';
 
 const useEditProfiles = (form) => {
   const navigateTo = useNavigate();
 
   const finilizeProfiles = async () => {
     const { email, phonenumber, birthday, ...extraData } = form.getFieldsValue();
-    const { data: emailData, error: emailError } = await supabaseClient
-      .from('profiles')
-      .select()
-      .eq('email', email);
-    const { data: phoneData, error: phoneError } = await supabaseClient
-      .from('profiles')
-      .select()
-      .eq('phone_number', phonenumber);
+    const { emailCheck, phoneCheck } = repeatabilityCheck('', email, phonenumber);
+
+    const { data: emailData, error: emailError } = await emailCheck;
+    const { data: phoneData, error: phoneError } = await phoneCheck;
 
     if (emailData.length > 0 || phoneData.length > 0) {
       if (emailData.length > 0) {

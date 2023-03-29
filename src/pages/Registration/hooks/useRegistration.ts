@@ -8,7 +8,8 @@ const useRegistration = form => {
 
   const toNextStep = async () => {
     const { accountname } = form.getFieldsValue();
-    const { nameCheck } = repeatabilityCheck(accountname);
+
+    const { nameCheck } = repeatabilityCheck(accountname, '', '');
     const { data, error } = await nameCheck;
 
     if (data.length > 0) {
