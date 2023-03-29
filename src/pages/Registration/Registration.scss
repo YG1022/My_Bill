@@ -1,0 +1,12 @@
+.register-row {
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+
+  .register-form {
+    width: 600px;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  }
+}

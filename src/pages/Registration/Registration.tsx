@@ -7,6 +7,7 @@ import createUser from '../../services/createUser';
 import { supabaseClient } from '../../supabaseClient';
 import { fetchUser } from '../../constants/types';
 import RegisterDerivativeUtils from './utils/EditProfilesUtils/RegisterDerivativeUtils';
+import './Registration.scss';
 
 const Registration: React.FC = () => {
   const navigateTo = useNavigate();
@@ -42,18 +43,13 @@ const Registration: React.FC = () => {
 
   return (
     <PageContainer>
-      <Row style={{ minHeight: '100%', alignItems: 'center', justifyContent: 'center' }}>
+      <Row className="register-row">
         <Form
+          className="register-form"
           {...formItemLayout}
           form={form}
           name="register"
           onFinish={toNextStep}
-          style={{
-            width: 600,
-            padding: 50,
-            borderRadius: 10,
-            boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)',
-          }}
           scrollToFirstError
         >
           <Form.Item
@@ -69,12 +65,7 @@ const Registration: React.FC = () => {
           <Form.Item
             label="Password"
             name="password"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your password!',
-              },
-            ]}
+            rules={[{ required: true, message: 'Please input your password!' }]}
             hasFeedback
           >
             <Input.Password />
@@ -85,10 +76,7 @@ const Registration: React.FC = () => {
             dependencies={['password']}
             hasFeedback
             rules={[
-              {
-                required: true,
-                message: 'Please confirm your password!',
-              },
+              { required: true, message: 'Please confirm your password!' },
               ({ getFieldValue }) => ({
                 validator(_, value) {
                   if (!value || getFieldValue('password') === value) {
