@@ -3,6 +3,7 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import React from "react";
 import { PageContainer } from "../../components/PageContainer/PageContainer";
 import useSignIn from "./hooks/useSignIn";
+import "./SignIn.scss";
 
 const SignIn: React.FC = () => {
   const [form] = Form.useForm();
@@ -10,19 +11,13 @@ const SignIn: React.FC = () => {
 
   return (
     <PageContainer>
-      <Row style={{ minHeight: "100%", alignItems: "center", justifyContent: "center" }}>
+      <Row className="sign-in-row">
         <Form
           name="normal_login"
           className="login-form"
           form={form}
           initialValues={{ remember: true }}
           onFinish={signIn}
-          style={{
-            width: 400,
-            padding: 50,
-            borderRadius: 10,
-            boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
-          }}
         >
           <Form.Item name="accountname" rules={[{ required: true }]}>
             <Input
