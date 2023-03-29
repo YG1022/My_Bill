@@ -2,11 +2,11 @@ import { Button, Form, Input, Row } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import React from "react";
 import { PageContainer } from "../../components/PageContainer/PageContainer";
-import userSignIn from "../../services/userSignIn";
+import useSignIn from "./hooks/useSignIn";
 
 const SignIn: React.FC = () => {
   const [form] = Form.useForm();
-  const signIn = async () => await userSignIn(form);
+  const { signIn } = useSignIn(form);
 
   return (
     <PageContainer>
