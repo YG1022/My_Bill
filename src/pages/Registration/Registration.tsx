@@ -4,14 +4,27 @@ import { useNavigate } from 'react-router-dom';
 import { PageContainer } from '../../components/PageContainer/PageContainer';
 import { ROUTES } from '../../constants/routes';
 import createUser from '../../services/createUser';
+import { supabaseClient } from '../../supabaseClient';
+import { fetchUser } from '../../constants/types';
 
 const Registration: React.FC = () => {
   const navigateTo = useNavigate();
   const [form] = Form.useForm();
 
   const toNextStep = async () => {
-    navigateTo(ROUTES.profilesEdit);
-    await createUser(form.getFieldsValue());
+    const { accountname } = form.getFieldsValue();
+    const { data, error } = await supabaseClient.from('users').select<any, fetchUser>().eq('account_name', accountname);
+
+    if (data.length > 0) {
+      alert('This account name has been used. Please sign in directly or choose another account name.');
+      return;
+    } else if (error) {
+      alert('Something wrong happened. Please try again later.');
+      return;
+    } else {
+      navigateTo(ROUTES.profilesEdit);
+      await createUser(form.getFieldsValue());
+    }
   };
 
   const formItemLayout = {
