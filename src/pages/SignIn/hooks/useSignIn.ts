@@ -10,6 +10,20 @@ const useSignIn = (form) => {
 
     localStorage.setItem("signedIn", flag.toString());
 
+    if (!flag) {
+      form.setFields([
+        // {
+        //   name: "accountname",
+        //   errors: ["This account name does not exist. Please sign up first."],
+        // },
+        {
+          name: "password",
+          errors: ["Wrong user name or password, please try again!"],
+        },
+      ]);
+      return;
+    }
+
     setTimeout(() => {
       if (flag) {
         navigateTo(ROUTES.home);
