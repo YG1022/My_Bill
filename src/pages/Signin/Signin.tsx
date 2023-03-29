@@ -56,7 +56,7 @@ const Signin: React.FC = () => {
 
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
-              Log in
+              Sign in
             </Button>
             {/* Or <NavLink to={ROUTES.registration}>register now!</NavLink> */}
           </Form.Item>
