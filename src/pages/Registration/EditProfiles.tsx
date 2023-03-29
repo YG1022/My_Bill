@@ -31,16 +31,31 @@ const EditProfiles = () => {
   const dateFormat = 'YYYY/MM/DD';
 
   const finilizeProfiles = async () => {
-    const { email, birthday, ...extraData } = form.getFieldsValue();
-    const { data, error } = await supabaseClient.from('profiles').select().eq('email', email);
-    if (data.length > 0) {
-      alert('This email has been used. Please choose another email.');
-      return;
-    } else if (error) {
+    const { email, phonenumber, birthday, ...extraData } = form.getFieldsValue();
+    const { data: emailData, error: emailError } = await supabaseClient.from('profiles').select().eq('email', email);
+    const {
+      data: phoneData,
+      error: phoneError,
+    } = await supabaseClient.from('profiles').select().eq('phone_number', phonenumber);
+
+    if (emailData.length > 0 || phoneData.length > 0) {
+      if (emailData.length > 0) {
+        form.setFields([{
+          name: 'email',
+          errors: ['This email has been used. Please choose another email.'],
+        }]);
+      }
+      if (phoneData.length > 0) {
+        form.setFields([{
+          name: 'phonenumber',
+          errors: ['This phone number has been used. Please choose another phone number.'],
+        }]);
+      }
+    } else if (emailError || phoneError) {
       alert('Something wrong happened. Please try again later.');
       return;
     } else {
-      const postData = { birthday: birthday?.format('YYYY/MM/DD'), email, ...extraData };
+      const postData = { birthday: birthday?.format('YYYY/MM/DD'), email, phonenumber, ...extraData };
 
       await createProfile(postData);
       navigateTo(ROUTES.home);
