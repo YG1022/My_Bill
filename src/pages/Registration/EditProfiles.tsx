@@ -13,7 +13,7 @@ const EditProfiles = () => {
   const [form] = Form.useForm();
 
   const { prefixSelector, formItemLayout, tailFormItemLayout, dateFormat } =
-    RegisterDerivativeUtils();
+    RegisterDerivativeUtils(form);
 
   const finilizeProfiles = async () => {
     const { email, phonenumber, birthday, ...extraData } = form.getFieldsValue();
