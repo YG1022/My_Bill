@@ -2,10 +2,17 @@ import { Button, Form, Input, Row } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import React from 'react';
 import { PageContainer } from '../../components/PageContainer/PageContainer';
+import { supabaseClient } from '../../supabaseClient';
+import { fetchUser } from '../../constants/types';
 
 const SignIn: React.FC = () => {
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+  const [form] = Form.useForm();
+  const onFinish = async () => {
+    const { accountname, password } = form.getFieldsValue();
+
+    const { data, error } = await supabaseClient.from('users').select<any,fetchUser>().eq('account_name', accountname);
+    console.log(data, error);
+    const signInFlag = password === data[0].password;
   };
 
   return (
@@ -14,6 +21,7 @@ const SignIn: React.FC = () => {
         <Form
           name="normal_login"
           className="login-form"
+          form={form}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           style={{
