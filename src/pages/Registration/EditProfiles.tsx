@@ -54,14 +54,14 @@ const EditProfiles = () => {
           </Form.Item>
           <Form.Item label="Birthday" name="birthday" rules={[{ type: 'date' }]}>
             <DatePicker
-              style={{ width: 333.33 }}
+              className="edit-profiles-date-picker"
               format={dateFormat}
               placeholder="Select your birthday!"
             />
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
             <Button
-              style={{ marginRight: 30 }}
+              className="edit-profiles-skip-button"
               type="primary"
               onClick={skipProfiles}
             >
