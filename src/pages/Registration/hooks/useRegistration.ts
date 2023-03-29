@@ -1,18 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../constants/routes';
-import { fetchUser } from '../../../constants/types';
 import createUser from '../../../services/createUser';
-import { supabaseClient } from '../../../supabaseClient';
+import repeatabilityCheck from '../../../services/repeatabilityCheck';
 
 const useRegistration = form => {
   const navigateTo = useNavigate();
 
   const toNextStep = async () => {
     const { accountname } = form.getFieldsValue();
-    const { data, error } = await supabaseClient
-      .from('users')
-      .select<any, fetchUser>()
-      .eq('account_name', accountname);
+    const { nameCheck } = repeatabilityCheck(accountname);
+    const { data, error } = await nameCheck;
 
     if (data.length > 0) {
       form.setFields([
