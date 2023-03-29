@@ -1,9 +1,14 @@
-import React from 'react';
-import SignIn from '../pages/SignIn/SignIn';
+import React from "react";
+import SignIn from "../pages/SignIn/SignIn";
 
-const authRoute = props => {
-  const isSignIn = false;
+const authRoute = (props) => {
+  window.addEventListener("storage", (e) => {
+    if (e.key === "signedIn") {
+      window.location.reload();
+    }
+  });
 
-  return isSignIn ? props : <SignIn />;
+  return localStorage.getItem("signedIn") === "true" ? props : <SignIn />;
 };
+
 export { authRoute };
