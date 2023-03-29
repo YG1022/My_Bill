@@ -16,7 +16,12 @@ const Registration: React.FC = () => {
     const { data, error } = await supabaseClient.from('users').select<any, fetchUser>().eq('account_name', accountname);
 
     if (data.length > 0) {
-      alert('This account name has been used. Please sign in directly or choose another account name.');
+      form.setFields([
+        {
+          name: 'accountname',
+          errors: ['This account name has been used. Please sign in directly or choose another account name.'],
+        },
+      ]);
       return;
     } else if (error) {
       alert('Something wrong happened. Please try again later.');
