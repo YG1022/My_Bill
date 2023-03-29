@@ -26,6 +26,13 @@ type user = {
   confirmpassword: string;
 };
 
+type fetchUser = {
+  id: number;
+  created_at: string;
+  account_name: string;
+  password: string;
+}
+
 type profile = {
   email: string;
   realname: string;
@@ -35,4 +42,4 @@ type profile = {
   birthday: string;
 };
 
-export { transItem, transListProps, MenuItem, Props, user, profile };
+export { transItem, transListProps, MenuItem, Props, user, fetchUser, profile };
