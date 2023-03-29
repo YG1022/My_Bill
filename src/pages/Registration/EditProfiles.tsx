@@ -6,6 +6,7 @@ import createProfile from '../../services/createProfile';
 import { ROUTES } from '../../constants/routes';
 import { supabaseClient } from '../../supabaseClient';
 import RegisterDerivativeUtils from './utils/EditProfilesUtils/RegisterDerivativeUtils';
+import './EditProfiles.scss';
 
 const EditProfiles = () => {
   const navigateTo = useNavigate();
@@ -60,33 +61,22 @@ const EditProfiles = () => {
 
   return (
     <PageContainer>
-      <Row style={{ minHeight: '100%', alignItems: 'center', justifyContent: 'center' }}>
+      <Row className="edit-profiles-row">
         <Form
+          className="edit-profiles-form"
           {...formItemLayout}
           form={form}
           name="editprofiles"
           onFinish={finilizeProfiles}
           initialValues={{ prefix: '86' }}
-          style={{
-            width: 600,
-            padding: 50,
-            borderRadius: 10,
-            boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)',
-          }}
           scrollToFirstError
         >
           <Form.Item
             label="E-mail"
             name="email"
             rules={[
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
-              },
-              {
-                required: true,
-                message: 'Please input your E-mail!',
-              },
+              { type: 'email', message: 'The input is not valid E-mail!' },
+              { required: true, message: 'Please input your E-mail!' },
             ]}
           >
             <Input placeholder="Please input your E-mail!" />
