@@ -6,20 +6,28 @@ import { ROUTES } from '../../constants/routes';
 import createUser from '../../services/createUser';
 import { supabaseClient } from '../../supabaseClient';
 import { fetchUser } from '../../constants/types';
+import RegisterDerivativeUtils from './utils/EditProfilesUtils/RegisterDerivativeUtils';
 
 const Registration: React.FC = () => {
   const navigateTo = useNavigate();
   const [form] = Form.useForm();
 
+  const { formItemLayout, tailFormItemLayout } = RegisterDerivativeUtils();
+
   const toNextStep = async () => {
     const { accountname } = form.getFieldsValue();
-    const { data, error } = await supabaseClient.from('users').select<any, fetchUser>().eq('account_name', accountname);
+    const { data, error } = await supabaseClient
+      .from('users')
+      .select<any, fetchUser>()
+      .eq('account_name', accountname);
 
     if (data.length > 0) {
       form.setFields([
         {
           name: 'accountname',
-          errors: ['This account name has been used. Please sign in directly or choose another account name.'],
+          errors: [
+            'This account name has been used. Please sign in directly or choose another account name.',
+          ],
         },
       ]);
       return;
@@ -32,24 +40,13 @@ const Registration: React.FC = () => {
     }
   };
 
-  const formItemLayout = {
-    labelCol: { xs: { span: 24 }, sm: { span: 8 } },
-    wrapperCol: { xs: { span: 24 }, sm: { span: 16 } },
-  };
-  const tailFormItemLayout = {
-    wrapperCol: {
-      xs: { span: 24, offset: 0 },
-      sm: { span: 16, offset: 8 },
-    },
-  };
-
   return (
     <PageContainer>
       <Row style={{ minHeight: '100%', alignItems: 'center', justifyContent: 'center' }}>
         <Form
           {...formItemLayout}
           form={form}
-          name='register'
+          name="register"
           onFinish={toNextStep}
           style={{
             width: 600,
@@ -60,16 +57,18 @@ const Registration: React.FC = () => {
           scrollToFirstError
         >
           <Form.Item
-            label='Account Name'
-            name='accountname'
-            tooltip='What do you want others to call you?'
-            rules={[{ required: true, message: 'Please input your account name!', whitespace: true }]}
+            label="Account Name"
+            name="accountname"
+            tooltip="What do you want others to call you?"
+            rules={[
+              { required: true, message: 'Please input your account name!', whitespace: true },
+            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            label='Password'
-            name='password'
+            label="Password"
+            name="password"
             rules={[
               {
                 required: true,
@@ -81,8 +80,8 @@ const Registration: React.FC = () => {
             <Input.Password />
           </Form.Item>
           <Form.Item
-            label='Confirm Password'
-            name='confirmpassword'
+            label="Confirm Password"
+            name="confirmpassword"
             dependencies={['password']}
             hasFeedback
             rules={[
@@ -96,7 +95,7 @@ const Registration: React.FC = () => {
                     return Promise.resolve();
                   }
                   return Promise.reject(
-                    new Error('The two passwords that you entered do not match!'),
+                    new Error('The two passwords that you entered do not match!')
                   );
                 },
               }),
@@ -105,7 +104,7 @@ const Registration: React.FC = () => {
             <Input.Password />
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
-            <Button type='primary' htmlType='submit'>
+            <Button type="primary" htmlType="submit">
               Register
             </Button>
           </Form.Item>
