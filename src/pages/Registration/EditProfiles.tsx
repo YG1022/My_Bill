@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import createProfile from '../../services/createProfile';
 import { ROUTES } from '../../constants/routes';
 import { supabaseClient } from '../../supabaseClient';
-import RegisterDerivativeUtils from './utils/EditProfilesUtils/RegisterDerivativeUtils';
+import RegisterDerivativeUtils from './utils/RegisterDerivativeUtils';
 import './EditProfiles.scss';
 
 const EditProfiles = () => {

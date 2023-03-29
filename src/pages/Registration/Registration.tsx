@@ -6,7 +6,7 @@ import { ROUTES } from '../../constants/routes';
 import createUser from '../../services/createUser';
 import { supabaseClient } from '../../supabaseClient';
 import { fetchUser } from '../../constants/types';
-import RegisterDerivativeUtils from './utils/EditProfilesUtils/RegisterDerivativeUtils';
+import RegisterDerivativeUtils from './utils/RegisterDerivativeUtils';
 import './Registration.scss';
 
 const Registration: React.FC = () => {
