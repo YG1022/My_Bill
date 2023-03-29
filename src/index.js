@@ -22,15 +22,15 @@ root.render(
         <Route path={ROUTES.signIn} element={<SignIn />} />
         <Route path={ROUTES.registration} element={<Registration />} />
         <Route path={ROUTES.profilesEdit} element={authRoute(<EditProfiles />)} />
-        <Route path={ROUTES.home} element={<App />}>
-          <Route index element={<HomePage />} />
-          <Route path={ROUTES.transactionInput} element={<InputAmount />} />
-          <Route path={ROUTES.transactions} element={<AccountBook />} />
-          <Route path={ROUTES.transactionEdit} element={<InputAmount />} />
+        <Route path={ROUTES.home} element={authRoute(<App />)}>
+          <Route index element={authRoute(<HomePage />)} />
+          <Route path={ROUTES.transactionInput} element={authRoute(<InputAmount />)} />
+          <Route path={ROUTES.transactions} element={authRoute(<AccountBook />)} />
+          <Route path={ROUTES.transactionEdit} element={authRoute(<InputAmount />)} />
         </Route>
       </Routes>
     </Router>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 reportWebVitals();
