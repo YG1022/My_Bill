@@ -1,63 +1,18 @@
 import { Button, DatePicker, Form, Input, Row, Select } from 'antd';
 import React from 'react';
 import { PageContainer } from '../../components/PageContainer/PageContainer';
-import { NavLink, useNavigate } from 'react-router-dom';
-import createProfile from '../../services/createProfile';
+import { NavLink } from 'react-router-dom';
 import { ROUTES } from '../../constants/routes';
-import { supabaseClient } from '../../supabaseClient';
 import RegisterDerivativeUtils from './utils/RegisterDerivativeUtils';
 import './EditProfiles.scss';
+import useEditProfiles from './hooks/useEditProfiles';
 
 const EditProfiles = () => {
-  const navigateTo = useNavigate();
   const [form] = Form.useForm();
 
   const { prefixSelector, formItemLayout, tailFormItemLayout, dateFormat } =
     RegisterDerivativeUtils(form);
-
-  const finilizeProfiles = async () => {
-    const { email, phonenumber, birthday, ...extraData } = form.getFieldsValue();
-    const { data: emailData, error: emailError } = await supabaseClient
-      .from('profiles')
-      .select()
-      .eq('email', email);
-    const { data: phoneData, error: phoneError } = await supabaseClient
-      .from('profiles')
-      .select()
-      .eq('phone_number', phonenumber);
-
-    if (emailData.length > 0 || phoneData.length > 0) {
-      if (emailData.length > 0) {
-        form.setFields([
-          {
-            name: 'email',
-            errors: ['This email has been used. Please choose another email.'],
-          },
-        ]);
-      }
-      if (phoneData.length > 0) {
-        form.setFields([
-          {
-            name: 'phonenumber',
-            errors: ['This phone number has been used. Please choose another phone number.'],
-          },
-        ]);
-      }
-    } else if (emailError || phoneError) {
-      alert('Something wrong happened. Please try again later.');
-      return;
-    } else {
-      const postData = {
-        birthday: birthday?.format('YYYY/MM/DD'),
-        email,
-        phonenumber,
-        ...extraData,
-      };
-
-      await createProfile(postData);
-      navigateTo(ROUTES.home);
-    }
-  };
+  const { finilizeProfiles, skipProfiles } = useEditProfiles(form);
 
   return (
     <PageContainer>
@@ -94,7 +49,6 @@ const EditProfiles = () => {
           <Form.Item label="Phone Number" name="phonenumber">
             <Input
               addonBefore={prefixSelector}
-              style={{ width: '100%' }}
               placeholder="Please input your phone number!"
             />
           </Form.Item>
@@ -109,9 +63,7 @@ const EditProfiles = () => {
             <Button
               style={{ marginRight: 30 }}
               type="primary"
-              onClick={async () => {
-                await createProfile(form.getFieldsValue());
-              }}
+              onClick={skipProfiles}
             >
               <NavLink to={ROUTES.home}>Skip</NavLink>
             </Button>
