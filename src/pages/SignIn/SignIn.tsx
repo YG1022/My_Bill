@@ -3,7 +3,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import React from 'react';
 import { PageContainer } from '../../components/PageContainer/PageContainer';
 
-const Signin: React.FC = () => {
+const SignIn: React.FC = () => {
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
   };
@@ -23,42 +23,24 @@ const Signin: React.FC = () => {
             boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)',
           }}
         >
-          <Form.Item
-            name="accountname"
-            // rules={[{ required: true, message: 'Please input your Username!' }]}
-            rules={[{ required: true }]}
-          >
+          <Form.Item name="accountname" rules={[{ required: true }]}>
             <Input
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Account Name"
             />
           </Form.Item>
-          <Form.Item
-            name="password"
-            // rules={[{ required: true, message: 'Please input your Password!' }]}
-            rules={[{ required: true }]}
-          >
+          <Form.Item name="password" rules={[{ required: true }]}>
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
               placeholder="Password"
             />
           </Form.Item>
-          {/* <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-
-            <a className="login-form-forgot" href="">
-              Forgot password
-            </a>
-          </Form.Item> */}
 
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
               Sign in
             </Button>
-            {/* Or <NavLink to={ROUTES.registration}>register now!</NavLink> */}
           </Form.Item>
         </Form>
       </Row>
@@ -66,4 +48,4 @@ const Signin: React.FC = () => {
   );
 };
 
-export default Signin;
+export default SignIn;
