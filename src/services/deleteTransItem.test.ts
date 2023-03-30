@@ -1,16 +1,16 @@
-import { waitFor } from '@testing-library/react';
-import { supabaseClient } from '../supabaseClient';
-import { deleteTransItem } from './deleteTransItem';
+import { waitFor } from "@testing-library/react";
+import { supabaseClient } from "../supabaseClient";
+import { deleteTransItem } from "./deleteTransItem";
 
-const mockResultData = [{
-  data: [{ id: 1, date: '2023-03-17', amount: '100', category: '+', tags: ['tag 1'] }],
+const mockResultData = {
+  data: [{ id: 1, date: "2023-03-17", amount: "100", category: "+", tags: ["tag 1"] }],
   error: null,
-}];
+};
 
-jest.mock('../supabaseClient');
+jest.mock("../supabaseClient");
 const mockedSupabaseClient = supabaseClient as jest.Mocked<typeof supabaseClient>;
 
-describe('delete transaction item', () => {
+describe("delete transaction item", () => {
   const fromMock = mockedSupabaseClient.from as any;
 
   beforeEach(() => {
@@ -23,14 +23,14 @@ describe('delete transaction item', () => {
     });
   });
 
-  it('should delete selected transaction item from supabase', async () => {
+  it("should delete selected transaction item from supabase", async () => {
     // Arrange
 
     // Act
-
+    const result = await deleteTransItem(1);
     // Assert
-    await waitFor(async () => {
-      return expect(await deleteTransItem(1)).toEqual(mockResultData);
+    await waitFor(() => {
+      return expect(result).toEqual(mockResultData);
     });
   });
 });
