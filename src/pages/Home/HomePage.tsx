@@ -1,15 +1,9 @@
-import React from 'react';
+import React from "react";
+import "./HomePage.scss";
 
 const HomePage: React.FC = () => {
   return (
-    <div
-      style={{
-        fontSize: '28px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
+    <div className="home-page">
       Welcome to My Bill!
     </div>
   );
