@@ -11,7 +11,7 @@ describe("Registration", () => {
     // Act
 
     // Assert
-    expect(container).toMatchSnapshot();
+    expect(container).toMatchSnapshot("Registration.test.tsx.snap");
   });
 
   it("should show error when user click register without any data", () => {
