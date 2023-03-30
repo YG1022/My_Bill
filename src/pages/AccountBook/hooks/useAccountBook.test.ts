@@ -9,8 +9,8 @@ describe('useAccountBook custom hook', () => {
   const mockedFetchedData = {
     count: null,
     data: [
-      { id: 1, amount: '100', date: '2021-01-01', category: 'income', tags: ['Food'] },
-      { id: 2, amount: '200', date: '2021-01-02', category: 'expenses', tags: ['Shopping'] },
+      { id: 1, amount: '100', date: '2021-01-01', category: 'income', tags: ['Food'], uuid: "1" },
+      { id: 2, amount: '200', date: '2021-01-02', category: 'expenses', tags: ['Shopping'], uuid: "1" },
     ],
     error: null,
     status: 200,

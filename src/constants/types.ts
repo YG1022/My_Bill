@@ -7,6 +7,7 @@ type transItem = {
   date: string;
   category: string;
   tags?: Array<string>;
+  uuid: string;
 };
 
 type transListProps = {
