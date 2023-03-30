@@ -7,9 +7,11 @@ const userSignIn = async (form): Promise<boolean> => {
   const { data, error } = await nameCheck;
 
   if (error) {
-    console.log(error);
+    console.log("Error: " + error);
     return false;
   }
+
+  localStorage.setItem("uuid", data[0]?.uuid);
 
   return password === data[0]?.password;
 };
