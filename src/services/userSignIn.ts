@@ -1,13 +1,10 @@
-import { supabaseClient } from "../supabaseClient";
-import { fetchUser } from "../constants/types";
+import repeatabilityCheck from "./repeatabilityCheck";
 
 const userSignIn = async (form): Promise<boolean> => {
   const { accountname, password } = form.getFieldsValue();
+  const { nameCheck } = repeatabilityCheck(accountname, "", "");
 
-  const { data, error } = await supabaseClient
-    .from("users")
-    .select<any, fetchUser>()
-    .eq("account_name", accountname);
+  const { data, error } = await nameCheck;
 
   if (error) {
     console.log(error);
