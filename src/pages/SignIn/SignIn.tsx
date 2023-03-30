@@ -1,4 +1,4 @@
-import { Button, Form, Input, Row } from "antd";
+import { Button, ConfigProvider, Form, Input, Row } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import React from "react";
 import { PageContainer } from "../../components/PageContainer/PageContainer";
@@ -25,13 +25,25 @@ const SignIn: React.FC = () => {
               placeholder="Account Name"
             />
           </Form.Item>
-          <Form.Item name="password" rules={[{ required: true }]}>
-            <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Password"
-            />
-          </Form.Item>
+          <ConfigProvider
+            theme={{
+              components: {
+                Input: {
+                  colorError: "#d9d9d9",
+                  colorErrorBorderHover: "#1677ff",
+                  colorErrorOutline: "#EBF4FE",
+                },
+              },
+            }}
+          >
+            <Form.Item name="password" rules={[{ required: true }]}>
+              <Input
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="Password"
+              />
+            </Form.Item>
+          </ConfigProvider>
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
               Sign in
