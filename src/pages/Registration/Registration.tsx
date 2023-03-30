@@ -1,9 +1,9 @@
-import { Button, Form, Input, Row } from 'antd';
-import React from 'react';
-import { PageContainer } from '../../components/PageContainer/PageContainer';
-import RegisterDerivativeUtils from './utils/RegisterDerivativeUtils';
-import './Registration.scss';
-import useRegistration from './hooks/useRegistration';
+import { Button, Form, Input, Row } from "antd";
+import React from "react";
+import { PageContainer } from "../../components/PageContainer/PageContainer";
+import RegisterDerivativeUtils from "./utils/RegisterDerivativeUtils";
+import "./Registration.scss";
+import useRegistration from "./hooks/useRegistration";
 
 const Registration: React.FC = () => {
   const [form] = Form.useForm();
@@ -27,7 +27,7 @@ const Registration: React.FC = () => {
             name="accountname"
             tooltip="What do you want others to call you?"
             rules={[
-              { required: true, message: 'Please input your account name!', whitespace: true },
+              { required: true, message: "Please input your account name!", whitespace: true },
             ]}
           >
             <Input />
@@ -35,7 +35,7 @@ const Registration: React.FC = () => {
           <Form.Item
             label="Password"
             name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[{ required: true, message: "Please input your password!" }]}
             hasFeedback
           >
             <Input.Password />
@@ -43,10 +43,10 @@ const Registration: React.FC = () => {
           <Form.Item
             label="Confirm Password"
             name="confirmpassword"
-            dependencies={['password']}
+            dependencies={["password"]}
             hasFeedback
             rules={[
-              { required: true, message: 'Please confirm your password!' },
+              { required: true, message: "Please confirm your password!" },
               () => passwordValidator,
             ]}
           >
