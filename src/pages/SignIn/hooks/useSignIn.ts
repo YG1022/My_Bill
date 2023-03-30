@@ -17,6 +17,7 @@ const useSignIn = form => {
           errors: ["Wrong user name or password, please try again!"],
         },
       ]);
+      return;
     }
 
     setTimeout(() => {
