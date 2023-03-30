@@ -1,5 +1,5 @@
-import { MenuProps } from 'antd';
-import React from 'react';
+import { MenuProps } from "antd";
+import React from "react";
 
 type transItem = {
   id: number;
@@ -14,7 +14,7 @@ type transListProps = {
   category: string;
 };
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = Required<MenuProps>["items"][number];
 
 type Props = {
   children: React.ReactNode;
@@ -31,7 +31,8 @@ type fetchUser = {
   created_at: string;
   account_name: string;
   password: string;
-}
+  uuid: string;
+};
 
 type profile = {
   email: string;
