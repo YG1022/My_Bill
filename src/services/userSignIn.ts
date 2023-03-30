@@ -11,7 +11,7 @@ const userSignIn = async (form): Promise<boolean> => {
     return false;
   }
 
-  return password === data[0].password;
+  return password === data[0]?.password;
 };
 
 export default userSignIn;
