@@ -10,7 +10,7 @@ const useRegistration = form => {
     const { accountname } = form.getFieldsValue();
 
     const { nameCheck } = repeatabilityCheck(accountname, "", "");
-    const { data, error } = await nameCheck;
+    const { data, error } = await nameCheck();
 
     if (data.length > 0) {
       form.setFields([

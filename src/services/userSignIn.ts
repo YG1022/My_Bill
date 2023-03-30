@@ -4,7 +4,7 @@ const userSignIn = async (form): Promise<boolean> => {
   const { accountname, password } = form.getFieldsValue();
   const { nameCheck } = repeatabilityCheck(accountname, "", "");
 
-  const { data, error } = await nameCheck;
+  const { data, error } = await nameCheck();
 
   if (error) {
     console.log("Error: " + error);

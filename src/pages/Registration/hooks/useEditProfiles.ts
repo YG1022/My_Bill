@@ -10,8 +10,8 @@ const useEditProfiles = (form) => {
     const { email, phonenumber, birthday, ...extraData } = form.getFieldsValue();
     const { emailCheck, phoneCheck } = repeatabilityCheck('', email, phonenumber);
 
-    const { data: emailData, error: emailError } = await emailCheck;
-    const { data: phoneData, error: phoneError } = await phoneCheck;
+    const { data: emailData, error: emailError } = await emailCheck();
+    const { data: phoneData, error: phoneError } = await phoneCheck();
 
     if (emailData.length > 0 || phoneData.length > 0) {
       if (emailData.length > 0) {
