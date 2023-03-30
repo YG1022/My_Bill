@@ -27,3 +27,5 @@ yarn.lock
 # ide
 .vscode
 .idea
+
+__snapshots__/
