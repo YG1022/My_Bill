@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import userSignIn from "../../../services/userSignIn";
 import { ROUTES } from "../../../constants/routes";
 
-const useSignIn = (form) => {
+const useSignIn = form => {
   const navigateTo = useNavigate();
 
   const signIn = async () => {
@@ -12,16 +12,11 @@ const useSignIn = (form) => {
 
     if (!flag) {
       form.setFields([
-        // {
-        //   name: "accountname",
-        //   errors: ["This account name does not exist. Please sign up first."],
-        // },
         {
           name: "password",
           errors: ["Wrong user name or password, please try again!"],
         },
       ]);
-      return;
     }
 
     setTimeout(() => {
