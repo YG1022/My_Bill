@@ -43,4 +43,15 @@ type profile = {
   birthday: string;
 };
 
-export { transItem, transListProps, MenuItem, Props, user, fetchUser, profile };
+type fetchProfile = {
+  id: number;
+  created_at: string;
+  email: string;
+  phone_number: string;
+  gender: string;
+  prefix: string;
+  real_name: string;
+  birthday: string;
+};
+
+export { transItem, transListProps, MenuItem, Props, user, fetchUser, profile, fetchProfile };
