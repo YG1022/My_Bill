@@ -3,7 +3,7 @@ export const ROUTES = {
   signIn: "/user/sign-in",
   registration: "/user/register",
   profilesEdit: "/user/profiles-edit",
-  profiles: "/user/profiles",
+  profiles: "/accountDetail",
   transactions: "/transactions/all",
   transactionInput: "/transactions/input",
   transactionEdit: "/transactions/trans-edit/:id",
@@ -22,6 +22,5 @@ export const breadcrumbNameMap: Record<string, string> = {
   "/transactions/all": "All transactions",
   "/transactions/input": "Create transaction",
   "/transactions/trans-edit": "Edit transaction",
-  "/user": "User",
-  "/user/profiles": "Profiles",
+  "/accountDetail": "Profiles"
 };
