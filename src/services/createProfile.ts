@@ -1,11 +1,12 @@
-import { supabaseClient } from '../supabaseClient';
-import { profile } from '../constants/types';
+import { supabaseClient } from "../supabaseClient";
+import { fetchProfile, profile } from "../constants/types";
+import { PostgrestError } from "@supabase/supabase-js";
 
-const createProfile = (profile: profile) => {
+const createProfile = async (profile: profile): Promise<{ data: fetchProfile[], error: PostgrestError }> => {
   const { email, realname, gender, prefix, phonenumber, birthday } = profile;
 
-  return supabaseClient
-    .from('profiles')
+  const { data, error } = await supabaseClient
+    .from("profiles")
     .insert([
       {
         email: email,
@@ -16,7 +17,9 @@ const createProfile = (profile: profile) => {
         birthday: birthday,
       },
     ])
-    .select();
+    .select<any, fetchProfile>();
+
+  return { data, error };
 };
 
 export default createProfile;
