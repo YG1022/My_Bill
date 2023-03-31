@@ -26,6 +26,7 @@ root.render(
         <Route path={ROUTES.transactionInput} element={authRoute(<InputAmount />)} />
         <Route path={ROUTES.transactions} element={authRoute(<AccountBook />)} />
         <Route path={ROUTES.transactionEdit} element={authRoute(<InputAmount />)} />
+        <Route path={ROUTES.profiles} element={authRoute(<EditProfiles />)} />
       </Route>
     </Routes>
   </Router>,
