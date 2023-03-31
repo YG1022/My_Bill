@@ -24,4 +24,19 @@ describe("getTransItems from supabase", () => {
       return expect(await getTransItems()).toEqual(mockResultData);
     });
   });
+
+  it("should get specific trans item", function() {
+    // Arrange
+    fromMock.mockReturnValue({
+      select: jest.fn().mockReturnValue({
+        eq: jest.fn().mockReturnValue({
+          eq: jest.fn().mockReturnValue(mockResultData),
+        }),
+      }),
+    });
+    // Act
+
+    // Assert
+    return expect(getTransItems(1)).resolves.toEqual(mockResultData);
+  });
 });
