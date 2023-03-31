@@ -64,14 +64,22 @@ const EditProfiles = () => {
               placeholder="Select your birthday!"
             />
           </Form.Item>
-          <Form.Item {...tailFormItemLayout}>
+          {!locationFlag && (<Form.Item {...tailFormItemLayout}>
             <Button className="edit-profiles-skip-button" type="primary" onClick={skipProfiles}>
               <NavLink to={ROUTES.home}>Skip</NavLink>
             </Button>
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
-          </Form.Item>
+          </Form.Item>)}
+          {locationFlag && (<Form.Item {...tailFormItemLayout}>
+            <Button className="edit-profiles-cancel-button" type="primary">
+              <NavLink to={ROUTES.home}>Cancel</NavLink>
+            </Button>
+            <Button type="primary" htmlType="submit">
+              Save
+            </Button>
+          </Form.Item>)}
         </Form>
       </Row>
     </PageContainer>
