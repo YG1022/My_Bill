@@ -4,7 +4,7 @@ import repeatabilityCheck from "./repeatabilityCheck";
 jest.mock("../supabaseClient");
 const mockedSupabaseClient = supabaseClient as jest.Mocked<typeof supabaseClient>;
 
-const { nameCheck, emailCheck } = repeatabilityCheck("test 1", "test 1", "test 1");
+const { nameCheck, emailCheck, phoneCheck } = repeatabilityCheck("test 1", "test 1", "test 1");
 
 describe("repeatabilityCheck", () => {
   const mockProfileCheckData = {
@@ -52,5 +52,18 @@ describe("repeatabilityCheck", () => {
 
     // Assert
     expect(emailCheck()).resolves.toEqual(mockProfileCheckData);
+  });
+
+  it("phoneCheck", function() {
+    // Arrange
+    fromMock.mockReturnValue({
+      select: jest.fn().mockReturnValue({
+        eq: jest.fn().mockReturnValue(mockProfileCheckData),
+      }),
+    });
+    // Act
+
+    // Assert
+    expect(phoneCheck()).resolves.toEqual(mockProfileCheckData);
   });
 });
