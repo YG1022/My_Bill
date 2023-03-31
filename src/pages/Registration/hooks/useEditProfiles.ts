@@ -6,7 +6,7 @@ import repeatabilityCheck from '../../../services/repeatabilityCheck';
 const useEditProfiles = (form) => {
   const navigateTo = useNavigate();
 
-  const finilizeProfiles = async () => {
+  const editProfiles = async () => {
     const { email, phonenumber, birthday, ...extraData } = form.getFieldsValue();
     const { emailCheck, phoneCheck } = repeatabilityCheck('', email, phonenumber);
 
@@ -50,7 +50,7 @@ const useEditProfiles = (form) => {
     await createProfile(form.getFieldsValue());
   };
 
-  return { finilizeProfiles, skipProfiles };
+  return { editProfiles, skipProfiles };
 };
 
 export default useEditProfiles;

@@ -1,18 +1,18 @@
-import { Button, DatePicker, Form, Input, Row, Select } from 'antd';
-import React from 'react';
-import { PageContainer } from '../../components/PageContainer/PageContainer';
-import { NavLink } from 'react-router-dom';
-import { ROUTES } from '../../constants/routes';
-import RegisterDerivativeUtils from './utils/RegisterDerivativeUtils';
-import './EditProfiles.scss';
-import useEditProfiles from './hooks/useEditProfiles';
+import { Button, DatePicker, Form, Input, Row, Select } from "antd";
+import React from "react";
+import { PageContainer } from "../../components/PageContainer/PageContainer";
+import { NavLink, useLocation } from "react-router-dom";
+import { ROUTES } from "../../constants/routes";
+import RegisterDerivativeUtils from "./utils/RegisterDerivativeUtils";
+import "./EditProfiles.scss";
+import useEditProfiles from "./hooks/useEditProfiles";
 
 const EditProfiles = () => {
   const [form] = Form.useForm();
 
   const { prefixSelector, formItemLayout, tailFormItemLayout, dateFormat } =
     RegisterDerivativeUtils(form);
-  const { finilizeProfiles, skipProfiles } = useEditProfiles(form);
+  const { editProfiles, skipProfiles } = useEditProfiles(form);
 
   return (
     <PageContainer>
@@ -22,16 +22,16 @@ const EditProfiles = () => {
           {...formItemLayout}
           form={form}
           name="editprofiles"
-          onFinish={finilizeProfiles}
-          initialValues={{ prefix: '86' }}
+          onFinish={editProfiles}
+          initialValues={{ prefix: "86" }}
           scrollToFirstError
         >
           <Form.Item
             label="E-mail"
             name="email"
             rules={[
-              { type: 'email', message: 'The input is not valid E-mail!' },
-              { required: true, message: 'Please input your E-mail!' },
+              { type: "email", message: "The input is not valid E-mail!" },
+              { required: true, message: "Please input your E-mail!" },
             ]}
           >
             <Input placeholder="Please input your E-mail!" />
@@ -52,7 +52,7 @@ const EditProfiles = () => {
               placeholder="Please input your phone number!"
             />
           </Form.Item>
-          <Form.Item label="Birthday" name="birthday" rules={[{ type: 'date' }]}>
+          <Form.Item label="Birthday" name="birthday" rules={[{ type: "date" }]}>
             <DatePicker
               className="edit-profiles-date-picker"
               format={dateFormat}
