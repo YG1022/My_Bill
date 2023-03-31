@@ -20,7 +20,7 @@ root.render(
     <Routes>
       <Route path={ROUTES.signIn} element={<SignIn />} />
       <Route path={ROUTES.registration} element={<Registration />} />
-      <Route path={ROUTES.profilesEdit} element={authRoute(<EditProfiles />)} />
+      <Route path={ROUTES.profilesEdit} element={<EditProfiles />} />
       <Route path={ROUTES.home} element={authRoute(<App />)}>
         <Route index element={authRoute(<HomePage />)} />
         <Route path={ROUTES.transactionInput} element={authRoute(<InputAmount />)} />
