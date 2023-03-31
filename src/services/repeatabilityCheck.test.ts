@@ -4,9 +4,25 @@ import repeatabilityCheck from "./repeatabilityCheck";
 jest.mock("../supabaseClient");
 const mockedSupabaseClient = supabaseClient as jest.Mocked<typeof supabaseClient>;
 
-const { nameCheck } = repeatabilityCheck("test 1", "test 1", "test 1");
+const { nameCheck, emailCheck } = repeatabilityCheck("test 1", "test 1", "test 1");
 
 describe("repeatabilityCheck", () => {
+  const mockProfileCheckData = {
+    data: [{
+      id: 1,
+      created_at: "2000/00/00",
+      email: "test 1@111.com",
+      phone_number: "111",
+      gender: "other",
+      prefix: "86",
+      real_name: "test 1",
+      birthday: "2000/00/00",
+    }],
+    error: null,
+  };
+
+  const fromMock = mockedSupabaseClient.from as any;
+
   it("nameCheck", function() {
     // Arrange
     const mockNameCheckData = {
@@ -14,7 +30,6 @@ describe("repeatabilityCheck", () => {
       error: null,
     };
 
-    const fromMock = mockedSupabaseClient.from as any;
     fromMock.mockReturnValue({
       select: jest.fn().mockReturnValue({
         eq: jest.fn().mockReturnValue(mockNameCheckData),
@@ -24,5 +39,18 @@ describe("repeatabilityCheck", () => {
 
     // Assert
     expect(nameCheck()).resolves.toEqual(mockNameCheckData);
+  });
+
+  it("emailCheck", function() {
+    // Arrange
+    fromMock.mockReturnValue({
+      select: jest.fn().mockReturnValue({
+        eq: jest.fn().mockReturnValue(mockProfileCheckData),
+      }),
+    });
+    // Act
+
+    // Assert
+    expect(emailCheck()).resolves.toEqual(mockProfileCheckData);
   });
 });
