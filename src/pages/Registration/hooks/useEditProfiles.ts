@@ -1,14 +1,16 @@
-import createProfile from '../../../services/createProfile';
-import { ROUTES } from '../../../constants/routes';
-import { useNavigate } from 'react-router-dom';
-import repeatabilityCheck from '../../../services/repeatabilityCheck';
+import createProfile from "../../../services/createProfile";
+import { ROUTES } from "../../../constants/routes";
+import { useNavigate } from "react-router-dom";
+import repeatabilityCheck from "../../../services/repeatabilityCheck";
+import getProfile from "../../../services/getProfile";
+import dayjs from "dayjs";
 
-const useEditProfiles = (form) => {
+const useEditProfiles = form => {
   const navigateTo = useNavigate();
 
   const editProfiles = async () => {
     const { email, phonenumber, birthday, ...extraData } = form.getFieldsValue();
-    const { emailCheck, phoneCheck } = repeatabilityCheck('', email, phonenumber);
+    const { emailCheck, phoneCheck } = repeatabilityCheck("", email, phonenumber);
 
     const { data: emailData, error: emailError } = await emailCheck();
     const { data: phoneData, error: phoneError } = await phoneCheck();
@@ -17,25 +19,25 @@ const useEditProfiles = (form) => {
       if (emailData.length > 0) {
         form.setFields([
           {
-            name: 'email',
-            errors: ['This email has been used. Please choose another email.'],
+            name: "email",
+            errors: ["This email has been used. Please choose another email."],
           },
         ]);
       }
       if (phoneData.length > 0) {
         form.setFields([
           {
-            name: 'phonenumber',
-            errors: ['This phone number has been used. Please choose another phone number.'],
+            name: "phonenumber",
+            errors: ["This phone number has been used. Please choose another phone number."],
           },
         ]);
       }
     } else if (emailError || phoneError) {
-      alert('Something wrong happened. Please try again later.');
+      alert("Something wrong happened. Please try again later.");
       return;
     } else {
       const postData = {
-        birthday: birthday?.format('YYYY/MM/DD'),
+        birthday: birthday?.format("YYYY/MM/DD"),
         email,
         phonenumber,
         ...extraData,
@@ -50,7 +52,22 @@ const useEditProfiles = (form) => {
     await createProfile(form.getFieldsValue());
   };
 
-  return { editProfiles, skipProfiles };
+  const queryProfiles = () => {
+    const uuid = localStorage.getItem("uuid");
+    getProfile(uuid).then(({ data }) => {
+      const { real_name, prefix, phone_number, gender, email, birthday } = data[0];
+      form.setFieldsValue({
+        realname: real_name,
+        prefix,
+        phonenumber: phone_number,
+        gender,
+        email,
+        birthday: birthday ? dayjs(birthday, "YYYY/MM/DD") : null,
+      });
+    });
+  };
+
+  return { editProfiles, skipProfiles, queryProfiles };
 };
 
 export default useEditProfiles;

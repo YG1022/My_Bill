@@ -1,5 +1,5 @@
 import { Button, DatePicker, Form, Input, Row, Select } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { PageContainer } from "../../components/PageContainer/PageContainer";
 import { NavLink, useLocation } from "react-router-dom";
 import { ROUTES } from "../../constants/routes";
@@ -9,10 +9,18 @@ import useEditProfiles from "./hooks/useEditProfiles";
 
 const EditProfiles = () => {
   const [form] = Form.useForm();
+  const locationFlag = useLocation().pathname === "/accountDetail";
 
+  const { queryProfiles } = useEditProfiles(form);
   const { prefixSelector, formItemLayout, tailFormItemLayout, dateFormat } =
     RegisterDerivativeUtils(form);
   const { editProfiles, skipProfiles } = useEditProfiles(form);
+
+  useEffect(() => {
+    if (locationFlag) {
+      queryProfiles();
+    }
+  }, []);
 
   return (
     <PageContainer>
@@ -47,10 +55,7 @@ const EditProfiles = () => {
             </Select>
           </Form.Item>
           <Form.Item label="Phone Number" name="phonenumber">
-            <Input
-              addonBefore={prefixSelector}
-              placeholder="Please input your phone number!"
-            />
+            <Input addonBefore={prefixSelector} placeholder="Please input your phone number!" />
           </Form.Item>
           <Form.Item label="Birthday" name="birthday" rules={[{ type: "date" }]}>
             <DatePicker
@@ -60,11 +65,7 @@ const EditProfiles = () => {
             />
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
-            <Button
-              className="edit-profiles-skip-button"
-              type="primary"
-              onClick={skipProfiles}
-            >
+            <Button className="edit-profiles-skip-button" type="primary" onClick={skipProfiles}>
               <NavLink to={ROUTES.home}>Skip</NavLink>
             </Button>
             <Button type="primary" htmlType="submit">
