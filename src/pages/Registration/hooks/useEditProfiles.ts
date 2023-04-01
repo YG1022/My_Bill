@@ -35,7 +35,7 @@ const useEditProfiles = form => {
       ];
     };
 
-    if (uuid) {
+    if (signInFlag === "true" && uuid) {
       await checkFunc(emailCheckWithUuid, phoneCheckWithUuid);
     } else {
       await checkFunc(emailCheck, phoneCheck);
