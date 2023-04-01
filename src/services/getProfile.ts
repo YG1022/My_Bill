@@ -1,21 +1,17 @@
-import { fetchProfile, fetchUser } from "../constants/types";
+import { fetchProfile } from "../constants/types";
 import { PostgrestError } from "@supabase/supabase-js";
 import { supabaseClient } from "../supabaseClient";
+import matchProfileIdWithUuid from "./matchProfileIdWithUuid";
 
 const getProfile = async (
-  uuid: string
+  uuid: string,
 ): Promise<{ data: fetchProfile[]; error: PostgrestError }> => {
-  const { data: temData } = await supabaseClient
-    .from("users")
-    .select<any, fetchUser>()
-    .eq("uuid", uuid);
-
-  const id = temData[0].id;
+  const { data: temData } = await matchProfileIdWithUuid(uuid);
 
   const { data, error } = await supabaseClient
     .from("profiles")
     .select<any, fetchProfile>()
-    .eq("id", id);
+    .eq("id", temData[0].id);
 
   return { data, error };
 };

@@ -1,6 +1,7 @@
 import { supabaseClient } from "../supabaseClient";
 import { fetchProfile, fetchUser } from "../constants/types";
 import { PostgrestError } from "@supabase/supabase-js";
+import matchProfileIdWithUuid from "./matchProfileIdWithUuid";
 
 const repeatabilityCheck = (accountname: string, email: string, phonenumber: string) => {
   const nameCheck = async (): Promise<{ data: fetchUser[]; error: PostgrestError }> => {
@@ -25,15 +26,6 @@ const repeatabilityCheck = (accountname: string, email: string, phonenumber: str
       .select<any, fetchProfile>()
       .eq("phone_number", phonenumber);
     return { data, error };
-  };
-
-  const matchProfileIdWithUuid = async (uuid: string): Promise<{ data: fetchUser[]; error: PostgrestError }> => {
-    const { data: temData, error: temError } = await supabaseClient
-      .from("users")
-      .select<any, fetchUser>()
-      .eq("uuid", uuid);
-
-    return { data: temData, error: temError };
   };
 
   const emailCheckWithUuid = async (
