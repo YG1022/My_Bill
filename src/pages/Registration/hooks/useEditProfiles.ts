@@ -7,13 +7,38 @@ import dayjs from "dayjs";
 
 const useEditProfiles = form => {
   const navigateTo = useNavigate();
+  const uuid = localStorage.getItem("uuid");
+
+  let [emailData, emailError, phoneData, phoneError] = [[], null, [], null];
 
   const editProfiles = async () => {
     const { email, phonenumber, birthday, ...extraData } = form.getFieldsValue();
-    const { emailCheck, phoneCheck } = repeatabilityCheck("", email, phonenumber);
+    const { emailCheck, phoneCheck, emailCheckWithUuid, phoneCheckWithUuid } = repeatabilityCheck(
+      "",
+      email,
+      phonenumber
+    );
 
-    const { data: emailData, error: emailError } = await emailCheck();
-    const { data: phoneData, error: phoneError } = await phoneCheck();
+    const checkFunc = async (emailCheckFunc, phoneCheckFunc) => {
+      const { data: emailDataTemp, error: emailErrorTemp } = uuid
+        ? await emailCheckFunc(uuid)
+        : await emailCheckFunc();
+      const { data: phoneDataTemp, error: phoneErrorTemp } = uuid
+        ? await phoneCheckFunc(uuid)
+        : await phoneCheckFunc();
+      [emailData, emailError, phoneData, phoneError] = [
+        emailDataTemp,
+        emailErrorTemp,
+        phoneDataTemp,
+        phoneErrorTemp,
+      ];
+    };
+
+    if (uuid) {
+      await checkFunc(emailCheckWithUuid, phoneCheckWithUuid);
+    } else {
+      await checkFunc(emailCheck, phoneCheck);
+    }
 
     if (emailData.length > 0 || phoneData.length > 0) {
       if (emailData.length > 0) {
@@ -53,7 +78,6 @@ const useEditProfiles = form => {
   };
 
   const queryProfiles = () => {
-    const uuid = localStorage.getItem("uuid");
     getProfile(uuid).then(({ data }) => {
       const { real_name, prefix, phone_number, gender, email, birthday } = data[0];
       form.setFieldsValue({
