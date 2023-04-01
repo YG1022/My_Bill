@@ -22,6 +22,8 @@ describe("useRegistration", () => {
     nameCheck: mockedNameCheck,
     emailCheck: jest.fn(),
     phoneCheck: jest.fn(),
+    emailCheckWithUuid: jest.fn(),
+    phoneCheckWithUuid: jest.fn(),
   });
 
   beforeEach(() => {
