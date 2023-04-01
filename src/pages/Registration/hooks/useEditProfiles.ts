@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import repeatabilityCheck from "../../../services/repeatabilityCheck";
 import getProfile from "../../../services/getProfile";
 import dayjs from "dayjs";
+import updateProfile from "../../../services/updateProfile";
 
 const useEditProfiles = form => {
   const navigateTo = useNavigate();
@@ -69,7 +70,7 @@ const useEditProfiles = form => {
         ...extraData,
       };
 
-      await createProfile(postData);
+      (signInFlag === "true" && uuid) ? await updateProfile(uuid, postData) : await createProfile(postData);
       navigateTo(ROUTES.home);
     }
   };
