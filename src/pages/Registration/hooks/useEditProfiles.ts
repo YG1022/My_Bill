@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 const useEditProfiles = form => {
   const navigateTo = useNavigate();
   const uuid = localStorage.getItem("uuid");
+  const signInFlag = localStorage.getItem("signedIn");
 
   let [emailData, emailError, phoneData, phoneError] = [[], null, [], null];
 
@@ -16,7 +17,7 @@ const useEditProfiles = form => {
     const { emailCheck, phoneCheck, emailCheckWithUuid, phoneCheckWithUuid } = repeatabilityCheck(
       "",
       email,
-      phonenumber
+      phonenumber,
     );
 
     const checkFunc = async (emailCheckFunc, phoneCheckFunc) => {
