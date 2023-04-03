@@ -1,38 +1,30 @@
 import { Button, Layout, Menu, Popover, Tooltip } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useMenuSider } from './hooks/useMenuSider'
-import { useAccountStore } from '../../stores/useAccountStore'
 import { NavLink } from 'react-router-dom'
 import { ROUTES } from '../../constants/routes'
 
 const MenuSider: React.FC = () => {
   const { Sider } = Layout
-  const { collapsed, setCollapsed, menus } = useMenuSider()
-  const { user } = useAccountStore(state => ({ user: state.user }))
-  const [open, setOpen] = useState(false)
-
-  const hide = () => setOpen(false)
-  const handleOpenChange = (newOpen: boolean) => setOpen(newOpen)
+  const { collapsed, setCollapsed, open, setOpen, menus, name, sliceLen } = useMenuSider()
 
   return (
     <Sider collapsible collapsed={collapsed} onCollapse={value => setCollapsed(value)}>
       <Popover
-        className="search-holder"
+        className='search-holder'
         content={
-          <NavLink to={ROUTES.profiles} onClick={hide}>
-            Profile
-          </NavLink>
+          <NavLink to={ROUTES.profiles} onClick={() => setOpen(false)}>Profile</NavLink>
         }
-        title="Account"
-        trigger="click"
+        title='Account'
+        trigger='click'
         open={open}
-        onOpenChange={handleOpenChange}
+        onOpenChange={(newOpen: boolean) => setOpen(newOpen)}
       >
-        <Tooltip title="Account">
-          <Button type="primary">{user.account_name}</Button>
+        <Tooltip title='Account'>
+          <Button type='primary'>{name.length > sliceLen ? `${name.slice(0, sliceLen)}...` : name}</Button>
         </Tooltip>
       </Popover>
-      <Menu theme="dark" mode="inline" items={menus} />
+      <Menu theme='dark' mode='inline' items={menus} />
     </Sider>
   )
 }
