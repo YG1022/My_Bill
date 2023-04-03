@@ -1,19 +1,18 @@
-import repeatabilityCheck from "./repeatabilityCheck";
+import { fetchUser } from '../constants/types'
+import repeatabilityCheck from './repeatabilityCheck'
 
-const userSignIn = async (form): Promise<boolean> => {
-  const { accountname, password } = form.getFieldsValue();
-  const { nameCheck } = repeatabilityCheck(accountname, "", "");
+const userSignIn = async (form): Promise<{ flag: boolean; checkData: fetchUser | null }> => {
+  const { accountname, password } = form.getFieldsValue()
+  const { nameCheck } = repeatabilityCheck(accountname, '', '')
 
-  const { data, error } = await nameCheck();
+  const { data, error } = await nameCheck()
 
   if (error) {
-    console.log("Error: " + error);
-    return false;
+    console.log('Error: ' + error)
+    return { flag: false, checkData: null }
   }
 
-  localStorage.setItem("uuid", data[0]?.uuid);
+  return { flag: password === data[0]?.password, checkData: data[0] }
+}
 
-  return password === data[0]?.password;
-};
-
-export default userSignIn;
+export default userSignIn
