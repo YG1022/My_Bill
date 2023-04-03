@@ -1,21 +1,12 @@
 import { Button, Layout, Menu, Popover, Tooltip } from 'antd'
-import { LogoutOutlined } from '@ant-design/icons'
 import React from 'react'
 import { useMenuSider } from './hooks/useMenuSider'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { ROUTES } from '../../constants/routes'
 
 const MenuSider: React.FC = () => {
   const { Sider } = Layout
-  const { collapsed, setCollapsed, open, setOpen, menus, name, sliceLen } = useMenuSider()
-  const navigateTo = useNavigate()
-
-  const signOut = (event) => {
-    event.preventDefault()
-    localStorage.removeItem('signedIn')
-    localStorage.removeItem('uuid')
-    navigateTo(ROUTES.signIn)
-  }
+  const { collapsed, setCollapsed, open, setOpen, menus, name, sliceLen, signOut } = useMenuSider()
 
   return (
     <Sider className='side-bar' collapsible collapsed={collapsed} onCollapse={value => setCollapsed(value)}>
