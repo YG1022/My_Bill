@@ -21,7 +21,11 @@ const MenuSider: React.FC = () => {
         onOpenChange={(newOpen: boolean) => setOpen(newOpen)}
       >
         <Tooltip title='Account'>
-          <Button type='primary'>{name.length > sliceLen ? `${name.slice(0, sliceLen)}...` : name}</Button>
+          <Button type='primary'>
+            {name.length > sliceLen ?
+              (collapsed ? `${name.slice(0, sliceLen)}` : `${name.slice(0, sliceLen)}...`)
+              : name}
+          </Button>
         </Tooltip>
       </Popover>
       <Menu theme='dark' mode='inline' items={menus} />

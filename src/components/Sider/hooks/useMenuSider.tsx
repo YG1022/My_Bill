@@ -7,7 +7,7 @@ const useMenuSider = () => {
   const [open, setOpen] = useState(false)
   const { user } = useAccountStore(state => ({ user: state.user }))
   const name = user.account_name
-  const sliceLen = collapsed ? 2 : 14
+  const sliceLen = collapsed ? 1 : 18
 
   return { collapsed, setCollapsed, open, setOpen, menus, name, sliceLen }
 }
