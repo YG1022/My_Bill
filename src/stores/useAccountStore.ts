@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { fetchProfile, fetchUser } from '../constants/types'
+import { createJSONStorage, persist } from 'zustand/middleware'
 
 interface AccountStore {
   user: fetchUser | null,
@@ -8,9 +9,16 @@ interface AccountStore {
   setProfile: (profile: fetchProfile) => void,
 }
 
-export const useAccountStore = create<AccountStore>((set) => ({
-  user: null,
-  profile: null,
-  setUser: (user: fetchUser) => set({ user }),
-  setProfile: (profile: fetchProfile) => set({ profile }),
-}))
+export const useAccountStore = create<AccountStore>()(persist(
+    (set) => ({
+      user: null,
+      profile: null,
+      setUser: (user: fetchUser) => set({ user }),
+      setProfile: (profile: fetchProfile) => set({ profile }),
+    }),
+    {
+      name: 'account-storage',
+      storage: createJSONStorage(() => sessionStorage),
+    },
+  ),
+)
