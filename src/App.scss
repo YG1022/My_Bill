@@ -12,22 +12,10 @@ body,
   min-width: 100vw;
   flex-direction: column;
 
-  .side-bar {
-    position: relative;
-
-    .search-holder {
-      height: 32px;
-      width: calc(100% - 32px);
-      margin: 16px;
-    }
-
-    .sign-out-site {
-      position: absolute;
-      bottom: 48px;
-      height: 32px;
-      width: calc(100% - 32px);
-      margin: 16px;
-    }
+  .account-holder {
+    height: 32px;
+    width: calc(100% - 32px);
+    margin: 16px;
   }
 
   .header {
