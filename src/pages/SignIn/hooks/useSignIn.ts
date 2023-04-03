@@ -1,33 +1,37 @@
-import { useNavigate } from "react-router-dom";
-import userSignIn from "../../../services/userSignIn";
-import { ROUTES } from "../../../constants/routes";
+import { useNavigate } from 'react-router-dom'
+import userSignIn from '../../../services/userSignIn'
+import { ROUTES } from '../../../constants/routes'
+import { useAccountStore } from '../../../stores/useAccountStore'
 
 const useSignIn = form => {
-  const navigateTo = useNavigate();
+  const navigateTo = useNavigate()
+  const { setUser } = useAccountStore(state => ({ setUser: state.setUser }))
 
   const signIn = async () => {
-    const flag = await userSignIn(form);
+    const { flag, checkData } = await userSignIn(form)
 
-    localStorage.setItem("signedIn", flag.toString());
+    localStorage.setItem('signedIn', flag.toString())
 
     if (!flag) {
       form.setFields([
         {
-          name: "password",
-          errors: ["Wrong user name or password, please try again!"],
+          name: 'password',
+          errors: ['Wrong user name or password, please try again!'],
         },
-      ]);
-      return;
+      ])
+      return
     }
 
     setTimeout(() => {
       if (flag) {
-        navigateTo(ROUTES.home);
+        setUser(checkData)
+        localStorage.setItem('uuid', checkData.uuid)
+        navigateTo(ROUTES.home)
       }
-    }, 1000);
-  };
+    }, 1000)
+  }
 
-  return { signIn };
-};
+  return { signIn }
+}
 
-export default useSignIn;
+export default useSignIn

@@ -1,42 +1,43 @@
-import useSignIn from "./useSignIn";
-import { renderHook, waitFor } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import userSignIn from "../../../services/userSignIn";
+import useSignIn from './useSignIn'
+import { renderHook, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import userSignIn from '../../../services/userSignIn'
 
-jest.mock("../../../services/userSignIn");
-const mockedUserSignIn = userSignIn as jest.MockedFunction<typeof userSignIn>;
+jest.mock('../../../services/userSignIn')
+const mockedUserSignIn = userSignIn as jest.MockedFunction<typeof userSignIn>
 const mockedForm = {
   setFields: jest.fn(),
-};
+}
 
-describe("useSignIn", () => {
+describe('useSignIn', () => {
   beforeEach(() => {
-    mockedForm.setFields.mockClear();
-    mockedUserSignIn.mockClear();
-  });
+    mockedForm.setFields.mockClear()
+    mockedUserSignIn.mockClear()
+  })
 
-  it("should excute userSignIn", async () => {
+  it('should excute userSignIn', async () => {
     // Arrange
-    mockedUserSignIn.mockResolvedValue(true);
+    mockedUserSignIn.mockResolvedValue({ flag: true, checkData: null })
 
-    const { result } = renderHook(() => useSignIn(mockedForm), { wrapper: MemoryRouter });
+    const { result } = renderHook(() => useSignIn(mockedForm), { wrapper: MemoryRouter })
     // Act
-    await result.current.signIn();
+    await result.current.signIn()
     // Assert
     await waitFor(() => {
-      expect(mockedForm.setFields).not.toBeCalled();
-    });
-  });
+      expect(mockedForm.setFields).not.toBeCalled()
+    })
+  })
 
-  it("should return error", async()=> {
+  it('should return error', async () => {
     // Arrange
-    mockedUserSignIn.mockResolvedValue(false);
+    mockedUserSignIn.mockResolvedValue({ flag: false, checkData: null })
 
-    const { result } = renderHook(() => useSignIn(mockedForm), { wrapper: MemoryRouter });
+    const { result } = renderHook(() => useSignIn(mockedForm), { wrapper: MemoryRouter })
     // Act
-    await result.current.signIn();
+    await result.current.signIn()
     // Assert
     await waitFor(() => {
-      expect(mockedForm.setFields).toBeCalled();
-    });});
-});
+      expect(mockedForm.setFields).toBeCalled()
+    })
+  })
+})
