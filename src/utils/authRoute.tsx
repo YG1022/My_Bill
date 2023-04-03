@@ -1,14 +1,8 @@
-import React from "react";
-import SignIn from "../pages/SignIn/SignIn";
+import React from 'react'
+import { Navigate } from 'react-router-dom'
+import { ROUTES } from '../constants/routes'
 
-const authRoute = (props) => {
-  window.addEventListener("storage", (e) => {
-    if (e.key === "signedIn") {
-      window.location.reload();
-    }
-  });
+const authRoute = (props) => localStorage.getItem('signedIn') === 'true' ? props :
+  <Navigate to={ROUTES.signIn} replace />
 
-  return localStorage.getItem("signedIn") === "true" ? props : <SignIn />;
-};
-
-export { authRoute };
+export { authRoute }
