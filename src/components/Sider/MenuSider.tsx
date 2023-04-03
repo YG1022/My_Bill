@@ -15,7 +15,6 @@ const MenuSider: React.FC = () => {
         content={
           <NavLink to={ROUTES.profiles} onClick={() => setOpen(false)}>Profile</NavLink>
         }
-        title='Account'
         trigger='click'
         open={open}
         onOpenChange={(newOpen: boolean) => setOpen(newOpen)}
