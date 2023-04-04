@@ -20,7 +20,7 @@ const App: React.FC = () => {
     fetchData()
   }, [transDeps])
 
-  const routes = useRoutes([
+  return useRoutes([
     {
       path: ROUTES.signIn,
       element: <SignIn />,
@@ -38,6 +38,7 @@ const App: React.FC = () => {
       element: <PrivateRoute component={AppContent} />,
       children: [
         {
+          path: ROUTES.home,
           element: <PrivateRoute component={HomePage} />,
         },
         {
@@ -59,8 +60,6 @@ const App: React.FC = () => {
       ],
     },
   ])
-
-  return routes
 }
 
 export default App
