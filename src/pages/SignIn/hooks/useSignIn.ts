@@ -1,10 +1,11 @@
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import userSignIn from '../../../services/userSignIn'
 import { ROUTES } from '../../../constants/routes'
 import { useAccountStore } from '../../../stores/useAccountStore'
 
 const useSignIn = form => {
   const navigateTo = useNavigate()
+  const location = useLocation()
   const { setUser } = useAccountStore(state => ({ setUser: state.setUser }))
 
   const signIn = async () => {
@@ -20,7 +21,7 @@ const useSignIn = form => {
     } else {
       setUser(checkData)
       localStorage.setItem('uuid', checkData.uuid)
-      navigateTo(ROUTES.home)
+      navigateTo(location.state?.from || ROUTES.home)
     }
   }
 
